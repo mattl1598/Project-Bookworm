@@ -4,9 +4,9 @@
 #
 # Author:      matthewl9
 #
-# Version:     0.1
+# Version:     0.2
 #
-# Contains:    
+# Contains:
 #	       Functions: write to file, quicksort, import_list, check file, find mid
 #	       Classes: stack
 #
@@ -15,6 +15,10 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 class stack():
+	"""absolute pile of shite, do not use,
+	use python lists instead
+
+	please..."""
 	top = 0
 	stack = []
 	isEmpty = True
@@ -37,6 +41,7 @@ class stack():
 		return(data)
 
 def write(filepath, list1):                      #writes to file
+	"""small writing to file algorithm, works well"""
 	filepath = str(filepath)
 	file = open(filepath,"w")
 	for count in range (len(list1)):
@@ -46,6 +51,7 @@ def write(filepath, list1):                      #writes to file
 	file.close
 
 def partition(data):
+  """ignore me, subset of quicksort"""
   pivot = data[0]
   less, equal, greater = [], [], []
   for temp in data:
@@ -64,6 +70,12 @@ def quicksort(data):                             #quicksort algorithm. takes lis
   return data
 
 def checkFile(filepath):
+	"""for portable development.
+
+	takes possible filepath,
+	checks drive letter,
+	if wrong letter is used,
+	returns correct path """
 	working = False
 	try:
 		txt = open(filepath)
@@ -94,6 +106,9 @@ def checkFile(filepath):
 
 
 def import_list(filepath):               #imports list from file
+	"""imports list from a file,
+	takes a filepath, returns a list
+	NOTE: ALREADY USES CHECK PATH"""
 	file = checkFile(filepath)
 	txt = open(file, "r")
 	shuff = txt.read().splitlines()
@@ -101,12 +116,18 @@ def import_list(filepath):               #imports list from file
 	return(shuff)
 
 def sortFromToFile(infile, outfile, debug):      #takes in file, writes sorted list to another file
+	"""imports a file to a list,
+	sorts it,
+	writes to another files"""
 	postsort = sortFromFile(infile,debug)
 	write(outfile, postsort)
 	if debug == True:
 		print("Written:", len(postsort), "words.")
 
 def sortFromFile(infile,debug):                   #takes in file, returns sorted list
+	"""imports a file to list,
+	sorts it,
+	returns a sorted list"""
 	shuff = import_list(infile)
 	postsort = quicksort(shuff)
 	#write(outfile, postsort)
@@ -115,12 +136,18 @@ def sortFromFile(infile,debug):                   #takes in file, returns sorted
 	return(postsort)
 
 def search(string, data):
+	"""stupid search function using python "in" function
+	only made it for a school task"""
 	return(string in data)
 
 def gethalf(sort, uppervalue):
+	"""doesnt work"""
 	print()
 
 def binSearch(string,data):
+	"""binary search.
+	takes search string and list,
+	returns location and data from location"""
 	sort = data
 	lowervalue = int(0)
 	uppervalue = int(len(sort))
@@ -142,8 +169,12 @@ def binSearch(string,data):
 	return(location, data[location])
 
 def FindMid(list1):
+	"""integer division to find "mid" value of list or string"""
 	length = len(list1)
 	mid = length//2
 	return mid
+
+
+
 
 
