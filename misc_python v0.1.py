@@ -4,9 +4,11 @@
 #
 # Author:      matthewl9
 #
-# Version:     1.0
+# Version:     0.1
 #
-# Contains:    write to file, quicksort, import_list
+# Contains:    
+#	       Functions: write to file, quicksort, import_list, check file, find mid
+#	       Classes: stack
 #
 # Created:     21/02/2018
 # Copyright:   (c) matthewl9 2018
