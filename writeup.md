@@ -3,7 +3,9 @@
 ## Analysis
 ### Background to and identification of problem
 #### Overview of Scenario and Current User setup
-Hampshire County Councils School Library Service currently only tracks number of books loaned and returned.
+Hampshire County Councils School Library Service loans large numbers of books (200+) to schools in Hampshire.
+Their current system is limited to tracking number of books loaned.
+
 ### Description of current system
 ### Data collection and research
 ### Identification of prospective users
