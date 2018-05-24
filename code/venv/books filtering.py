@@ -2,6 +2,7 @@ import googlebooks
 import misc_python
 
 
+
 def getBook():
 	api = googlebooks.Api()
 	isbn = "isbn:"
@@ -11,7 +12,7 @@ def getBook():
 
 
 def getTitle(data):
-	datastart = data.find('title') + 11
+	datastart = data.find('title') + 9
 	dataend = data.find('authors') - 4
 	return (data[datastart:dataend])
 
@@ -44,14 +45,16 @@ def getAge(data):
 
 
 def getBlurb(data):
-
 	datastart = data.find('description') + 15
 	dataend = data.find("industryIdentifiers") - 4
 	return (data[datastart:dataend])
 
 
 def getImageURL(data):
-	pass
+	datastart = data.find('thumbnail') + 13
+	dataend = data.find("language") - 5
+	return (data[datastart:dataend])
 
 
-print(getBlurb(getBook()))
+
+print(getTitle(getBook()))
