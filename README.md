@@ -4,5 +4,5 @@ library management database system project
 a level compsci project
 
 
-[gantt chart](https://drive.google.com/open?id=1EEM6tlQUtUxfTV6DJpOmkZaOYBdqgpRV)
-open with tomsplanner
+[gantt chart](https://www.tomsplanner.com/public/project-bookworm)
+open with tomsplanner. password: 12345
