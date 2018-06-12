@@ -8,7 +8,8 @@
 import sys
 import img
 import urllib
-from PIL import Image, ImageTk
+import PIL.Image as pict
+from PIL import ImageTk
 
 try:
 	from Tkinter import *
@@ -78,7 +79,7 @@ class New_Toplevel:
 		self.Canvas1.configure(selectbackground="#c4c4c4")
 		self.Canvas1.configure(selectforeground="black")
 		self.Canvas1.configure(width=183)
-		self.Canvas1.pack(expand = YES, fill = BOTH)
+
 
 		self.titleVar = Text(top)
 		self.titleVar.place(relx=0.17, rely=0.06, relheight=0.05, relwidth=0.77)
@@ -321,9 +322,12 @@ class New_Toplevel:
 			photo = Tk.PhotoImage(imgURL)
 		else:
 			urllib.request.urlretrieve(imgURL, "D:/pyscripter/pycharm/projects/bookworm/image.jpg")
-			image = Image.open("D:/pyscripter/pycharm/projects/bookworm/image.gif")
-			photo = PhotoImage(file = image)
-		self.Canvas1.create_image(0,0, image = photo, anchor = NW)
+			#fp = open("D:/pyscripter/pycharm/projects/bookworm/image.jpg")
+			picture = pict.open("D:/pyscripter/pycharm/projects/bookworm/image.jpg")
+			photo = ImageTk.PhotoImage(picture)
+		#photo = ImageTk.PhotoImage(imgURL)
+		self.Canvas1.create_image(0,0, photo, NW)
+		#self.Canvas1.pack()
 
 
 
