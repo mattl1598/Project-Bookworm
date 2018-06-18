@@ -33,7 +33,7 @@ def destroy_window():
     top_level = None
 
 if __name__ == '__main__':
-    import unknown
-    unknown.vp_start_gui()
+    import book
+    book.vp_start_gui()
 
 

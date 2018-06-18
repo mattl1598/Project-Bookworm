@@ -10,6 +10,9 @@ import img
 import urllib
 import PIL.Image as pict
 from PIL import ImageTk
+import img2gif
+
+from sys import argv
 
 try:
 	from Tkinter import *
@@ -23,14 +26,14 @@ except ImportError:
 	import tkinter.ttk as ttk
 	py3 = True
 
-import unknown_support
+import book_support
 
 def vp_start_gui(a):
 	'''Starting point when module is the main routine.'''
 	global val, w, root
 	root = Tk()
 	top = New_Toplevel (root)
-	unknown_support.init(root, top)
+	book_support.init(root, top)
 	root.mainloop()
 
 w = None
@@ -40,7 +43,7 @@ def create_New_Toplevel(root):
 	rt = root
 	w = Toplevel(root)
 	top = New_Toplevel (w)
-	unknown_support.init(w, top)
+	book_support.init(w, top)
 	return (w, top)
 
 def destroy_New_Toplevel():
@@ -319,15 +322,21 @@ class New_Toplevel:
 		self.Text7.insert(INSERT, label)
 		self.blurbVar.insert(INSERT, blurb)
 		if imgURL == img.imgGet():
-			photo = Tk.PhotoImage(imgURL)
+			img2gif.error()
+			img2gif.resizeError()
+			self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/error.gif")
 		else:
 			urllib.request.urlretrieve(imgURL, "D:/pyscripter/pycharm/projects/bookworm/image.jpg")
-			#fp = open("D:/pyscripter/pycharm/projects/bookworm/image.jpg")
-			picture = pict.open("D:/pyscripter/pycharm/projects/bookworm/image.jpg")
-			photo = ImageTk.PhotoImage(picture)
-		#photo = ImageTk.PhotoImage(imgURL)
-		self.Canvas1.create_image(0,0, photo, NW)
-		#self.Canvas1.pack()
+			img2gif.main()
+			img2gif.resize()
+			self.photo = ImageTk.PhotoImage(file = "D:/pyscripter/pycharm/projects/bookworm/image.gif")
+		self.Canvas1.create_image(0, 123, image = self.photo, anchor = 'w')
+		print(self.Canvas1.cget("width"))
+		print(self.Canvas1.cget("height"))
+
+
+
+
 
 
 
