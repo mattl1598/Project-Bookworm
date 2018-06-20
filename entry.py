@@ -1,5 +1,6 @@
 import tkinter as Tkinter
 import sqlite3
+import sql
 
 
 class App():
@@ -26,10 +27,9 @@ class App():
 		self.root.mainloop()
 
 	def quit(self):
-		print(self.entry.get())
-		conn = sqlite3.connect("D:/pyscripter/pycharm/projects/bookworm/database/database.db")
-		cmd = "INSERT INTO TABLE_NAME VALUES (id=?,input=?)"
-		conn.close()
+		input1 = str(self.entry.get())
+		print(input)
+		sql.dbInputIn(input1)
 		self.root.destroy()
 
 #app = App()

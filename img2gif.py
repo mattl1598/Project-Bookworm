@@ -12,7 +12,7 @@ def main():
 	outfile = f + ".gif"
 	Image.open(infile).save(outfile, 'gif')
 	im = Image.open("D:/pyscripter/pycharm/projects/bookworm/image.gif")
-	print(im.format, im.size, im.mode)
+	#print(im.format, im.size, im.mode)
 
 
 def error():
@@ -24,7 +24,7 @@ def error():
 	outfile = f + ".gif"
 	Image.open(infile).save(outfile, 'gif')
 	im = Image.open("D:/pyscripter/pycharm/projects/bookworm/error.gif")
-	print(im.format, im.size, im.mode)
+	#print(im.format, im.size, im.mode)
 
 
 def resize():
