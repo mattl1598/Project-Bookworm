@@ -22,7 +22,7 @@ if __name__ == "__main__":
 	book_support.init(root, top)
 	root.resizable(False, False)
 	root.mainloop()'''
-	#input.isbn2book()
+	input.isbn2book()
 
-	print(sql.getBook(1509860142))
-
+	#print(sql.getBook(1509860142))
+	#print(sql.inDB(1509860142))

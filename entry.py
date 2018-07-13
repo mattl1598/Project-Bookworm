@@ -28,7 +28,7 @@ class App():
 
 	def quit(self):
 		input1 = str(self.entry.get())
-		print(input)
+		print(input1)
 		sql.dbInputIn(input1)
 		self.root.destroy()
 
