@@ -5,6 +5,7 @@ import urllib
 import PIL.Image as pict
 from PIL import ImageTk
 import img2gif
+import sql
 
 class Book:
 	def __init__(self, title=str("None"), author = str("None"), genre=str("None"), released=str("None"), binding= str("None"), age=str("None"), label=str("None"), blurb=str("None"), imgURL=str(img.imgGet()), isbn = None):
@@ -18,6 +19,7 @@ class Book:
 		_ana2color = '#d9d9d9' # X11 color: 'gray85'
 
 		self.isbn = isbn
+		self.imgURL = imgURL
 
 		self.root = tkinter.Tk()
 		self.root.resizable(False, False)
@@ -301,6 +303,7 @@ class Book:
 			img2gif.resizeError()
 			self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/error.gif")
 		else:
+			print(imgURL)
 			urllib.request.urlretrieve(imgURL, "D:/pyscripter/pycharm/projects/bookworm/image.jpg")
 			img2gif.main()
 			img2gif.resize()
@@ -311,10 +314,26 @@ class Book:
 
 		self.root.mainloop()
 
+	def getChanges(self):
+		a = str(self.titleVar.get("0.0", tkinter.END))
+		b = str(self.authorVar.get("0.0", tkinter.END))
+		c = str(self.genreVar.get("0.0", tkinter.END))
+		d = str(self.releasedVar.get("0.0", tkinter.END))
+		e = str(self.bindingVar.get("0.0", tkinter.END))
+		f = str(self.ageVar.get("0.0", tkinter.END))
+		g = str(self.Text7.get("0.0", tkinter.END))
+		h = str(self.blurbVar.get("0.0", tkinter.END))
+		#i = self.imgURL
+		return a, b, c, d, e, f, g, h#, i
+
 	def close(self):
 		self.root.destroy()
 
 	def save(self):
+		a, b, c, d, e, f, g, h = self.getChanges()
+		print(a, b, c, d, e, f, g, h)
+		#i = "None"
+		sql.addBook(self.isbn, a, b, c, d, e, f, g, h, self.isbn)
 		self.close()
 
 	def delete(self):

@@ -21,13 +21,20 @@ def getBook(isbn1 = None):
 		isbn += input("input isbn")
 		isbn1 = isbn
 	deets = api.list(isbn1)
+	print(deets)
 	return str(deets)
 
 
 def getTitle(data):
 	datastart = data.find('title') + 9
+	print(data.find("', 'subtitle': '"))
 	dataend = data.find('authors') - 4
-	return (data[datastart:dataend])
+	if data[datastart:dataend].find("', 'subtitle': '") == -1:
+		return data[datastart:dataend]
+	else:
+		dataend = data.find("subtitle") - 4
+		return data[datastart:dataend]
+	#return (data[datastart:dataend])
 
 
 def getAuthor(data):
