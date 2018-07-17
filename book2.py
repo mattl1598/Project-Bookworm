@@ -6,9 +6,10 @@ import PIL.Image as pict
 from PIL import ImageTk
 import img2gif
 import sql
+import books_api as books
 
 class Book:
-	def __init__(self, title=str("None"), author = str("None"), genre=str("None"), released=str("None"), binding= str("None"), age=str("None"), label=str("None"), blurb=str("None"), imgURL=str(img.imgGet()), isbn = None):
+	def __init__(self, title=str("None"), author = str("None"), genre=str("None"), released=str("None"), binding= str("None"), age=str("None"), label=str("None"), blurb=str("None"), imgURL = None, isbn = None):
 		'''This class configures and populates the toplevel window.
 		   top is the toplevel containing window.'''
 
@@ -298,16 +299,27 @@ class Book:
 		self.Text7.insert(tkinter.INSERT, label)
 		self.blurbVar.insert(tkinter.INSERT, blurb)
 
-		if imgURL == img.imgGet():
-			img2gif.error()
-			img2gif.resizeError()
-			self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/error.gif")
-		else:
-			print(imgURL)
+		if self.imgURL == None or self.imgURL == "None)":
+			try:
+				self.imgURL = books.getImageURL(self.isbn)
+				urllib.request.urlretrieve(imgURL, "D:/pyscripter/pycharm/projects/bookworm/image.jpg")
+				img2gif.main()
+				img2gif.resize()
+				self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/image.gif")
+			except:
+				img2gif.error()
+				img2gif.resizeError()
+				self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/error.gif")
+		elif ("www." in self.imgURL) == True:
+			print(self.imgURL)
 			urllib.request.urlretrieve(imgURL, "D:/pyscripter/pycharm/projects/bookworm/image.jpg")
 			img2gif.main()
 			img2gif.resize()
 			self.photo = ImageTk.PhotoImage(file = "D:/pyscripter/pycharm/projects/bookworm/image.gif")
+		else:
+			img2gif.error()
+			img2gif.resizeError()
+			self.photo = ImageTk.PhotoImage(file="D:/pyscripter/pycharm/projects/bookworm/error.gif")
 		self.Canvas1.create_image(0, 123, image = self.photo, anchor = 'w')
 		#print(self.Canvas1.cget("width"))
 		#print(self.Canvas1.cget("height"))
@@ -338,3 +350,6 @@ class Book:
 
 	def delete(self):
 		self.close()
+
+	def imgChange(self):
+		self.imgURL = input("image url?")

@@ -34,9 +34,13 @@ def isbn2book():
 	#print(len(isbn))
 	if len(isbn) == 13 or len(isbn) == 10:
 		if sql.inDB(isbn) == True:
-			j, k, l, m, n, o, p, q, r, s = sql.getBook(isbn)
+			isbn, j, k, l, m, n, o, p, q, r = sql.getBook(isbn)
+			print(j, k, l, m, n, o, p, q, r, isbn)
+			#print("sql")
 		else:
 			j, k, l, m, n, o, p, q, r = books.getAll(books.getBook(isbn))
+			#print("books")
+			print(j, k, l, m, n, o, p, q, r, isbn)
 		bookDeets(j, k, l, m, n, o, p, q, r, isbn)
 	else:
 		print("error")
