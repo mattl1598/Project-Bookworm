@@ -112,25 +112,36 @@ def getBook(isbn):
 	c.execute(cmd)
 	data = str(c.fetchall())
 	conn.close()
-	print(data)
+	# print(data)
+
 	a = data[2:data.find(",")]
-	data = data[data.find(",") + 2:]
-	b = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	c = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	d = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	e = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	f = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	g = data[:data.find(",")]
-	data = data[data.find(",") + 2:]
-	h = data[:data.find(",")]
-	data = data[data.find("\",") + 2:]
-	i = data[:data.find("\",")]
-	data = data[data.find(",") + 2:]
-	j = data[:len(data)-2]
-	print(j)
+	data = data[data.find(",") + 3:]
+	#print(data)
+	b = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	c = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	d = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	e = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	f = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	g = data[:data.find(",") - 3]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	h = data[:data.find(",") - 3]
+	data = data[data.find(", \"") + 3:]
+	#print("test")
+	#print(data)
+	i = data[:data.find("\",") - 2]
+	data = data[data.find(",") + 3:]
+	#print(data)
+	j = data[:len(data) - 1]
+
 	return a, b, c, d, e, f, g, h, i, j
