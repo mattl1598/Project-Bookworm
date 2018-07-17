@@ -23,6 +23,11 @@ Question 2:
 Question 3:
 ![Screen cap of question 3](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q3.PNG "Question 3")
 
+Question 4:
+![Screen cap of question 4](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q4.PNG "Question 4")
+
+Question 5:
+![Screen cap of question 5](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q5.PNG "Question 5")
 ### Identification of prospective users
 the users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
 ### Identification of user needs and acceptable limitations
