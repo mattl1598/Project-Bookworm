@@ -12,6 +12,7 @@ subscription information and loan details.
 
  **insert excel spreadsheet analysis** 
 ### Data collection and research
+#### Questionnaire:
 Survey made on Enalyzer.
 
 Question 1:
@@ -28,9 +29,16 @@ Question 4:
 
 Question 5:
 ![Screen cap of question 5](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q5.PNG "Question 5")
+#### Results:
+ **\*Insert Results here***
+
 ### Identification of prospective users
-the users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
+The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
 ### Identification of user needs and acceptable limitations
+####Features requested:
+
+#### Features priority based on number of suggestions:
+
 ### Data sources and destinations
 ### Data Volumes
 ### Object analysis diagram
@@ -47,6 +55,30 @@ the users would be the librarians at the Hampshire School Library Service who co
 
 ### Class and object diagrams 
 ### User interface design (HC)
+#### Books Details:
+Text boxes: title, author, genre, released, binding, age, label, blurb, image.
+* Title: Book title and subtitle (maybe??) 
+* Author: authors. pretty self explanatory
+* Genre: genre of book
+* Released: release date
+* binding: should be paperback or hard cover. doesnt work. can be repurposed.
+* age: age rating ("mature" or "not mature")
+* label: blank. can be repurposed.
+* blurb: the book blurb.
+
+Canvas: image
+* image: book cover image
+
+Buttons: save changes, close, revert to online data.
+* Save changes: gets the data from the editable text boxes and saves it to a database.
+* close: closes the window.
+* revert to online data: deletes the database version of the book details and lets the program use the google books data instead.
+
+Image:
+ ![Screen cap of books details](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/book%20details%20(image%20error).PNG "Books Details")
+
+
+
 ### Hardware specification 
 #### Input Devices 
 #### Output Devices
