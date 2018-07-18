@@ -55,8 +55,18 @@ The users would be the librarians at the Hampshire School Library Service who co
 
 ### Class and object diagrams 
 ### User interface design (HC)
+#### Single Entry:
+Used for isbn entry.
+
+Text boxes: entry field.
+* Entry field: user enters isbn or other single entry data.
+Button: Submit.
+* Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
+
+Image:
+![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.PNG "Entry form")
 #### Books Details:
-Text boxes: title, author, genre, released, binding, age, label, blurb, image.
+Text boxes: title, author, genre, released, binding, age, label, blurb.
 * Title: Book title and subtitle (maybe??) 
 * Author: authors. pretty self explanatory
 * Genre: genre of book
@@ -74,16 +84,27 @@ Buttons: save changes, close, revert to online data.
 * close: closes the window.
 * revert to online data: deletes the database version of the book details and lets the program use the google books data instead.
 
-Image:
+Image: 
+
  ![Screen cap of books details](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/book%20details%20(image%20error).PNG "Books Details")
 
 
 
 ### Hardware specification 
 #### Input Devices 
+Currently Required: Keyboard, Mouse. 
+Optional: Barcode Scanner (untested)
+* Keyboard: allows manual entry of barcodes and editing of book details.
+* Mouse: for interaction with buttons on the forms as pressing enter after typing doesnt work. (tab is untested.)
+* Barcode scanner: easier input of isbns stored as barcodes on most books.
 #### Output Devices
+Required: Monitor.
+* Monitor: viewing of GUI.
 #### Storage devices
+Required: Program files and sqlite database. unknown sizes as unfinished. database may be moved to a server.
 #### Processor and Memory requirements
+* a processor is required. working: i5-4460 \n
+* some amount of ram is required. working: 8gb sodimm ddr3
 ### Description of measures planned for security and integrity of data and system security
 ### Overall test strategy 
 ### Testing
