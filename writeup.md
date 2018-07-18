@@ -47,7 +47,17 @@ The users would be the librarians at the Hampshire School Library Service who co
 ### Justification of chosen solution
 ## Design
 ### Overall System Design
-### Description of modular structure of system 
+### Description of modular structure of system
+#### Modules:
+All of the code has been separated into different python modules (*.py).
+These modules can be imported into other parts of the code to allow modularity in the structure of the program. 
+The modules also reduce the amount of code needed to be written as they can imported to allow the calling of the functions inside the modules. 
+#### Objects:
+Objects are callable by any other part of the code where the modules are imported. 
+
+Some objects that I've implemented are:
+* Entry form object
+* book details object
 ### Definition of data requirements 
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)
@@ -64,7 +74,7 @@ Button: Submit.
 * Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
 
 Image:
-![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.png "Entry form")
+![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.PNG "Entry form")
 #### Books Details:
 Text boxes: title, author, genre, released, binding, age, label, blurb.
 * Title: Book title and subtitle (maybe??) 
@@ -103,11 +113,23 @@ Required: Monitor.
 #### Storage devices
 Required: Program files and sqlite database. unknown sizes as unfinished. database may be moved to a server.
 #### Processor and Memory requirements
-* a processor is required. working: i5-4460 \n
-* some amount of ram is required. working: 8gb sodimm ddr3
+* a processor is required. working: i5-4460, i5-4210M \n
+* some amount of ram is required. working: 8gb sodimm ddr3, 8gb ddr3 desktop dimm
+
+
+
+## Testing
+
 ### Description of measures planned for security and integrity of data and system security
+* sql injection prevention
+
 ### Overall test strategy 
-### Testing
+* test for sql injection
+* see if it breaks under normal use cases
+* test under extreme use cases to see if it breaks
+
+### Testing Details
+
 ## System Maintenance
 ### System Overview
 ### Sampled Detailed Algorithms
@@ -117,3 +139,6 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 ## Evaluation
 ## Program Code
+
+
+
