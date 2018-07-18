@@ -74,7 +74,7 @@ Button: Submit.
 * Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
 
 Image:
-![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.PNG "Entry form")
+![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.png "Entry form")
 #### Books Details:
 Text boxes: title, author, genre, released, binding, age, label, blurb.
 * Title: Book title and subtitle (maybe??) 
