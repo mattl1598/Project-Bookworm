@@ -44,6 +44,7 @@ The users would be the librarians at the Hampshire School Library Service who co
 
 ### Data sources and destinations
 ### Data Volumes
+Data is stored in a series of database tables currently using sqlite as the backend.
 ### Object analysis diagram
 ### Analysis data dictionary and ERD
 ### Realistic appraisal of the feasibility of potential solutions
