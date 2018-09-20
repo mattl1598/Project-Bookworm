@@ -9,12 +9,14 @@ The current system is managed using a group of "three?" excel spreadsheets for m
 subscription information and loan details. 
 
 ### Description of current system
-The current system is managed by a collection of excel spreadsheets.
-One of these spreadsheets contains contact information, addresses and dates needed for site visits to collect and drop off books that have been selected or ordered and to perform a stock check to assess the amount of books lost and damaged and either replace for free if under a certain level or for a fee if the number of books is significant.
-
+The current system is managed by a collection of excel spreadsheets. 
+One of these spreadsheets contains contact information, addresses and dates needed for site visits to 
+collect and drop off books that have been selected or ordered and to perform a stock check to assess the 
+amount of books lost and damaged and either replace for free if under a certain level or for a fee if the 
+number of books is significant.
 
  **insert excel spreadsheet analysis** 
-### Data collection and research
+### Data collection and research:
 #### Questionnaire:
 Survey made on Enalyzer.
 
@@ -43,6 +45,12 @@ The users would be the librarians at the Hampshire School Library Service who co
 #### Features priority based on number of suggestions:
 
 ### Data sources and destinations
+#### Sources:
+* Google Books for details about the books.
+* Input devices for ISBNs
+#### Destinations:
+* Database for long term storage of data.
+* Printable reports.
 ### Data Volumes
 Data is stored in a series of database tables currently using sqlite as the backend.
 ### Object analysis diagram
@@ -120,6 +128,13 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 * a processor is required. working: i5-4460, i5-4210M \n
 * some amount of ram is required. working: 8gb sodimm ddr3, 8gb ddr3 desktop dimm
 
+### Table:
+
+|               | Processors | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
+|---------------|------------|---------------|--------------------------------|-----------|-------------------|------------------|
+| Minimum:      | i5-4210M   |8GB SODIMM DDR3|80.1MB w/out third-party modules|Win7 32bit |                   |Keyboard and Mouse|
+| Recommended:  |            |               |8GB with all required modules   |Win10 64bit| 1920x1080@60Hz    |                  |
+| Also Working: | i5-4460    |8GB DIMM DDR3  |                                |           | 1920x1080@60Hz    |                  |
 
 
 ## Testing
