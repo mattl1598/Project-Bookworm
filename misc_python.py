@@ -109,8 +109,8 @@ def import_list(filepath):               #imports list from file
 	"""imports list from a file,
 	takes a filepath, returns a list
 	NOTE: ALREADY USES CHECK PATH"""
-	file = checkFile(filepath)
-	txt = open(file, "r")
+	#file = checkFile(filepath)
+	txt = open(filepath, "r")
 	shuff = txt.read().splitlines()
 	txt.close()
 	return(shuff)
