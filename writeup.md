@@ -124,6 +124,7 @@ graph LR
   key2-. Data Transfer .-key3
  end
 ```
+https://mermaidjs.github.io/mermaid-live-editor/
 
 ### Identification of processes and suitable algorithms for data transformation
 
