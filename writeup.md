@@ -73,6 +73,8 @@ Some objects that I've implemented are:
 * Homepage object
 * Multientry form object
 * settings menu object
+* School Details View menu
+* School Details Buttons menu
 
 | Object:       | Description: |Uses:| Called by: | Calls: |
 |---------------|--------------|------------|------------|--------|
