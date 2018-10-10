@@ -70,6 +70,17 @@ Objects are callable by any other part of the code where the modules are importe
 Some objects that I've implemented are:
 * Entry form object
 * book details object
+* Homepage object
+* Multientry form object
+* settings menu object
+
+| Object:       | Description: |Uses:| Called by: | Calls: |
+|---------------|--------------|------------|------------|--------|
+| Entry Form    |For entering a single value to be processed.|Enering an ISBN to view the details of that book.|Homepage|Book Details|
+| Book Details  |Displays the title, author, etc that is passed into the object.|Displaying the details of a book.|Entry Form|Homepage| 
+| Homepage      |The main menu of the program. Has buttons to call each of the parts of the program.|Calling smaller independent parts of the program such as Settings and the Multientry form.|Starting the program, Book Details, Settings, Multientry, Entry Form.|Entry Form, Multientry, Settings Menu|
+| Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Homepage|##N/A##|
+| Settings Menu |Changing settings that apply globally to the program.|Changing the colour theme of the program.|Homepage|Homepage|
 ### Definition of data requirements 
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)
