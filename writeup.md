@@ -89,6 +89,40 @@ Some objects that I've implemented are:
 ### Definition of data requirements 
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)
+#### Entity Relationship Diagram:
+
+Code: 
+graph LR
+ Homepage-->School-Details-Start(School Details Start)
+ School-Details-Start-->School-Details
+ School-Details-->Homepage
+
+ Homepage-->Multi-Entry
+ Multi-Entry-->Homepage
+
+ Homepage-->Entry-Form(Entry Form)
+ Entry-Form-->Book-Details(Book Details)
+ Book-Details-->Homepage
+
+ Settings-->Homepage{Homepage}
+ Homepage-->Settings(Settings)
+ Settings-.-theme((theme.json))
+
+ School-Details-.-SQL((SQL.py))
+ School-Details-Start-.-SQL((SQL.py))
+ Book-Details-.-SQL((SQL.py))
+ Multi-Entry-.-SQL((SQL.py))
+ Book-Details-.-GB((Google Books))
+ Multi-Entry-.-GB((Google Books))
+
+#### Key:
+Code:
+graph LR
+key1{Main Menu}
+key2(Simple GUI Module)
+key3((Data Storage))
+key1-- Module Calling -->key2
+key2-. Data Transfer .-key3
 ### Identification of processes and suitable algorithms for data transformation
 
 ### Class and object diagrams 
