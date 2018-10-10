@@ -90,8 +90,9 @@ Some objects that I've implemented are:
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)
 #### Entity Relationship Diagram:
-
+![Alt text](./bookwormERD.svg)
 Code: 
+```
 graph LR
  Homepage-->School-Details-Start(School Details Start)
  School-Details-Start-->School-Details
@@ -115,6 +116,14 @@ graph LR
  Book-Details-.-GB((Google Books))
  Multi-Entry-.-GB((Google Books))
 
+ subgraph Key
+  key1{Main Menu}
+  key2(Simple GUI Module)
+  key3((Data Storage))
+  key1-- Module Calling -->key2
+  key2-. Data Transfer .-key3
+ end
+```
 #### Key:
 Code:
 graph LR
