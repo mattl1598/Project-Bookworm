@@ -91,7 +91,7 @@ Some objects that I've implemented are:
 ### Entity relationship diagram(Normalised)
 #### Entity Relationship Diagram:
 ![Alt text](./bookwormERD.svg)
-Code: 
+####Code: 
 ```
 graph LR
  Homepage-->School-Details-Start(School Details Start)
@@ -124,14 +124,7 @@ graph LR
   key2-. Data Transfer .-key3
  end
 ```
-#### Key:
-Code:
-graph LR
-key1{Main Menu}
-key2(Simple GUI Module)
-key3((Data Storage))
-key1-- Module Calling -->key2
-key2-. Data Transfer .-key3
+
 ### Identification of processes and suitable algorithms for data transformation
 
 ### Class and object diagrams 
