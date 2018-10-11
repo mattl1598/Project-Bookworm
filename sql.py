@@ -2,12 +2,7 @@ import sqlite3
 import books_api as books
 import misc_python as misc
 
-<<<<<<< HEAD
 def db_input_in(input1):
-=======
-
-def dbInputIn(input1):
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	cmd = str("INSERT INTO input VALUES (\"")
@@ -19,11 +14,7 @@ def dbInputIn(input1):
 	conn.close()
 
 
-<<<<<<< HEAD
 def db_input_out_all():
-=======
-def dbInputOutAll():
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	c.execute("SELECT * FROM input")
@@ -38,11 +29,7 @@ def dbInputOutAll():
 	return final
 
 
-<<<<<<< HEAD
 def db_input_out():
-=======
-def dbInputOut():
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	c.execute("SELECT * FROM input")
@@ -54,11 +41,7 @@ def dbInputOut():
 	return real
 
 
-<<<<<<< HEAD
 def check_book(isbn):
-=======
-def checkBook(isbn):
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	cmd = str("SELECT * FROM changed_books WHERE isbn = (\"")
@@ -110,12 +93,8 @@ def add_book(isbn, a, b, c, d, e, f, g, h, i):
 	conn.commit()
 	conn.close()
 
-<<<<<<< HEAD
 
 def in_db(isbn):
-=======
-def inDB(isbn):
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	cmd = str("SELECT isbn FROM changed_books")
@@ -125,7 +104,6 @@ def inDB(isbn):
 	return str(isbn) in data
 
 
-<<<<<<< HEAD
 def get_book(isbn):
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
@@ -211,9 +189,6 @@ def get_school_deets(school_id):
 	values = list(raw[0])
 	conn.close()
 
-=======
-def getBook(isbn):
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 	conn = sqlite3.connect("D:\Project-Bookworm\database\database.db")
 	c = conn.cursor()
 	cmd = "SELECT * FROM schools;"
@@ -223,7 +198,6 @@ def getBook(isbn):
 
 	out = create_dict(keys, values)
 
-<<<<<<< HEAD
 	return out
 
 
@@ -259,6 +233,3 @@ def new_school(data):
 
 def create_dict(keys, values):
 	return dict(zip(keys, values + [None] * (len(keys) - len(values))))
-=======
-	return a, b, c, d, e, f, g, h, i, j
->>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
