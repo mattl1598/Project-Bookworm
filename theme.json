@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "theme": "dark",
     "dark": {
@@ -69,4 +70,77 @@
             "clickedbg": "#2f2f2f"
         }
     }
+=======
+{
+    "theme": "dark",
+    "dark": {
+        "windows": {
+            "background": "#474747",
+            "darkbackground": "#2f2f2f",
+            "highlightbackground": "#474747",
+            "highlightcolor": "black",
+            "text": "white"
+        },
+        "textbox": {
+            "background": "#2f2f2f",
+            "foreground": "white",
+            "highlightbackground": "#d9d9d9",
+            "highlightcolor": "black",
+            "insertbackground": "#c4c4c4",
+            "selectbackground": "#214283",
+            "selectforeground": "black"
+        },
+        "button": {
+            "background": "#474747",
+            "text": "white",
+            "clickedbg": "#2f2f2f"
+        }
+    },
+    "light": {
+        "windows": {
+            "background": "#d9d9d9",
+            "darkbackground": "#d9d9d9",
+            "highlightbackground": "#d9d9d9",
+            "highlightcolor": "black",
+            "text": "black"
+        },
+        "textbox": {
+            "background": "white",
+            "foreground": "black",
+            "highlightbackground": "#d9d9d9",
+            "highlightcolor": "black",
+            "insertbackground": "#c4c4c4",
+            "selectbackground": "black",
+            "selectforeground": "black"
+        },
+        "button": {
+            "background": "#d9d9d9",
+            "text": "black",
+            "clickedbg": "#d9d9d9"
+        }
+    },
+    "custom": {
+        "windows": {
+            "background": "SystemButtonFace",
+            "darkbackground": "#2f2f2f",
+            "highlightbackground": "#474747",
+            "highlightcolor": "black",
+            "text": "white"
+        },
+        "textbox": {
+            "background": "#2f2f2f",
+            "foreground": "white",
+            "highlightbackground": "#d9d9d9",
+            "highlightcolor": "black",
+            "insertbackground": "#c4c4c4",
+            "selectbackground": "#214283",
+            "selectforeground": "black"
+        },
+        "button": {
+            "background": "#474747",
+            "text": "white",
+            "clickedbg": "#2f2f2f"
+        }
+    }
+>>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 }

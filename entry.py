@@ -66,8 +66,13 @@ class Form():
 		self.root.destroy()
 
 		if len(isbn) == 13 or len(isbn) == 10:
+<<<<<<< HEAD
 			if sql.in_db(isbn) is True:
 				isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbn)
+=======
+			if sql.inDB(isbn) == True:
+				isbn, j, k, l, m, n, o, p, q, r = sql.getBook(isbn)
+>>>>>>> 77d70087116cb3542db994ff5dd771921a03de6f
 			# print(j, k, l, m, n, o, p, q, r, isbn)
 			# print("sql")
 			else:
