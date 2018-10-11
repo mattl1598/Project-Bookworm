@@ -15,7 +15,10 @@ class Api(object):
 	def _get(self, path, params=None):
 		if params is None:
 			params = {}
+		print(params)
+		print(self.__BASEURL + path, params)
 		resp = requests.get(self.__BASEURL + path, params=params)
+		print(resp)
 		if resp.status_code == 200:
 			return json.loads(resp.content)
 

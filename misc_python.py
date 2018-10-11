@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Name:        misc_python
 # Purpose:     misc python utilities
 #
@@ -7,13 +7,16 @@
 # Version:     0.2
 #
 # Contains:
-#	       Functions: write to file, quicksort, import_list, check file, find mid
-#	       Classes: stack
+# 	       Functions: write to file, quicksort, import_list, check file, find mid
+# 	       Classes: stack
 #
 # Created:     21/02/2018
 # Copyright:   (c) matthewl9 2018
 # Licence:     <your licence>
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
+
+import re
+
 class stack():
 	"""absolute pile of shite, do not use,
 	use python lists instead
@@ -69,6 +72,18 @@ def quicksort(data):                             #quicksort algorithm. takes lis
    return quicksort(less) + equal + quicksort(greater)
   return data
 
+def sorted_nicely( l ):
+    """ Sort the given iterable in the way that humans expect."""
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]
+    return sorted(l, key = alphanum_key)
+
+def better_sort(s):
+	y = []
+	for x in sorted_nicely(s):
+		y.append(x)
+	return y
+
 def checkFile(filepath):
 	"""for portable development.
 
@@ -109,8 +124,8 @@ def import_list(filepath):               #imports list from file
 	"""imports list from a file,
 	takes a filepath, returns a list
 	NOTE: ALREADY USES CHECK PATH"""
-	file = checkFile(filepath)
-	txt = open(file, "r")
+	#file = checkFile(filepath)
+	txt = open(filepath, "r")
 	shuff = txt.read().splitlines()
 	txt.close()
 	return(shuff)

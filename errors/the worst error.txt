@@ -1,0 +1,62 @@
+N:\A Level\python 3.6.6\lib\requests\__init__.py:91: RequestsDependencyWarning: urllib3 (dev) or chardet (4.0.0) doesn't match a supported version!
+  RequestsDependencyWarning)
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "N:\A Level\python 3.6.6\lib\urllib3\connection.py", line 171, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "N:\A Level\python 3.6.6\lib\urllib3\util\connection.py", line 56, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "N:\A Level\python 3.6.6\lib\socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11003] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "N:\A Level\python 3.6.6\lib\urllib3\connectionpool.py", line 594, in urlopen
+    self._prepare_proxy(conn)
+  File "N:\A Level\python 3.6.6\lib\urllib3\connectionpool.py", line 815, in _prepare_proxy
+    conn.connect()
+  File "N:\A Level\python 3.6.6\lib\urllib3\connection.py", line 314, in connect
+    conn = self._new_conn()
+  File "N:\A Level\python 3.6.6\lib\urllib3\connection.py", line 180, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x0000024155B8CF60>: Failed to establish a new connection: [Errno 11003] getaddrinfo failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "N:\A Level\python 3.6.6\lib\requests\adapters.py", line 445, in send
+    timeout=timeout
+  File "N:\A Level\python 3.6.6\lib\urllib3\connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "N:\A Level\python 3.6.6\lib\urllib3\util\retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.googleapis.com', port=443): Max retries exceeded with url: /books/v1/volumes?q=1509860142 (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x0000024155B8CF60>: Failed to establish a new connection: [Errno 11003] getaddrinfo failed',)))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "N:\A Level\python 3.6.6\lib\tkinter\__init__.py", line 1702, in __call__
+    return self.func(*args)
+  File "D:\Project-Bookworm\multientry.py", line 63, in <lambda>
+    self.root.bind('<Return>', (lambda event: self.addISBN()))
+  File "D:\Project-Bookworm\multientry.py", line 87, in addISBN
+    title = books.getTitle(books.getBook(input1))
+  File "D:\Project-Bookworm\books_api.py", line 24, in getBook
+    deets = api.list(isbn1)
+  File "D:\Project-Bookworm\googlebooks.py", line 109, in list
+    return self._get(path, params)
+  File "D:\Project-Bookworm\googlebooks.py", line 18, in _get
+    resp = requests.get(self.__BASEURL + path, params=params)
+  File "N:\A Level\python 3.6.6\lib\requests\api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "N:\A Level\python 3.6.6\lib\requests\api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "N:\A Level\python 3.6.6\lib\requests\sessions.py", line 513, in request
+    resp = self.send(prep, **send_kwargs)
+  File "N:\A Level\python 3.6.6\lib\requests\sessions.py", line 623, in send
+    r = adapter.send(request, **kwargs)
+  File "N:\A Level\python 3.6.6\lib\requests\adapters.py", line 507, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='www.googleapis.com', port=443): Max retries exceeded with url: /books/v1/volumes?q=1509860142 (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x0000024155B8CF60>: Failed to establish a new connection: [Errno 11003] getaddrinfo failed',)))
