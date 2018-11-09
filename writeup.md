@@ -87,15 +87,27 @@ Key:
 | ❌ | No or not practical               |
 
 
-| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use | Supports USB Scanners |   |
-|-----------------------|---------|-------|-------|---------|-----|------------------|----------------------|----------------------|---|
-| Python Text Interface |    ✔    |  ✔   |  ✔    |   ❌    |  ❌  |       ✔         | ✔                   | ✔                     |   |
-| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓    |  🗸  |       ✔          | ✔                   | ✓ (bluetooth version required for android and iOS) |   |
-| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       🗸          | ✔                   | ✓ (bluetooth version required for android and iOS) |   |
-| Visual Basic          |    ✔    |  ❌   |  ❌   |   ❌    |  ❌  |       ✔          | ❌                   | ✔                     |   |
-| Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ❌          | ❌                   | ✔                     |   |
-| WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |   |
-|                       |         |       |       |         |     |                   |                     |                      |   |
+| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use | Supports USB Scanners |
+|-----------------------|---------|-------|-------|---------|-----|------------------|----------------------|----------------------|
+| Python Text Interface |    ✔    |  ✔   |  ✔    |   ❌    |  ❌  |       ✔         | ✔                   | ✔                     |
+| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓    |  🗸  |       ✔          | ✔                   | ✓ (bluetooth version required for android and iOS) |
+| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       🗸          | ✔                   | ✓ (bluetooth version required for android and iOS) |
+| Visual Basic          |    ✔    |  ❌   |  ❌   |   ❌    |  ❌  |       ✔          | ❌                   | ✔                     |
+| Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ❌          | ❌                   | ✔                     |
+| WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |
+
+#### Final Decision:
+
+* Python with Tkinter GUI
+
+I have chosen to use Python with Tkinter for the GUI as my method of choice for my project. I am using it because 
+I know python quite well (compared to VB which is the only other language I have used before) and I have 
+already learnt tkinter as a GUI implementation for python as apposed to learning Kivy just for being able to 
+easily put the program on mobile devices.
+
+I also know that the users have Windows machines as their desk computers at the location meaning mobile 
+devices aren't a required feature.
+
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).
