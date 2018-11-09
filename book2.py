@@ -1,6 +1,6 @@
 import tkinter
 import sys
-import img
+# import img
 import urllib
 import PIL.Image as Pict
 from PIL import ImageTk
@@ -11,11 +11,16 @@ import json
 import homepage
 
 
-def gettheme():
+def get_theme():
+
+	with open("D:/Project-Bookworm/settings.json", "r") as file:
+		settings = json.load(file)
+
 	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
-	theme = theme1["theme"]
+	theme = settings["theme"]
+	db = settings["database_location"]
 
 	bg = theme1[theme]["windows"]["background"]
 	text = theme1[theme]["windows"]["text"]
@@ -28,7 +33,7 @@ def gettheme():
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 	darkbg = theme1[theme]["windows"]["darkbackground"]
 
-	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg
+	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db
 
 
 class Book:
@@ -37,7 +42,7 @@ class Book:
 					binding=str("None"), age=str("None"), label=str("None"), blurb=str("None"),
 					img_url=None, isbn=None):
 
-		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg = gettheme()
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db = get_theme()
 
 		self.isbn = isbn
 		self.img_url = img_url
@@ -233,7 +238,7 @@ class Book:
 
 	def close(self):
 		self.root.destroy()
-		homepage.homepage()
+		#homepage.homepage()
 
 	def save(self):
 		a, b, c, d, e, f, g, h = self.get_changes()

@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import StringVar
-
 import input as input1
 import json
 import settings
@@ -10,6 +9,7 @@ import requests
 import urllib.request
 import os
 import schoolDetails
+import gui
 
 
 
@@ -40,9 +40,16 @@ class homepage:
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 
 		self.home = Tk()
-		self.home.geometry("1280x720")
+		self.home.iconbitmap("D:\Project-Bookworm\icons\colour.ico")
+
+		size = str(int((self.home.winfo_screenwidth()*(1280/1920))))
+		x = "x"
+		size += x
+		size += str(int(self.home.winfo_screenheight()*(720/1080)))
+
+		self.home.geometry(size)
 		self.home.title("Project Bookworm")
-		self.home.resizable(False, False)
+		#self.home.resizable(False, False)
 		self.home.configure(background=bg)
 		self.randon_variable = StringVar()
 
@@ -66,30 +73,30 @@ class homepage:
 		self.quit.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
-		self.deets.place(x=165, y=95, width=230, height=125)
-		self.signOut.place(x=405, y=95, width=230, height=125)
-		self.schools.place(x=165, y=230, width=230, height=125)
-		self.settings.place(x=645, y=500, width=230, height=125, anchor=NW)
-		self.quit.place(x=885, y=500, width=230, height=125, anchor=NW)
+		self.deets.place(relx=165/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
+		self.signOut.place(relx=405/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
+		self.schools.place(relx=165/1280, rely=230/720, relwidth=230/1280, relheight=125/720)
+		self.settings.place(relx=645/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
+		self.quit.place(relx=885/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
 
 		self.home.mainloop()
 
 	def book_details(self):
 		self.home.destroy()
-		input1.isbn2book()
+		gui.book_deets()
 		# self.get2()
 
 	def school_details(self):
 		self.home.destroy()
-		schoolDetails.start()
+		gui.school_details()
 
 	def settings(self):
 		self.home.destroy()
-		settings.main()
+		gui.settings_menu()
 
 	def book_sign_out(self):
 		self.home.destroy()
-		multientry.class3()
+		gui.multi_entry()
 
 	def close(self):
 		self.home.destroy()

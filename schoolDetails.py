@@ -34,10 +34,20 @@ class Deets:
 
 		self.root = tkinter.Tk()
 
-		size = str(int((self.root.winfo_screenwidth()*(55/192))))
+		self.flag = False
+
+		relw = 55/192
+		relh = 35/54
+
+		size = str(int((self.root.winfo_screenwidth()*(relw))))
 		x = "x"
 		size += x
-		size += str(int(self.root.winfo_screenheight()*(35/54)))
+		size += str(int(self.root.winfo_screenheight()*(relh)))
+
+		self.fontcalc2 = int((self.root.winfo_screenwidth()*(relw)))+int(self.root.winfo_screenheight()*(relh))
+
+		self.fontmult = 3/70
+
 
 		self.root.geometry(size)
 		self.root.title("Test")
@@ -53,28 +63,28 @@ class Deets:
 		self.root.HTL = tkinter.Label(self.root)
 		self.root.HTL.config(text="Head Teacher: ", foreground=text, bg=bg)
 
-		self.root.HT.place(relx=(2/11), rely=0.1, width=250, height=22, anchor="nw")
+		self.root.HT.place(relx=(2/11), rely=0.1, relwidth=250/550, relheight=22/700, anchor="nw")
 		self.root.HTL.place(relx=(2/11), rely=0.1, anchor="ne")
 
 		self.root.LastEx = tkinter.Text(self.root)
 		self.root.LastExL = tkinter.Label(self.root)
 
 		self.root.LastExL.config(text="Last Exchange: ", foreground=text, bg=bg)
-		self.root.LastEx.place(relx=(2/11), rely=(1/7), width=250, height=22, anchor="nw")
+		self.root.LastEx.place(relx=(2/11), rely=(1/7), relwidth=250/550, relheight=22/700, anchor="nw")
 		self.root.LastExL.place(relx=(2/11), rely=(1/7), anchor="ne")
 
 		self.root.contact = tkinter.Text(self.root)
 		self.root.contactL = tkinter.Label(self.root)
 
 		self.root.contactL.config(text="Contact: ", foreground=text, bg=bg)
-		self.root.contact.place(relx=(2/11), rely=(13/70), width=250, height=22, anchor="nw")
+		self.root.contact.place(relx=(2/11), rely=(13/70), relwidth=250/550, relheight=22/700, anchor="nw")
 		self.root.contactL.place(relx=(2/11), rely=(13/70), anchor="ne")
 
 		self.root.dfe = tkinter.Text(self.root)
 		self.root.dfeL = tkinter.Label(self.root)
 
 		self.root.dfeL.config(text="DFE No': ", foreground=text, bg=bg)
-		self.root.dfe.place(relx=(2/11), rely=(16/70), width=250, height=22, anchor="nw")
+		self.root.dfe.place(relx=(2/11), rely=(16/70), relwidth=250/550, relheight=22/700, anchor="nw")
 		self.root.dfeL.place(relx=(2/11), rely=(16/70), anchor="ne")
 
 		self.root.Add = tkinter.Text(self.root)
@@ -84,9 +94,9 @@ class Deets:
 		self.root.AddL.config(text="Address: ", foreground=text, bg=bg)
 		self.root.AddButt.config(text="Directions: ", foreground=butt_txt, bg=button_bg, activebackground=clickedbg,
 										activeforeground=butt_txt)
-		self.root.Add.place(relx=(2/11), y=190, width=250, height=82, anchor="nw")
-		self.root.AddL.place(relx=(2/11), y=190, anchor="ne")
-		self.root.AddButt.place(relx=0.654545, y=190)
+		self.root.Add.place(relx=(2/11), rely=190/700, relwidth=250/550, relheight=82/700, anchor="nw")
+		self.root.AddL.place(relx=(2/11), rely=190/700, anchor="ne")
+		self.root.AddButt.place(relx=0.654545, rely=190/700)
 
 		self.root.data = tkinter.Button(self.root, foreground=butt_txt, bg=button_bg, activebackground=clickedbg,
 										activeforeground=butt_txt)
@@ -99,7 +109,7 @@ class Deets:
 				self.data = sql.get_school_deets(self.school_id)
 
 				self.root.data.config(command=self.edit, text="Save Changes")
-				self.root.sch.config(text=self.data["name"], foreground=text, bg=bg, font=("TkDefault", 30))
+				self.root.sch.config(text=self.data["name"], foreground=text, bg=bg, font=("TkDefault", int(self.root.winfo_height()*self.fontmult)))
 				self.root.schE.insert(tkinter.INSERT, self.data["name"])
 				self.root.HT.insert(tkinter.INSERT, self.data["HT"])
 				self.root.LastEx.insert(tkinter.INSERT, self.data["lastEx"])
@@ -109,7 +119,7 @@ class Deets:
 			else:
 				self.root.data.config(command=self.new, text="Add New School")
 
-			self.root.data.place(x=445, y=650, height=30, anchor="ne")
+			self.root.data.place(relx=445/550, rely=650/700, relheight=30/700, anchor="ne")
 
 			for t in (self.root.schE, self.root.HT, self.root.LastEx, self.root.contact, self.root.dfe, self.root.Add,
 						self.root.data):
@@ -135,15 +145,34 @@ class Deets:
 
 		self.root.quit = tkinter.Button(self.root, text="Quit", command=self.quit, foreground=butt_txt, bg=button_bg,
 										activebackground=clickedbg, activeforeground=butt_txt)
-		self.root.quit.place(x=455, y=650, width=45, height=30)
+		self.root.quit.place(relx=455/550, rely=650/700, relwidth=45/550, relheight=30/700)
 
+
+
+		self.flag = True
+		'''
+		def d(event):
+			if self.flag is True:
+				self.root.update()
+				self.root.sch.config(font=("TkDefault", int(self.fontmult * self.root.winfo_height())))
+
+		def task():
+			self.root.bind('<Configure>', d)
+
+		self.root.after(2000, task)'''
 		self.root.mainloop()
+
+
 
 	def quit(self):
 		self.root.destroy()
-		homepage.main()
 
 	def edit(self):
+
+		data = [self.root.schE.get("0.0", 'end-1c'), self.root.HT.get("0.0", 'end-1c'),
+		        self.root.LastEx.get("0.0", 'end-1c'), self.root.contact.get("0.0", 'end-1c'),
+		        self.root.dfe.get("0.0", 'end-1c'), self.root.Add.get("0.0", 'end-1c')]
+		sql.edit_school(self.school_id,data)
 		print("REEEEEEEEEEEEEEEEEE")
 
 	def new(self):
@@ -154,14 +183,14 @@ class Deets:
 
 	def directions(self):
 		add = self.root.Add.get("0.0", tkinter.END)
+		add3 = urllib.parse.quote_plus(add)
 		url = "https://www.google.com/maps/search/?api=1&query="
-		urladd = urllib.parse.quote_plus(add)
-		url += urladd
+		url += add3
 		webbrowser.open_new(url)
 
-
-
-
+	def new_font(self):
+		self.root.update()
+		self.root.sch.config(font=("TkDefault", int(self.fontmult*self.root.winfo_height())))
 
 
 class entry:

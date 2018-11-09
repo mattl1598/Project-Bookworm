@@ -188,8 +188,3 @@ def FindMid(list1):
 	length = len(list1)
 	mid = length//2
 	return mid
-
-
-
-
-

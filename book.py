@@ -6,13 +6,19 @@
 #	Jun 08, 2018 10:32:08 PM
 
 import sys
-import img
+# import img
 import urllib
 import PIL.Image as pict
 from PIL import ImageTk
 import img2gif
 
 from sys import argv
+
+
+
+# legacy
+
+
 
 try:
 	from Tkinter import *
@@ -26,7 +32,7 @@ except ImportError:
 	import tkinter.ttk as ttk
 	py3 = True
 
-import book_support
+# import book_support
 
 def vp_start_gui(a):
 	'''Starting point when module is the main routine.'''

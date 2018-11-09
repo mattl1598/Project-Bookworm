@@ -1,6 +1,6 @@
 import books_api as books
-import book
-import book_support
+# import book
+# import book_support
 import tkinter
 import entrysmall
 import input

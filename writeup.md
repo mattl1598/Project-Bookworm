@@ -15,6 +15,23 @@ collect and drop off books that have been selected or ordered and to perform a s
 amount of books lost and damaged and either replace for free if under a certain level or for a fee if the 
 number of books is significant.
 
+#### General Details for a School
+Each school currently has it's own tab in the spreadsheet. At the top of each tab is a header containing information such as:
+* School Name
+* Head Teachers Name
+* Address
+* Contact Details
+* The DfE Number (unique number assigned by the Department for Education to each school)
+* Date of the Last Exchange
+
+Below these details, there is a table of the exchanges and details of them including:
+* Date
+* Comments/Notes
+* Type of exchange
+* Number of books returned
+* Number of books issued
+
+
  **insert excel spreadsheet analysis** 
 ### Data collection and research:
 #### Questionnaire:
@@ -181,7 +198,7 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 * a processor is required. working: i5-4460, i5-4210M \n
 * some amount of ram is required. working: 8gb sodimm ddr3, 8gb ddr3 desktop dimm
 
-### Table:
+#### Table:
 
 |               | Processors | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
 |---------------|------------|---------------|--------------------------------|-----------|-------------------|------------------|
