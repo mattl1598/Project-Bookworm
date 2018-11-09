@@ -76,15 +76,26 @@ Data is stored in a series of database tables currently using sqlite as the back
 ### Justification of chosen solution
 ## Design
 ### Overall System Design
-| Project Method        | Windows | MacOS | Linux | Android | iOS | Intuitive Interface |   |   |   |
-|-----------------------|---------|-------|-------|---------|-----|---------------------|---|---|---|
-| Python Text Interface | &#10004 |       |       |         |     |                     |   |   |   |
-| Python Tkinter GUI    |         |       |       |         |     |                     |   |   |   |
-| Python Kivy GUI       |         |       |       |         |     |                     |   |   |   |
-| Visual Basic          |         |       |       |         |     |                     |   |   |   |
-| Java                  |         |       |       |         |     |                     |   |   |   |
-| WebApp                |         |       |       |         |     |                     |   |   |   |
-|                       |         |       |       |         |     |                     |   |   |   |
+
+Key:
+
+| Character | Note |
+|---:|:-----------------|
+| 🗸 | Very difficult but still possible |
+| ✓ | Possible but time consuming       |
+| ✔ | Yes                               |
+| ✘ | No or not practical               |
+
+
+| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use |   |   |
+|-----------------------|---------|-------|-------|---------|-----|------------------|---------------------|---|---|
+| Python Text Interface |    ✔    |  ✔   |  ✔    |   ✘      |     |       ✔          | ✔                  |   |   |
+| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓     |  🗸   |      ✔           | ✔                  |   |   |
+| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |                   | ✔                  |   |   |
+| Visual Basic          |    ✔    |      |        |         |     |       ✔          |                    |   |   |
+| Java                  |         |       |       |          |     |                  |                    |   |   |
+| WebApp                |    ✔    |  ✔   |  ✔    |    ✔    |  ✔  |                  | ✔                  |   |   |
+|                       |         |       |       |          |     |                  |                    |   |   |
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).
