@@ -102,10 +102,10 @@ Key:
 
 I have chosen to use Python with Tkinter for the GUI as my method of choice for my project. I am using it because 
 I know python quite well (compared to VB which is the only other language I have used before) and I have 
-already learnt tkinter as a GUI implementation for python as apposed to learning Kivy just for being able to 
+already learnt Tkinter as a GUI implementation for python as opposed to learning Kivy just for being able to 
 easily put the program on mobile devices.
 
-I also know that the users have Windows machines as their desk computers at the location meaning mobile 
+I also know that the users have Windows machines as their desk computers at the site meaning mobile 
 devices aren't a required feature.
 
 ### Description of modular structure of system
