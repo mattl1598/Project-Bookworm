@@ -87,15 +87,15 @@ Key:
 | ✘ | No or not practical               |
 
 
-| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use |   |   |
-|-----------------------|---------|-------|-------|---------|-----|------------------|---------------------|---|---|
-| Python Text Interface |    ✔    |  ✔   |  ✔    |   ✘      |     |       ✔          | ✔                  |   |   |
-| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓     |  🗸   |      ✔           | ✔                  |   |   |
-| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |                   | ✔                  |   |   |
-| Visual Basic          |    ✔    |      |        |         |     |       ✔          |                    |   |   |
-| Java                  |         |       |       |          |     |                  |                    |   |   |
-| WebApp                |    ✔    |  ✔   |  ✔    |    ✔    |  ✔  |                  | ✔                  |   |   |
-|                       |         |       |       |          |     |                  |                    |   |   |
+| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use | Supports USB Scanners |   |
+|-----------------------|---------|-------|-------|---------|-----|------------------|----------------------|----------------------|---|
+| Python Text Interface |    ✔    |  ✔   |  ✔    |   ✘    |  ✘  |       ✔          | ✔                   | ✔                     |   |
+| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓    |  🗸  |       ✔          | ✔                   | ✓ (bluetooth version required for android and iOS) |   |
+| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       🗸          | ✔                   | ✓ (bluetooth version required for android and iOS) |   |
+| Visual Basic          |    ✔    |  ✘   |  ✘    |   ✘    |  ✘  |       ✔          | ✘                   | ✔                     |   |
+| Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ✘          | ✘                   | ✔                     |   |
+| WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ✘          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |   |
+|                       |         |       |       |         |     |                   |                     |                      |   |
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).
