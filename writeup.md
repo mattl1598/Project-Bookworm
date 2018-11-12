@@ -38,19 +38,19 @@ Below these details, there is a table of the exchanges and details of them inclu
 Survey made on Enalyzer.
 
 Question 1:
-![Screen cap of question 1](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q1.PNG "Question 1")
+![Screen cap of question 1](./survey/q1.PNG "Question 1")
 
 Question 2:
-![Screen cap of question 2](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q2.PNG "Question 2")
+![Screen cap of question 2](./survey/q2.PNG "Question 2")
 
 Question 3:
-![Screen cap of question 3](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q3.PNG "Question 3")
+![Screen cap of question 3](./survey/q3.PNG "Question 3")
 
 Question 4:
-![Screen cap of question 4](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q4.PNG "Question 4")
+![Screen cap of question 4](./survey/q4.PNG "Question 4")
 
 Question 5:
-![Screen cap of question 5](https://github.com/mattl1598/Project-Bookworm/blob/master/survey/q5.PNG "Question 5")
+![Screen cap of question 5](./survey/q5.PNG "Question 5")
 #### Results:
  **\*Insert Results here***
 
@@ -76,7 +76,8 @@ Data is stored in a series of database tables currently using sqlite as the back
 ### Justification of chosen solution
 ## Design
 ### Overall System Design
-
+#### Project Method Evalutation:
+##### Key Features Evalutation Table:
 Key:
 
 | Character | Note |
@@ -96,7 +97,7 @@ Key:
 | Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ❌          | ❌                   | ✔                     |
 | WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |
 
-#### Final Decision:
+##### Final Decision:
 
 * Python with Tkinter GUI
 
@@ -188,7 +189,7 @@ Button: Submit.
 * Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
 
 Image:
-![Screen cap of entry form](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/entry.png "Entry form")
+![Screen cap of entry form](./gui images/entry.png "Entry form")
 #### Books Details:
 Text boxes: title, author, genre, released, binding, age, label, blurb.
 * Title: Book title and subtitle (maybe??) 
@@ -210,7 +211,7 @@ Buttons: save changes, close, revert to online data.
 
 Image: 
 
- ![Screen cap of books details](https://github.com/mattl1598/Project-Bookworm/blob/master/gui%20images/book%20details%20(image%20error).PNG "Books Details")
+ ![Screen cap of books details](./gui images/book%20details%20(image%20error).PNG "Books Details")
 
 
 
