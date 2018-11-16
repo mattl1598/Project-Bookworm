@@ -71,6 +71,18 @@ The users would be the librarians at the Hampshire School Library Service who co
 ### Data Volumes
 Data is stored in a series of database tables currently using sqlite as the backend.
 ### Object analysis diagram
+### Objectives for Proposed System:
+| Objective               | Details                                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Key Objective I         | Signing in and out books to different schools                                                                       |
+| Key Objective II        | Database for storing details about schools                                                                          |
+| Key Objective III       | The system must be able to produce reports about the loan history of individual schools and the service as a whole. |
+| Key Objective IV        | Login system to protect sensitive data                                                                              |
+| Key Objective V         | The graphical user interface must be user friendly and intuitive                                                    |
+| Additional Objective I  | The system must use Object Oriented Programming where possible                                                      |
+| Additional Objective II |                                                                                                                     |
+|                         |                                                                                                                     |
+
 ### Analysis data dictionary and ERD
 ### Realistic appraisal of the feasibility of potential solutions
 ### Justification of chosen solution
