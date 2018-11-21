@@ -57,35 +57,35 @@ class Deets:
 
 		self.root.schL = tkinter.Label(self.root, foreground=text, bg=bg, text="School Name:")
 		self.root.schE = tkinter.Text(self.root)
-		self.root.schL.place(relx=(2/11), rely=(2/35), anchor="ne")
+		self.root.schL.place(relx=(3/11), rely=(2/35), anchor="ne")
 
 		self.root.HT = tkinter.Text(self.root)
 		self.root.HTL = tkinter.Label(self.root)
 		self.root.HTL.config(text="Head Teacher: ", foreground=text, bg=bg)
 
-		self.root.HT.place(relx=(2/11), rely=0.1, relwidth=250/550, relheight=22/700, anchor="nw")
-		self.root.HTL.place(relx=(2/11), rely=0.1, anchor="ne")
+		self.root.HT.place(relx=(3/11), rely=0.1, relwidth=250/550, relheight=22/700, anchor="nw")
+		self.root.HTL.place(relx=(3/11), rely=0.1, anchor="ne")
 
 		self.root.LastEx = tkinter.Text(self.root)
 		self.root.LastExL = tkinter.Label(self.root)
 
 		self.root.LastExL.config(text="Last Exchange: ", foreground=text, bg=bg)
-		self.root.LastEx.place(relx=(2/11), rely=(1/7), relwidth=250/550, relheight=22/700, anchor="nw")
-		self.root.LastExL.place(relx=(2/11), rely=(1/7), anchor="ne")
+		self.root.LastEx.place(relx=(3/11), rely=(1/7), relwidth=250/550, relheight=22/700, anchor="nw")
+		self.root.LastExL.place(relx=(3/11), rely=(1/7), anchor="ne")
 
 		self.root.contact = tkinter.Text(self.root)
 		self.root.contactL = tkinter.Label(self.root)
 
 		self.root.contactL.config(text="Contact: ", foreground=text, bg=bg)
-		self.root.contact.place(relx=(2/11), rely=(13/70), relwidth=250/550, relheight=22/700, anchor="nw")
-		self.root.contactL.place(relx=(2/11), rely=(13/70), anchor="ne")
+		self.root.contact.place(relx=(3/11), rely=(13/70), relwidth=250/550, relheight=22/700, anchor="nw")
+		self.root.contactL.place(relx=(3/11), rely=(13/70), anchor="ne")
 
 		self.root.dfe = tkinter.Text(self.root)
 		self.root.dfeL = tkinter.Label(self.root)
 
 		self.root.dfeL.config(text="DFE No': ", foreground=text, bg=bg)
-		self.root.dfe.place(relx=(2/11), rely=(16/70), relwidth=250/550, relheight=22/700, anchor="nw")
-		self.root.dfeL.place(relx=(2/11), rely=(16/70), anchor="ne")
+		self.root.dfe.place(relx=(3/11), rely=(16/70), relwidth=250/550, relheight=22/700, anchor="nw")
+		self.root.dfeL.place(relx=(3/11), rely=(16/70), anchor="ne")
 
 		self.root.Add = tkinter.Text(self.root)
 		self.root.AddL = tkinter.Label(self.root)
@@ -94,9 +94,30 @@ class Deets:
 		self.root.AddL.config(text="Address: ", foreground=text, bg=bg)
 		self.root.AddButt.config(text="Directions: ", foreground=butt_txt, bg=button_bg, activebackground=clickedbg,
 										activeforeground=butt_txt)
-		self.root.Add.place(relx=(2/11), rely=190/700, relwidth=250/550, relheight=82/700, anchor="nw")
-		self.root.AddL.place(relx=(2/11), rely=190/700, anchor="ne")
-		self.root.AddButt.place(relx=0.654545, rely=190/700)
+		self.root.Add.place(relx=(3/11), rely=280/700, relwidth=250/550, relheight=82/700, anchor="nw")
+		self.root.AddL.place(relx=(3/11), rely=280/700, anchor="ne")
+		self.root.AddButt.place(relx=0.745454, rely=250/700)
+
+		self.root.Pupils = tkinter.Text(self.root)
+		self.root.PupilsL = tkinter.Label(self.root)
+
+		self.root.PupilsL.config(text="No' of Pupils: ", foreground=text, bg=bg)
+		self.root.Pupils.place(relx=(3/11), rely=190 / 700, relwidth=250 / 550, relheight=22 / 700, anchor="nw")
+		self.root.PupilsL.place(relx=(3/11), rely=190 / 700, anchor="ne")
+
+		self.root.Alloc = tkinter.Text(self.root)
+		self.root.AllocL = tkinter.Label(self.root)
+
+		self.root.AllocL.config(text="Allocation per pupil: ", foreground=text, bg=bg)
+		self.root.Alloc.place(relx=(3/11), rely=220 / 700, relwidth=250 / 550, relheight=22 / 700, anchor="nw")
+		self.root.AllocL.place(relx=(3/11), rely=220 / 700, anchor="ne")
+
+		self.root.TotAlloc = tkinter.Text(self.root)
+		self.root.TotAllocL = tkinter.Label(self.root)
+
+		self.root.TotAllocL.config(text="Total Allocation: ", foreground=text, bg=bg)
+		self.root.TotAlloc.place(relx=(3/11), rely=250 / 700, relwidth=250 / 550, relheight=22 / 700, anchor="nw")
+		self.root.TotAllocL.place(relx=(3/11), rely=250 / 700, anchor="ne")
 
 		self.root.data = tkinter.Button(self.root, foreground=butt_txt, bg=button_bg, activebackground=clickedbg,
 										activeforeground=butt_txt)
@@ -116,17 +137,22 @@ class Deets:
 				self.root.contact.insert(tkinter.INSERT, self.data["Contact"])
 				self.root.dfe.insert(tkinter.INSERT, self.data["DFE"])
 				self.root.Add.insert(tkinter.INSERT, self.data["address"])
+				self.root.Pupils.insert(tkinter.INSERT, self.data["pupilTotal"])
+				self.root.Alloc.insert(tkinter.INSERT, self.data["itemsPer"])
+				alloc = int(self.data["itemsPer"])*int(self.data["pupilTotal"])
+				print(alloc)
+				self.root.TotAlloc.insert(tkinter.INSERT, alloc)
 			else:
 				self.root.data.config(command=self.new, text="Add New School")
 
 			self.root.data.place(relx=445/550, rely=650/700, relheight=30/700, anchor="ne")
 
-			for t in (self.root.schE, self.root.HT, self.root.LastEx, self.root.contact, self.root.dfe, self.root.Add,
-						self.root.data):
+			for t in (self.root.schE, self.root.HT, self.root.LastEx, self.root.contact, self.root.dfe, self.root.Pupils,
+						self.root.Alloc, self.root.TotAlloc, self.root.Add, self.root.data):
 				t.bind('<Tab>', lambda e, t=t: focus_next(t))
 				t.bind('<Shift-Tab>', lambda e, t=t: focus_prev(t))
 
-			self.root.schE.place(relx=(2/11), rely=(2/35), relwidth=(250/550), relheight=(22/700), anchor="nw")
+			self.root.schE.place(relx=(3/11), rely=(2/35), relwidth=(250/550), relheight=(22/700), anchor="nw")
 
 		else:
 			print("REEEEEEEEEEEEEEEE")
@@ -136,12 +162,17 @@ class Deets:
 			print("aaaaaa")
 			print(self.data)
 			self.root.sch.config(text=self.data["name"], foreground=text, bg=bg, font=("TkDefault", 30))
-			self.root.sch.place(relx=(2 / 11), rely=(1 / 70))
+			self.root.sch.place(relx=(3/11), rely=(1 / 70))
 			self.root.HT.insert(tkinter.INSERT, self.data["HT"])
 			self.root.LastEx.insert(tkinter.INSERT, self.data["lastEx"])
 			self.root.contact.insert(tkinter.INSERT, self.data["Contact"])
 			self.root.dfe.insert(tkinter.INSERT, self.data["DFE"])
 			self.root.Add.insert(tkinter.INSERT, self.data["address"])
+			self.root.Pupils.insert(tkinter.INSERT, self.data["pupilTotal"])
+			self.root.Alloc.insert(tkinter.INSERT, self.data["itemsPer"])
+			alloc = int(self.data["itemsPer"]) * int(self.data["pupilTotal"])
+			print(alloc)
+			self.root.TotAlloc.insert(tkinter.INSERT, alloc)
 
 		self.root.quit = tkinter.Button(self.root, text="Quit", command=self.quit, foreground=butt_txt, bg=button_bg,
 										activebackground=clickedbg, activeforeground=butt_txt)
@@ -170,15 +201,17 @@ class Deets:
 	def edit(self):
 
 		data = [self.root.schE.get("0.0", 'end-1c'), self.root.HT.get("0.0", 'end-1c'),
-		        self.root.LastEx.get("0.0", 'end-1c'), self.root.contact.get("0.0", 'end-1c'),
-		        self.root.dfe.get("0.0", 'end-1c'), self.root.Add.get("0.0", 'end-1c')]
-		sql.edit_school(self.school_id,data)
+				self.root.LastEx.get("0.0", 'end-1c'), self.root.contact.get("0.0", 'end-1c'),
+				self.root.dfe.get("0.0", 'end-1c'), self.root.Pupils.get("0.0", 'end-1c'),
+				self.root.Alloc.get("0.0", 'end-1c'), self.root.Add.get("0.0", 'end-1c')]
+		sql.edit_school(self.school_id, data)
 		print("REEEEEEEEEEEEEEEEEE")
 
 	def new(self):
 		data = [self.root.schE.get("0.0", 'end-1c'), self.root.HT.get("0.0", 'end-1c'),
-					self.root.LastEx.get("0.0", 'end-1c'), self.root.contact.get("0.0", 'end-1c'),
-					self.root.dfe.get("0.0", 'end-1c'), self.root.Add.get("0.0", 'end-1c')]
+				self.root.LastEx.get("0.0", 'end-1c'), self.root.contact.get("0.0", 'end-1c'),
+				self.root.dfe.get("0.0", 'end-1c'), self.root.Pupils.get("0.0", 'end-1c'),
+				self.root.Alloc.get("0.0", 'end-1c'), self.root.Add.get("0.0", 'end-1c')]
 		print(sql.new_school(data))
 
 	def directions(self):

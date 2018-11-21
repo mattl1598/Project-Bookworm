@@ -72,24 +72,25 @@ The users would be the librarians at the Hampshire School Library Service who co
 Data is stored in a series of database tables currently using sqlite as the backend.
 ### Object analysis diagram
 ### Objectives for Proposed System:
-| Objective               | Details                                                                                                             |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Key Objective I         | Signing in and out books to different schools                                                                       |
-| Key Objective II        | Database for storing details about schools                                                                          |
-| Key Objective III       | The system must be able to produce reports about the loan history of individual schools and the service as a whole. |
-| Key Objective IV        | Login system to protect sensitive data                                                                              |
-| Key Objective V         | The graphical user interface must be user friendly and intuitive                                                    |
-| Additional Objective I  | The system must use Object Oriented Programming where possible                                                      |
-| Additional Objective II |                                                                                                                     |
-|                         |                                                                                                                     |
+| Objective                | Details                                                                                                                                                  |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Key Objective I          | The system must be able to sign books in and out to different schools.                                                                                   |
+| Key Objective II         | The system should keep track of books in-stock and at different the schools.                                                                             |
+| Key Objective III        | The system should have a database to store details about the schools that are subscribed to the service.                                                 |
+| Key Objective IV         | The system must be able to produce reports about the loan history of individual schools and the service as a whole.                                      |
+| Key Objective V          | The system should have a login policy to protect sensitive data about the subscribed schools.                                                            |
+| Key Objective VI         | The graphical user interface must be user friendly and intuitive.                                                                                        |
+| Key Objective VII        | The system should protect the database from SQL Injection attacks that could otherwise cause irreversible damage to the structure and contents of it.    |
+| Additional Objective I   | The system should use Object Oriented Programming where possible                                                                                         |
+| Additional Objective II  | The system could have a settings menu where the user can customise their experience (e.g. colour themes) and change the locations of any required files. |
+| Additional Objective III | The system could have a calendar system to manage school visits.                                                                                         |
+| Additional Objective IV  | The systems reporting function could calculate various statistics about their visits, borrowing history and amount of lost/damaged books.                |
+| Additional Objective V   | The system could have a lookup system for books pertaining to a particular topic with a way to check their location.                                     |
+| Additional Objective VI  | The system should be able to make use of a barcode scanner for faster signing in and out of books.                                                       |
+| Additional Objective VII | The system should be simple to setup and install on the target users computers.                                                                          |
 
 ### Analysis data dictionary and ERD
-### Realistic appraisal of the feasibility of potential solutions
-### Justification of chosen solution
-## Design
-### Overall System Design
-#### Project Method Evalutation:
-##### Key Features Evalutation Table:
+### Realistic appraisal of the feasibility of potential solutions:
 Key:
 
 | Character | Note |
@@ -109,7 +110,7 @@ Key:
 | Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ❌          | ❌                   | ✔                     |
 | WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |
 
-##### Final Decision:
+### Justification of chosen solution:
 
 * Python with Tkinter GUI
 
@@ -121,6 +122,8 @@ easily put the program on mobile devices.
 I also know that the users have Windows machines as their desk computers at the site meaning mobile 
 devices aren't a required feature.
 
+## Design
+### Overall System Design
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).

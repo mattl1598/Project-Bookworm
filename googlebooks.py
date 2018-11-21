@@ -1,5 +1,7 @@
 import requests
 import json
+import os
+import urllib.request
 
 
 class Api(object):
@@ -9,15 +11,23 @@ class Api(object):
 	"""
 	__BASEURL = 'https://www.googleapis.com/books/v1'
 
+
 	def __init__(self):
-		pass
+		proxy = os.getenv("PROXY")
+		self.proxies = {'http': "194.154.22.1:8080",
+						'https': "194.154.22.1:8080"}
+		self.headers = {
+						'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+										'(KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36'
+						}
+		print(self.proxies)
 
 	def _get(self, path, params=None):
 		if params is None:
 			params = {}
 		print(params)
 		print(self.__BASEURL + path, params)
-		resp = requests.get(self.__BASEURL + path, params=params)
+		resp = requests.get(self.__BASEURL + path, params=params)# , proxies=urllib.request.getproxies(), headers=self.headers)
 		print(resp)
 		if resp.status_code == 200:
 			return json.loads(resp.content)

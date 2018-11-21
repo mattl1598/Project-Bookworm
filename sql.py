@@ -12,6 +12,16 @@ def get_db():
 
 	return db
 
+def get_logins():
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("SELECT * FROM login")
+	c.execute(cmd)
+	data = c.fetchall()
+	conn.close()
+	return data
+
 def db_input_in(input1):
 	db = get_db()
 	conn = sqlite3.connect(db)
@@ -255,7 +265,7 @@ def edit_school(sch_id, data):
 	db = get_db()
 	conn = sqlite3.connect(db)
 	c = conn.cursor()
-	names = ["school_id", "name", "HT", "lastEx", "Contact", "DFE", "address"]
+	names = ["school_id", "name", "HT", "lastEx", "Contact", "DFE", "pupilTotal", "itemsPer", "address"]
 	cmd = '''UPDATE schools SET '''
 	for i in range(6):
 		cmd += names[i+1]
