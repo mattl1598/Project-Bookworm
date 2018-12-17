@@ -1,8 +1,8 @@
 {
-    "database_location": "D:/Project-Bookworm/database/database.db",
+    "database_location": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/database/database.db",
     "database_type": "file",
-    "root_location": "D:/Project-Bookworm/",
+    "root_location": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/",
     "theme": "dark",
-    "root_folder": "D:/Project-Bookworm/",
+    "root_folder": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/",
     "last_user_id": "1"
 }

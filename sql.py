@@ -2,6 +2,7 @@ import sqlite3
 import books_api as books
 import misc_python as misc
 import json
+import time
 
 def get_db():
 
@@ -47,7 +48,18 @@ ORDER BY books.isbn, books.copy_no;""")
 	return data
 
 def create_new_loan(loc):
-	pass
+	date = str(time.strftime("%d/%m/%Y"))
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("""INSERT INTO loans(school_id, dates, active) VALUES (?, ?, "True");""")
+	c.execute(cmd, (loc, date,))
+	cmd2 = "SELECT loan_id FROM loans;"
+	c.execute(cmd2)
+	data = c.fetchall()
+	conn.commit()
+	conn.close()
+	return data
 
 
 def get_logins():

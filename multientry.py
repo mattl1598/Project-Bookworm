@@ -209,6 +209,7 @@ class App:
 				pass
 		elif mode == "out":
 			books = sql.get_books_location(0)
+			sql.create_new_loan(self.location)
 			for i in range(len(self.root.ISBNS)):
 				isbn = self.root.ISBNs[i]
 				copy = sql.get_copys_location(0, isbn)
@@ -220,6 +221,7 @@ class App:
 					pass # error plz
 				else:
 					copy_no = copy_list[0]
+
 
 
 
