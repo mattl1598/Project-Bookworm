@@ -198,28 +198,20 @@ class Book:
 		self.Text7.insert(tkinter.INSERT, label)
 		self.blurbVar.insert(tkinter.INSERT, blurb)
 
-		if self.img_url is None or self.img_url == "None)":
-			# noinspection PyBroadException
-			try:
-				self.img_url = books.getImageURL(self.isbn)
-				urllib.request.urlretrieve(img_url, "D:/Project-Bookworm/image.jpg")
-				img2gif.main()
-				img2gif.resize()
-				self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/image.gif")
-			except PyBroadException:
-				img2gif.error()
-				img2gif.resizeError()
-				self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/error.gif")
-		elif ("www." in self.img_url) is True:
-			print(self.img_url)
+		try:
 			urllib.request.urlretrieve(img_url, "D:/Project-Bookworm/image.jpg")
 			img2gif.main()
 			img2gif.resize()
 			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/image.gif")
-		else:
+		except TypeError:
 			img2gif.error()
 			img2gif.resizeError()
 			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/error.gif")
+		except ValueError:
+			img2gif.error()
+			img2gif.resizeError()
+			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/error.gif")
+
 		self.Canvas1.create_image(0, 123, image=self.photo, anchor='w')
 
 		self.root.mainloop()

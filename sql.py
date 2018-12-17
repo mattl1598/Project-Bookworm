@@ -12,6 +12,44 @@ def get_db():
 
 	return db
 
+def get_books_location(location):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("""SELECT books.isbn, books.copy_no, schools.name
+FROM books
+LEFT JOIN loans
+ON books.loan_id = loans.loan_id
+LEFT JOIN schools
+ON loans.school_id = schools.school_id
+WHERE schools.school_id = ?
+ORDER BY books.isbn, books.copy_no;""")
+	c.execute(cmd, (location,))
+	data = c.fetchall()
+	conn.close()
+	return data
+
+def get_copys_location(location, isbn):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("""SELECT books.isbn, books.copy_no, schools.name
+FROM books
+LEFT JOIN loans
+ON books.loan_id = loans.loan_id
+LEFT JOIN schools
+ON loans.school_id = schools.school_id
+WHERE schools.school_id = ? AND books.isbn = ?
+ORDER BY books.isbn, books.copy_no;""")
+	c.execute(cmd, (location, isbn,))
+	data = c.fetchall()
+	conn.close()
+	return data
+
+def create_new_loan(loc):
+	pass
+
+
 def get_logins():
 	db = get_db()
 	conn = sqlite3.connect(db)
@@ -21,6 +59,25 @@ def get_logins():
 	data = c.fetchall()
 	conn.close()
 	return data
+
+def get_locations():
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("SELECT school_id, name FROM schools")
+	c.execute(cmd)
+	data = c.fetchall()
+	conn.close()
+	return data
+
+def new_user(a, b, c):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = str("INSERT INTO login (username, password, isDepressed) VALUES (?,?,?)")
+	c.execute(cmd, (str(a), str(b), str(c)))
+	conn.commit()
+	conn.close()
 
 def db_input_in(input1):
 	db = get_db()
@@ -85,7 +142,7 @@ def check_book(isbn):
 def add_book(isbn, a, b, c, d, e, f, g, h, i):
 	db = get_db()
 	# compare to google books then update sql
-	a1, b1, c1, d1, e1, f1, g1, h1, i1 = books.getAll(isbn)
+	a1, b1, c1, d1, e1, f1, g1, h1, i1 = books.get_all_new(isbn)
 	if a == a1:
 		a = "None"
 	if b == b1:
@@ -139,37 +196,21 @@ def get_book(isbn):
 	cmd += str(chr(34))
 	cmd += str(chr(41))
 	c.execute(cmd)
-	data = str(c.fetchall())
+	data = c.fetchall()
 	conn.close()
 
-	a = data[2:data.find(",")]
-	data = data[data.find(",") + 3:]
+	print(data)
 
-	b = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	c = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	d = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	e = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	f = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	g = data[:data.find(",") - 3]
-	data = data[data.find(",") + 3:]
-
-	h = data[:data.find(",") - 3]
-	data = data[data.find(", \"") + 3:]
-
-	i = data[:data.find("\",") - 2]
-	data = data[data.find(",") + 3:]
-
-	j = data[:len(data) - 1]
+	a = data[0][0]
+	b = data[0][1]
+	c = data[0][2]
+	d = data[0][3]
+	e = data[0][4]
+	f = data[0][5]
+	g = data[0][6]
+	h = data[0][7]
+	i = data[0][8]
+	j = data[0][9]
 
 	return a, b, c, d, e, f, g, h, i, j
 
@@ -205,6 +246,10 @@ def get_schools():
 
 	return data2, data, data4
 
+def get_school_id(name):
+	pass
+
+
 
 def get_school_deets(school_id):
 	db = get_db()
@@ -226,7 +271,6 @@ def get_school_deets(school_id):
 	conn.close()
 
 	out = create_dict(keys, values)
-
 	return out
 
 
@@ -288,3 +332,5 @@ def edit_school(sch_id, data):
 
 def create_dict(keys, values):
 	return dict(zip(keys, values + [None] * (len(keys) - len(values))))
+
+print(get_book("1509860142"))

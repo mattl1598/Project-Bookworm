@@ -1,96 +1,84 @@
-import requests
 import googlebooks
-import misc_python
-import urllib.request
 
-
-def getBook(isbn1 = None):
+def getNewBook(isbn1 = None):
+	null = {'kind': 'books#volumes', 'totalItems': 0}
 	api = googlebooks.Api()
 	isbn = "isbn:"
 	if isbn1 == None:
 		isbn += input("input isbn")
 		isbn1 = isbn
-	deets = api.list(isbn1)
-	print(deets)
-	return str(deets)
-
-
-def getTitle(data):
-	datastart = data.find('title') + 9
-	#print(data.find("', 'subtitle': '"))
-	dataend = data.find('authors') - 4
-	if data[datastart:dataend].find("', 'subtitle': '") == -1:
-		return data[datastart:dataend]
 	else:
-		dataend = data.find("subtitle") - 4
-		return data[datastart:dataend]
-	#return (data[datastart:dataend])
+		isbn += isbn1
+		isbn1 = isbn
+	deets = dict(api.list(isbn1))
+	print(deets)
+	if deets == null:
+		return deets
+		# ask entry for sql database
+	else:
+		return deets
 
+def get_all_new(isbn):
+	deets = getNewBook(isbn)
+	new_data = []
+	for t in "title", "authors", "categories", "publishedDate", "maturityRating", "description":
+		try:
+			data = deets["items"][0]["volumeInfo"][t]
+			if isinstance(data, list):
+				data2 = ""
+				for i in range(len(list(data))):
+					data2 += str(data[i])
+					if i != len(list(data))-1:
+						data2 += ", "
+				data = data2
+			new_data.append(data)
+		except KeyError:
+			new_data.append("Unknown")
+	new_data.append(get_single_deet(isbn, "thumbnail"))
 
-def getAuthor(data):
-	datastart = data.find('authors') + 12
-	dataend = data.find(']') - 1
-	return (data[datastart:dataend])
-
-
-def getGenre(data):
-	datastart = data.find('categories') + 15
-	dataend = data.find("maturityRating") - 5
-	return (data[datastart:dataend])
-
-
-def getReleased(data):
-	datastart = data.find('publishedDate') + 17
-	dataend = data.find("description") - 4
-	return (data[datastart:dataend])
-
-
-#BINDING???
-
-
-def getAge(data):
-	datastart = data.find('maturityRating') + 18
-	dataend = data.find("allowAnonLogging") - 4
-	return (data[datastart:dataend])
-
-
-def getBlurb(data):
-	datastart = data.find('description') + 15
-	dataend = data.find("industryIdentifiers") - 4
-	return (data[datastart:dataend])
-
-
-def getImageURL(data):
-	datastart = data.find('thumbnail') + 13
-	dataend = data.find("language") - 5
-	return (data[datastart:dataend])
-
-def imgUrl(url):
-	#print(url)
-	urllib.request.urlretrieve(url,"D:/pyscripter/pycharm/projects/bookworm/image.jpg")
-
-def getAll(data):
-	a = getTitle(data)
-	b = getAuthor(data)
-	c = getGenre(data)
-	d = getReleased(data)
+	a = new_data[0]  # title
+	b = new_data[1]  # author
+	c = new_data[2]  # genre
+	d = new_data[3]  # released date
 	e = None
-	f = getAge(data)
+	f = new_data[4]  # age rating
 	g = None
-	h = getBlurb(data)
-	i = getImageURL(data)
-	return a,b,c,d,e,f,g,h,i
+	h = new_data[5]  # blurb
+	i = new_data[6]  # image url
+	return a, b, c, d, e, f, g, h, i
 
-def printAll(a,b,c,d,e,f,g,h,i):
-	print(a)
-	print(b)
-	print(c)
-	print(d)
-	print(e)
-	print(f)
-	print(g)
-	print(h)
-	print(i)
+
+def get_single_deet(isbn, type):
+	"""
+	:param isbn:
+	:param type: title, authors, description, categories, publishedDate, maturityRating, thumbnail
+	:return:
+	"""
+	deets = getNewBook(isbn)
+	null = {'kind': 'books#volumes', 'totalItems': 0}
+	if deets != null:
+		try:
+			if type != "thumbnail":
+				data = deets["items"][0]["volumeInfo"][type]
+				if isinstance(data, list):
+					data2 = ""
+					for i in range(len(list(data))):
+						data2 += str(data[i])
+						if i != len(list(data))-1:
+							data2 += ", "
+					data = data2
+			else:
+				data = deets["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+				print(data)
+		except KeyError:
+			data = "Unknown"
+	else:
+		data = "Unknown"
+	return data
+
+
+
+
 
 
 

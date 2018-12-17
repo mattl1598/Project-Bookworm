@@ -5,8 +5,10 @@ from tkinter import filedialog
 from tkinter import messagebox
 from IPy import IP
 import sqlite3
-
-
+import sql
+import gui
+import re
+import hashlib
 
 def gettheme():
 	# get colours from json file
@@ -89,7 +91,32 @@ class Options:
 		self.setts.root_button = tkinter.Button(text="Browse", command=lambda: self.db_browse(0), background=button_bg,
 												foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 
-		print(self.themeDrop)
+		self.setts.add_user = tkinter.Button(text="Add New User", command=self.new_user, background=button_bg,
+												foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
+
+
+
+		logins = sql.get_logins()
+
+		ids = []
+		users = []
+		psws = []
+		admin = []
+		for i in range(len(logins)):
+			ids.append(logins[i][0])
+			users.append(logins[i][1])
+			psws.append(logins[i][2])
+			admin.append(logins[i][3])
+
+		with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+			setts = json.load(readfile)
+
+		isAdmin = tkinter.BooleanVar()
+		isAdmin.set(admin[ids.index(int(setts["last_user_id"]))])
+
+		if isAdmin.get() is True:
+			self.setts.add_user.place(relx=0.5, rely=0.5, anchor="n")
+
 		self.themeDrop.place(relx=0.5, rely=0.2, anchor="w")
 		self.setts.theme.place(relx=0.5, rely=0.2, anchor="e")
 		self.setts.db_label.place(relx=0.8-250/400, rely=0.3, anchor="e")
@@ -184,6 +211,204 @@ class Options:
 			print(self.root)
 			self.setts.root_location.insert(tkinter.INSERT, self.root)
 		return None
+
+	def new_user(self):
+		self.setts.destroy()
+		user = userCreate()
+
+class userCreate():
+
+	def __init__(self):
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
+		self.create = tkinter.Tk()
+
+
+		# Window Creation
+
+		relw = 30 / 192
+		relh = 400 / 1080
+
+		size = str(int((self.create.winfo_screenwidth() * (relw))))
+		x = "x"
+		size += x
+		size += str(int(self.create.winfo_screenheight() * (relh)))
+
+		self.create.geometry(size)
+		self.create.config(bg=bg)
+		self.create.iconbitmap("D:\Project-Bookworm\icons\settings.ico")
+
+		# Title:
+		self.create.title("Add New User")
+		self.create.titleL = tkinter.Label(self.create, text="Add New User:", foreground=text, bg=bg, font=("Verdana", 24))
+
+		# New Username
+		self.create.username = tkinter.Entry(self.create, background=box_bg, foreground=box_txt, insertbackground=cursor,
+										selectbackground=select)
+		self.create.userL = tkinter.Label(self.create, text="New Username:", foreground=text, bg=bg)
+
+		# New Password
+		self.create.password = tkinter.Entry(self.create, background=box_bg, foreground=box_txt,
+		                                     insertbackground=cursor, selectbackground=select, show="*")
+		self.create.passwordL = tkinter.Label(self.create, text="New Password:", foreground=text, bg=bg)
+
+		# Confirm Password
+		self.create.confirm = tkinter.Entry(self.create, background=box_bg, foreground=box_txt,
+		                                     insertbackground=cursor, selectbackground=select, show="*")
+		self.create.confirmL = tkinter.Label(self.create, text="Confirm Password:", foreground=text, bg=bg)
+
+		# Admin Priviledges
+		self.admin_var = tkinter.BooleanVar()
+		self.create.admin = tkinter.Checkbutton(self.create, variable = self.admin_var, background=bg, offvalue=False, onvalue=True)
+		self.create.adminL = tkinter.Label(self.create, text="Admin Priviledges:", foreground=text, bg=bg)
+
+		# Admin Password
+		self.create.creds = tkinter.Entry(self.create, background=box_bg, foreground=box_txt,
+		                                    insertbackground=cursor, selectbackground=select, show="*")
+		self.create.credsL = tkinter.Label(self.create, text="Admin Password:", foreground=text, bg=bg)
+
+		# Password Requirements
+		passreqs = """
+		New Passwords require at least:
+		One Uppercase Character, 
+		One Lowercase Character, 
+		One Number and One Special Character
+		"""
+		self.create.reqs = tkinter.Label(self.create, text=passreqs, foreground=text, bg=bg)
+
+		# Button
+		self.create.new_user_button = tkinter.Button(self.create, command=self.new_user, background=button_bg,
+												foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
+
+		# Place items
+		self.create.titleL.place(relx=0.5, rely=0, anchor="n")
+
+		self.create.username.place(relx=0.375, rely=0.15, anchor="w")
+		self.create.userL.place(relx=0.375, rely=0.15, anchor="e")
+
+		self.create.password.place(relx=0.375, rely=0.225, anchor="w")
+		self.create.passwordL.place(relx=0.375, rely=0.225, anchor="e")
+
+		self.create.confirm.place(relx=0.375, rely=0.3, anchor="w")
+		self.create.confirmL.place(relx=0.375, rely=0.3, anchor="e")
+
+		self.create.admin.place(relx = 0.375, rely=0.375, anchor="w")
+		self.create.adminL.place(relx=0.375, rely=0.375, anchor="e")
+
+		self.create.creds.place(relx=0.375, rely=0.45, anchor="w")
+		self.create.credsL.place(relx=0.375, rely=0.45, anchor="e")
+
+		self.create.reqs.place(relx=0.35, rely=0.6, anchor="center")
+
+		self.create.new_user_button.place(relx=0.5, rely=0.9, anchor="s")
+
+		self.create.mainloop()
+
+	def new_user(self):
+		username = self.create.username.get()
+		psw = self.create.password.get()
+		psw2 = self.create.confirm.get()
+		admin = self.admin_var.get()
+		psw_admin = self.create.creds.get()
+
+		logins = sql.get_logins()
+
+		ids = []
+		users = []
+		psws = []
+		admin = []
+		for i in range(len(logins)):
+			ids.append(logins[i][0])
+			users.append(logins[i][1])
+			psws.append(logins[i][2])
+			admin.append(logins[i][3])
+
+		admin_psws = []
+
+		for i in range(len(psws)):
+			if admin[i] is True:
+				admin_psws.append(psws)
+
+		flag_admin = False
+		flag_unique = False
+		flag_match = False
+		flag_lower = False
+		flag_upper = False
+		flag_special = False
+		flag_digits = False
+
+		user_unique = username in users
+		admin_verify = psw_admin in admin_psws
+
+
+		if admin_verify:
+			flag_admin = True
+		if user_unique is False:
+			flag_unique = True
+		if psw == psw2:
+			flag_match = True
+
+		punctuation = r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+
+		if re.search(r'[a-z]', psw) is not None:
+			flag_lower = True
+		if re.search(r'[A-Z]', psw) is not None:
+			flag_upper = True
+		for i in range(len(punctuation)):
+			if punctuation[i] in psw:
+				flag_special = True
+		if re.search(r'[0-9]', psw) is not None:
+			flag_digits = True
+
+		check = 0
+
+		if flag_unique is False:
+			print("Username is not unique.")
+		else:
+			check += 1
+		if flag_match is False:
+			print("Passwords do not match.")
+		else:
+			check += 1
+		if flag_lower is False:
+			print("Password does not contain lowercase letters.")
+		else:
+			check += 1
+		if flag_upper is False:
+			print("Password does not contain uppercase letters.")
+		else:
+			check += 1
+		if flag_special is False:
+			print("Password does not contain special characters.")
+		else:
+			check += 1
+		if flag_digits is False:
+			print("Password does not contain numbers.")
+		else:
+			check += 1
+
+		if check == 6:
+			sql.new_user(username, self.hash_it(psw), admin)
+			message = "New User was successfully created with username: "
+			message += username
+			tkinter.messagebox.showinfo("User Created", message)
+			self.create.destroy()
+
+
+	def hash_it(self, psd):
+		hash = hashlib.sha512(psd.encode())
+		hex = hash.hexdigest()
+		return hex
+
+
+
+
+
+
+
+
+
+
+
 
 
 def main():

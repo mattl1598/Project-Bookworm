@@ -1,0 +1,9 @@
+.idea/
+certifi/
+chardet/
+idna/
+PIL/
+requests/
+__pycache__/
+urllib3/
+*.env

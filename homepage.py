@@ -10,7 +10,7 @@ import urllib.request
 import os
 import schoolDetails
 import gui
-
+import sql
 
 
 def gettheme():
@@ -39,6 +39,28 @@ class homepage:
 	def __init__(self):
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 
+		with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+			settings = json.load(readfile)
+
+		logins = sql.get_logins()
+
+		ids = []
+		users = []
+		psws = []
+		for i in range(len(logins)):
+			ids.append(str(logins[i][0]))
+			users.append(logins[i][1])
+			psws.append(logins[i][2])
+
+		user_id = settings["last_user_id"]
+		if str(user_id) in ids:
+			user = users[ids.index(str(user_id))]
+			welc_string = "Welcome back, "
+			welc_string += user
+			welc_string += "!"
+		else:
+			welc_string = "Welcome Back!"
+
 		self.home = Tk()
 		self.home.iconbitmap("D:\Project-Bookworm\icons\colour.ico")
 
@@ -49,9 +71,13 @@ class homepage:
 
 		self.home.geometry(size)
 		self.home.title("Project Bookworm")
-		#self.home.resizable(False, False)
+		self.home.resizable(False, False)
 		self.home.configure(background=bg)
 		self.randon_variable = StringVar()
+
+		self.welc = Label(self.home)
+		self.welc.config(activebackground=bg, activeforeground=text, background=bg, foreground=text,
+								highlightbackground=bg, text=welc_string, font=("Verdana", 24))
 
 		self.deets = Button(self.home, text="Book Details", command=self.book_details)
 		self.deets.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
@@ -69,6 +95,10 @@ class homepage:
 		self.settings.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
+		self.logoff = Button(self.home, text="Log Out", command=self.logout)
+		self.logoff.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+		                    activeforeground=butt_txt)
+
 		self.quit = Button(self.home, text="Quit", command=self.close)
 		self.quit.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
@@ -77,14 +107,15 @@ class homepage:
 		self.signOut.place(relx=405/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
 		self.schools.place(relx=165/1280, rely=230/720, relwidth=230/1280, relheight=125/720)
 		self.settings.place(relx=645/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
+		self.logoff.place(relx=885 / 1280, rely=365 / 720, relwidth=230 / 1280, relheight=125 / 720, anchor=NW)
 		self.quit.place(relx=885/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
+		self.welc.place(relx=640/1280, rely=672/720, anchor=CENTER)
 
 		self.home.mainloop()
 
 	def book_details(self):
 		self.home.destroy()
 		gui.book_deets()
-		# self.get2()
 
 	def school_details(self):
 		self.home.destroy()
@@ -97,6 +128,10 @@ class homepage:
 	def book_sign_out(self):
 		self.home.destroy()
 		gui.multi_entry()
+
+	def logout(self):
+		self.close()
+		gui.logins()
 
 	def close(self):
 		self.home.destroy()

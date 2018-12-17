@@ -153,7 +153,7 @@ def sortFromFile(infile,debug):                   #takes in file, returns sorted
 def search(string, data):
 	"""stupid search function using python "in" function
 	only made it for a school task"""
-	return(string in data)
+	return string in data
 
 def gethalf(sort, uppervalue):
 	"""doesnt work"""

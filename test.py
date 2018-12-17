@@ -1,4 +1,3 @@
-import urllib.request
+import books_api
 
-with urllib.request.urlopen('https://www.googleapis.com/books/v1/volumes?q=9780393972832') as response:
-   html = response.read()
+books_api.get_all_new(input("isbn:"))

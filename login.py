@@ -2,6 +2,7 @@ import hashlib
 from tkinter import *
 import json
 import sql
+import gui
 
 def gettheme():
 	# get colours from json file
@@ -47,8 +48,8 @@ class login():
 		self.root.user.place(relx=19/40, rely=4/20, relheight=23/180, relwidth=180/400, anchor="w")
 		self.root.userL.place(relx=19/40, rely=4/20, anchor="e")
 
-		self.root.psw = Text(self.root, background=box_bg, foreground=box_txt, insertbackground=cursor,
-		                      selectbackground=select)
+		self.root.psw = Entry(self.root, background=box_bg, foreground=box_txt, insertbackground=cursor,
+								selectbackground=select, show="*")
 		self.root.pswL = Label(self.root, foreground=text, bg=bg, text="Password:")
 
 		self.root.psw.place(relx=19 / 40, rely=80 / 200, relheight=23 / 180, relwidth=180 / 400, anchor="w")
@@ -57,21 +58,67 @@ class login():
 		self.root.button = Button(self.root, command=self.logmein)
 		self.root.button.place(relx=1/2, rely=12/20)
 
+		def focus_next(widget):
+			widget.tk_focusNext().focus_set()
+			return "break"
+
+		def focus_prev(widget):
+			widget.tk_focusPrev().focus_set()
+			return "break"
+
+		for t in (self.root.user, self.root.psw):
+			t.bind('<Tab>', lambda e, t=t: focus_next(t))
+			t.bind('<Shift-Tab>', lambda e, t=t: focus_prev(t))
+			t.bind('<Return>', lambda e, t=t: self.logmein())
+
 		self.root.mainloop()
 
 	def logmein(self):
+		flag = False
 		user = self.root.user.get("0.0", 'end-1c')
-		psw = self.root.psw.get("0.0", 'end-1c')
-		print(user, " ", psw)
+		psw = self.root.psw.get()
+		logins = sql.get_logins()
+
+		ids = []
+		users = []
+		psws = []
+		admin = []
+		for i in range(len(logins)):
+			ids.append(logins[i][0])
+			users.append(logins[i][1])
+			psws.append(logins[i][2])
+			admin.append(logins[i][3])
+
+		if user in users:
+			if hash_it(psw) == psws[users.index(user)]:
+				print("Authentication Successful")
+				with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+					settings = json.load(readfile)
+				settings["last_user_id"] = str(ids[users.index(user)])
+				with open("D:/Project-Bookworm/settings.json", "w") as file:
+					json.dump(settings, file, indent=4)
+
+				flag = True
+			else:
+				print("Authentication Failed")
+		else:
+			print("Authentication Failed")
+
+		if flag is True:
+			self.root.destroy()
+			gui.homescreen()
 
 def hash_it(pwd):
 	hash = hashlib.sha512(pwd.encode())
 	hex = hash.hexdigest()
-	print(hex)
+	return hex
+
+def main():
+	login1 = login()
 
 
-login1 = login()
+if __name__ == "__main__":
+	main()
 
-hash_it("test")
 
-print(sql.get_logins())
+

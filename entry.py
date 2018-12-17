@@ -71,7 +71,7 @@ class Form():
 			# print(j, k, l, m, n, o, p, q, r, isbn)
 			# print("sql")
 			else:
-				j, k, l, m, n, o, p, q, r = books.getAll(books.getBook(isbn))
+				j, k, l, m, n, o, p, q, r = books.get_all_new(isbn)
 				# print("books")
 				print(j, k, l, m, n, o, p, q, r, isbn)
 			input.bookDeets(j, k, l, m, n, o, p, q, r, isbn)
