@@ -57,7 +57,9 @@ Question 5:
 ### Identification of prospective users
 The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
 ### Identification of user needs and acceptable limitations
-####Features requested:
+#### Features requested:
+* Reports
+* Calendar
 
 #### Features priority based on number of suggestions:
 
@@ -156,7 +158,7 @@ Some objects that I've implemented are:
 ### Entity relationship diagram(Normalised)
 #### Entity Relationship Diagram:
 ![Alt text](./bookwormERD.svg)
-####Code: 
+#### Code: 
 ```
 graph LR
  Homepage-->School-Details-Start(School Details Start)
