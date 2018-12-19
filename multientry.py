@@ -83,13 +83,12 @@ class Selection:
 
 
 class App:
-	def __init__(self, mode, loc, data):
+	def __init__(self, mode, loc):
 
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 
 		self.mode = mode
 		self.location = loc
-		self.data = data
 
 		self.root = tkinter.Tk()
 		self.root.title("Test")
@@ -221,7 +220,10 @@ class App:
 					pass # error plz
 				else:
 					copy_no = copy_list[0]
-
+					if self.location == "0":
+						pass # delete these
+					else:
+						loan_id = 
 
 
 

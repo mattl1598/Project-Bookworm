@@ -52,14 +52,14 @@ def create_new_loan(loc):
 	db = get_db()
 	conn = sqlite3.connect(db)
 	c = conn.cursor()
-	cmd = str("""INSERT INTO loans(school_id, dates, active) VALUES (?, ?, "True");""")
+	cmd = str("""INSERT INTO loans(school_id, dates, active) VALUES (?, ?, "True"); SELECT loan_id FROM loans;""")
 	c.execute(cmd, (loc, date,))
-	cmd2 = "SELECT loan_id FROM loans;"
-	c.execute(cmd2)
 	data = c.fetchall()
 	conn.commit()
 	conn.close()
-	return data
+	data2 = sorted(data)
+	value = data2[len(data2)]
+	return value
 
 
 def get_logins():
