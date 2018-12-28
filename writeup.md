@@ -1,19 +1,32 @@
 # AQA A Level Computer Science Project Writeup
 
 ## Analysis
-### Background to and identification of problem
-#### Overview of Scenario and Current User setup
-Hampshire County Councils School Library Service loans large numbers of books (200+) to schools in Hampshire.
-Their current system is limited to tracking number of books loaned.
-The current system is managed using a group of "three?" excel spreadsheets for managing school data, 
-subscription information and loan details. 
+
+### Introduction
+Hampshire County Council's School Library Service (SLS) loans books to over 400 schools in Hampshire and has 4 centres
+located in Basingstoke, Farnborough, Fareham and the New Forest.
+The SLS provides various services as well, including loaning books and e-resources, 
+training and advisory/support services.
+The school's exchange books by visiting a centre or receiving delivery via a small fleet of vans.
+The standard allocation of books is 3 per pupil at primary level and 2 per pupil at secondary with a maximum loan of 
+200 books per exchange.
 
 ### Description of current system
-The current system is managed by a collection of excel spreadsheets. 
-One of these spreadsheets contains contact information, addresses and dates needed for site visits to 
-collect and drop off books that have been selected or ordered and to perform a stock check to assess the 
-amount of books lost and damaged and either replace for free if under a certain level or for a fee if the 
-number of books is significant.
+Currently, the SLS only tracks the quantity of books at a given location using an excel spreadsheet for each 
+centre and one tab for each school. Each tab contains the details about the school (listed below) as well as the details
+of each exchange including the number of books and the date.
+When a school visits a centre to exchange books, the library assistants at the centre physically count all of the books 
+as they come in and go out and record this in the spreadsheet which then calculates the total for the school. 
+
+The problem was researched by speaking with one of the library assistants as well as conducting a survey amongst the rest.
+I also went to a showcase day for library management systems aimed for internal use in a school library. 
+These use a similar principle to my project however they work on a different level with reference to 
+different volumes of users and books. 
+
+The main issue with the current system is that the library assistants have no way of knowing where books are located.
+Currently a school can't request a list of books that they have since there is no tracking data available to look this up with.
+Another issue is that one school is not supposed to have more than two copies of any book in particular but this is difficult
+to manage since there isn't a list of what books they have to check against.
 
 #### General Details for a School
 Each school currently has it's own tab in the spreadsheet. At the top of each tab is a header containing information such as:
@@ -23,6 +36,7 @@ Each school currently has it's own tab in the spreadsheet. At the top of each ta
 * Contact Details
 * The DfE Number (unique number assigned by the Department for Education to each school)
 * Date of the Last Exchange
+* Number of Pupils
 
 Below these details, there is a table of the exchanges and details of them including:
 * Date
@@ -31,6 +45,7 @@ Below these details, there is a table of the exchanges and details of them inclu
 * Number of books returned
 * Number of books issued
 
+![Screenshot of a tab for a school](./spreadsheets/school example.png)
 
  **insert excel spreadsheet analysis** 
 ### Data collection and research:
@@ -51,6 +66,9 @@ Question 4:
 
 Question 5:
 ![Screen cap of question 5](./survey/q5.PNG "Question 5")
+
+Question 6:
+![Screen cap of question 6](./survey/q6.PNG "Question 6")
 #### Results:
  **\*Insert Results here***
 
@@ -60,6 +78,9 @@ The users would be the librarians at the Hampshire School Library Service who co
 #### Features requested:
 * Reports
 * Calendar
+* no more than 2 of a certain title per school.
+
+* format for reports
 
 #### Features priority based on number of suggestions:
 
