@@ -223,7 +223,8 @@ class App:
 					if self.location == "0":
 						pass # delete these
 					else:
-						loan_id = 
+						pass
+						# loan_id =
 
 
 

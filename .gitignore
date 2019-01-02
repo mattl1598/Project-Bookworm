@@ -8,3 +8,4 @@ __pycache__/
 urllib3/
 *.env
 workspace.xml
+*.pyc

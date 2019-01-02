@@ -49,6 +49,8 @@ Below these details, there is a table of the exchanges and details of them inclu
 
  **insert excel spreadsheet analysis** 
 ### Data collection and research:
+#### Identification of End Users:
+The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
 #### Questionnaire:
 Survey made on Enalyzer.
 
@@ -69,20 +71,19 @@ Question 5:
 
 Question 6:
 ![Screen cap of question 6](./survey/q6.PNG "Question 6")
-#### Results:
+##### Results:
  **\*Insert Results here***
 
-### Identification of prospective users
-The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
-### Identification of user needs and acceptable limitations
-#### Features requested:
+
+#### Identification of User Needs
 * Reports
 * Calendar
 * no more than 2 of a certain title per school.
 
 * format for reports
 
-#### Features priority based on number of suggestions:
+#### Accecptable Limitations:
+
 
 ### Data sources and destinations
 #### Sources:
@@ -91,7 +92,7 @@ The users would be the librarians at the Hampshire School Library Service who co
 #### Destinations:
 * Database for long term storage of data.
 * Printable reports.
-### Data Volumes
+#### Data Volumes
 Data is stored in a series of database tables currently using sqlite as the backend.
 ### Object analysis diagram
 ### Objectives for Proposed System:
@@ -174,6 +175,43 @@ Some objects that I've implemented are:
 |School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
 |School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
+#### Modular Design
+* **Login Screen** 
+  * Login Button
+    * **Main Menu Screen**
+      * Book Details
+        * **Single Entry**
+          * Submit
+            * **Book Details** (Title, Author etc of the book specified by isbn)
+              * Save Changes
+              * Close
+              * Revert to online data
+      * Sign Out Books
+        * **Destination Select Screen**
+          * Sign In
+            * **Multi-Entry**
+             * Sign In
+          * Sign Out
+            * **Multi-Entry**
+              * Sign Out
+      * School Details
+        * **School Selection Screen**
+          * Edit School
+            * **School Details** (Edit Mode)
+          * New School
+            * **School Details** (New Mode)
+          * View School
+            * **School Details** (View Mode)
+      * Settings
+        * **Settings**
+          * Theme Select
+          * Database Location
+          * Root Folder
+          * Add New User (Only when admin)
+            * **Add New User**
+          * Close
+      * Log Off
+      * Quit Program
 ### Definition of data requirements 
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)

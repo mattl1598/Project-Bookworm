@@ -23,6 +23,7 @@ def gettheme():
 
 	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, theme
 
+
 class login():
 
 	def __init__(self):
@@ -45,18 +46,24 @@ class login():
 										selectbackground=select)
 		self.root.userL = Label(self.root, foreground=text, bg=bg, text="Username:")
 
-		self.root.user.place(relx=19/40, rely=4/20, relheight=23/180, relwidth=180/400, anchor="w")
-		self.root.userL.place(relx=19/40, rely=4/20, anchor="e")
+		self.root.user.place(relx=19/40, rely=4/18, relheight=23/180, relwidth=180/400, anchor="w")
+		self.root.userL.place(relx=19/40, rely=4/18, anchor="e")
 
 		self.root.psw = Entry(self.root, background=box_bg, foreground=box_txt, insertbackground=cursor,
 								selectbackground=select, show="*")
 		self.root.pswL = Label(self.root, foreground=text, bg=bg, text="Password:")
 
-		self.root.psw.place(relx=19 / 40, rely=80 / 200, relheight=23 / 180, relwidth=180 / 400, anchor="w")
-		self.root.pswL.place(relx=19 / 40, rely=80 / 200, anchor="e")
+		self.root.psw.place(relx=19 / 40, rely=80 / 180, relheight=23 / 180, relwidth=180 / 400, anchor="w")
+		self.root.pswL.place(relx=19 / 40, rely=80 / 180, anchor="e")
 
-		self.root.button = Button(self.root, command=self.logmein)
+		self.root.button = Button(self.root, command=self.logmein, text="Log In",background=button_bg,
+									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 		self.root.button.place(relx=1/2, rely=12/20)
+
+		self.root.logo_img = PhotoImage(file="./icons/colour.gif")
+		self.root.canvas = Canvas(self.root, width=63, height=63)
+		self.root.canvas.create_image()
+		self.root.canvas.place(relx=4/40, rely=30/180)
 
 		def focus_next(widget):
 			widget.tk_focusNext().focus_set()
