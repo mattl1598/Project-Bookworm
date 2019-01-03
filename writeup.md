@@ -55,22 +55,29 @@ The users would be the librarians at the Hampshire School Library Service who co
 Survey made on Enalyzer.
 
 Question 1:
+
 ![Screen cap of question 1](./survey/q1.PNG "Question 1")
 
 Question 2:
+
 ![Screen cap of question 2](./survey/q2.PNG "Question 2")
 
 Question 3:
+
 ![Screen cap of question 3](./survey/q3.PNG "Question 3")
 
 Question 4:
+
 ![Screen cap of question 4](./survey/q4.PNG "Question 4")
 
 Question 5:
+
 ![Screen cap of question 5](./survey/q5.PNG "Question 5")
 
 Question 6:
+
 ![Screen cap of question 6](./survey/q6.PNG "Question 6")
+
 ##### Results:
  **\*Insert Results here***
 
