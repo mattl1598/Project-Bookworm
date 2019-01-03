@@ -280,7 +280,26 @@ respect to that location.
 
 ![Multi-Entry Main](./gui images/multibook sign in.png)
 
+This window has a single entry box for entering an isbn of a book. The user enters the ISBN and presses the 
+`Enter` key. This puts the ISBN in the list box on the left and collects the title from the database or the 
+Google Books API and puts it in the list on the right to help make sure the correct book has been entered.
+Once all of the ISBNs are entered, the user clicks on the `Sign In`/`Sign Out` button which will sign the 
+books out to the location selected in the previous window.
 
+##### Settings
+
+![Settings](./gui images/settings.png)
+
+This window is where the user can change any settings pertaining to the application that might need to 
+be modified. 
+The first setting is the application-wide theme option. This is changed via a drop down menu with a list of the 
+available themes that can be chosen from.
+The next setting is the location of the sqlite database. This is chosen via a file path to the database file 
+which can be selected via the Windows Open File dialog. The next setting is the root folder location for the 
+program to use as a file location for the temporary storage of cover images for books and long term storage of 
+icons required for the program.
+The last setting is an `Add New User` button for creating a new user profile which can be used on the login 
+screen to access the application. This setting is only available to accounts with administrator privileges.
 
 #### Modular Design
 * **Login Screen** 

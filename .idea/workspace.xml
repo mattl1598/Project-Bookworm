@@ -384,8 +384,8 @@
         <entry file="file://$PROJECT_DIR$/writeup.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="499">
-                <caret line="278" column="25" lean-forward="true" selection-start-line="278" selection-start-column="25" selection-end-line="278" selection-end-column="25" />
+              <first_editor relative-caret-position="788">
+                <caret line="301" column="107" selection-start-line="301" selection-start-column="107" selection-end-line="301" selection-end-column="107" />
               </first_editor>
               <second_editor />
             </state>
@@ -1047,8 +1047,8 @@
     <entry file="file://$PROJECT_DIR$/writeup.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="499">
-            <caret line="278" column="25" lean-forward="true" selection-start-line="278" selection-start-column="25" selection-end-line="278" selection-end-column="25" />
+          <first_editor relative-caret-position="788">
+            <caret line="301" column="107" selection-start-line="301" selection-start-column="107" selection-end-line="301" selection-end-column="107" />
           </first_editor>
           <second_editor />
         </state>
