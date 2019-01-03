@@ -152,7 +152,8 @@ devices aren't a required feature.
 #### Modules:
 All of the code has been separated into different python modules (*.py).
 These modules can be imported into other parts of the code to allow modularity in the structure of the program. 
-The modules also reduce the amount of code needed to be written as they can imported to allow the calling of the functions inside the modules. 
+The modules also reduce the amount of code needed to be written as they can imported to allow the calling of the functions inside the modules.
+ 
 #### Objects:
 Objects are callable by any other part of the code where the modules are imported. 
 
@@ -175,6 +176,112 @@ Some objects that I've implemented are:
 |School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
 |School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
+##### Login Screen
+![Login Screen](./gui images/login.png)
+
+This is the Login screen that is presented when the user opens the application or logs out from the homepage.
+The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
+submit button. The button isn't the only way to run the authentication process as the user can also 
+press `Enter` to submit the details as is standard of most login systems. The password field is obscured 
+upon entry with asterisks (`*`) replacing each character as is standard with almost all Windows-based 
+login systems as well as on many websites. When submitted, the password is hashed with an SHA512 cryptographic 
+hash function before being compared with the hashed password associated with the given username that is 
+stored in the databases login's table.
+
+##### Homepage
+![Homepage](./gui images/homepage.png)
+
+This is the homepage for the application where the user can navigate to all of the various parts. The homepage 
+is made up of various buttons linked to the different sections of the program. There are also buttons for 
+`Log Off` and `Quit` to allow the user to end their unique session or to completely close the application
+respectively. At the top of the window is the program name and logo and at the bottom is a welcome back 
+message with the current username.
+
+##### Book Details
+![ISBN Entry](./gui images/isbn entry.png)
+
+This part of the book details process is for taking the inputted isbn for a book and passing it through to the 
+next section. The menu has a entry box for the isbn and a label above it to instruct the user on what to input.
+Below the entry box is a button which will submit the contents of the entry box to the next bit of the 
+Book Details section.
+
+![Book Details](./gui images/book details.png)
+
+This is the window that is used to display the details of a book. The details are pulled from either the sqlite
+database if there is an entry for that isbn or the Google Books API if there isn't. The details that are available for 
+being displayed are:
+* Title (and subtitle if applicable)
+* Author(s)
+* Genre
+* Release/Publish Date
+* Age Rating
+* Blurb
+* Cover Image
+
+and two placeholder fields for anything else requested by the end users.
+At the bottom of the window are three buttons. One of these will save any changes made to the details by the 
+user to the sqlite database. The next one will close this part of the program and return to the homepage of
+the application. The last button will delete any entry in the database and allow the program to use the original 
+Google Books data for the details.
+
+##### School Details
+![School Selection](./gui images/school select.png)
+
+This window is for selecting a school to view or edit the details of or to add a new school to the system.
+There are three buttons on the left of the window:
+* `New School` for creating a profile of a new school in the database
+* `View School` for viewing the details of an existing school profile
+* `Edit School` for editing the details of an existing school profile
+
+On the right of the window is drop down menu containing the list of existing school profiles to select from for
+use in the `View School` or `Edit School` windows.
+
+The School Details main window has three variants which are chosen in the previous window.
+All of the variants are have the same fields to fill in or be viewed but they start differently depending 
+on the variant.
+The fields are:
+* School Name
+* Head Teacher
+* Last Exchange
+* Contact:
+* DFE No'
+* No' of Pupils
+* Allocation per pupil
+* Total Allocation
+* Address
+There is also a button next to the address field which will open Google Maps with the location of the school 
+in the default web browser.
+At the bottom of all of the variants is a button to close the details menu and return to the homepage.  
+
+![New School](./gui images/new school.png)
+
+The first variant of the School Details window is for create a new profile for a school. It has the same fields 
+as the other variants but all are left blank for the user to fill in. At the bottom of the field is an 
+`Add New School` button to save the entered details to the database as a new school.
+
+![View School](./gui images/view school.png)
+
+The second variant does not have editable field for the school name or a button to save changes as it is only 
+for viewing the details of a chosen school.
+
+![Edit School](./gui images/edit school.png) 
+
+The third and final variant is for changing the details of a school. As such, it starts with all of the details fields 
+filled with the details in the database ready for being changed by the user and has a `Save Changes` button 
+at the bottom for committing any changes to the database. 
+
+##### Sign Out Books
+
+![Multi-Entry Selection](./gui images/multientry selection.png)
+
+This window is for selecting a school to sign books out to or in from. It has a list of the schools in the 
+system in a drop down menu to select one and two buttons to choose whether you're signing books in or out with 
+respect to that location.
+
+![Multi-Entry Main](./gui images/multibook sign in.png)
+
+
+
 #### Modular Design
 * **Login Screen** 
   * Login Button
@@ -190,7 +297,7 @@ Some objects that I've implemented are:
         * **Destination Select Screen**
           * Sign In
             * **Multi-Entry**
-             * Sign In
+              * Sign In
           * Sign Out
             * **Multi-Entry**
               * Sign Out
@@ -337,4 +444,23 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 ## Evaluation
 ## Program Code
+### Python Requirements:
+* Requests
+  * idna
+  * urllib3
+  * certifi
+  * chardet
+* PIL (Python Image Library)
+* Tkinter
+* sqlite3
+* json
+* hashlib
+* re
+* googlebooks
+* os
+* urllib
+* misc_python
+* webbrowser
+* time
+
 

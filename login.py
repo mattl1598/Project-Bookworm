@@ -60,11 +60,11 @@ class login():
 									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 		self.root.button.place(relx=1/2, rely=12/20)
 
-		self.root.logo_img = PhotoImage(file="./icons/colour.gif")
+		'''self.root.logo_img = PhotoImage(file="./icons/colour.gif")
 		self.root.canvas = Canvas(self.root, width=63, height=63)
 		self.root.canvas.create_image()
 		self.root.canvas.place(relx=4/40, rely=30/180)
-
+'''
 		def focus_next(widget):
 			widget.tk_focusNext().focus_set()
 			return "break"
