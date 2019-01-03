@@ -177,7 +177,7 @@ Some objects that I've implemented are:
 |School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
 ##### Login Screen
-![Login Screen](./gui images/login.png)
+![Login Screen](./gui images/login.png "Login Screen")
 
 This is the Login screen that is presented when the user opens the application or logs out from the homepage.
 The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
