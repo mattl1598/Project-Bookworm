@@ -1,19 +1,32 @@
 # AQA A Level Computer Science Project Writeup
 
 ## Analysis
-### Background to and identification of problem
-#### Overview of Scenario and Current User setup
-Hampshire County Councils School Library Service loans large numbers of books (200+) to schools in Hampshire.
-Their current system is limited to tracking number of books loaned.
-The current system is managed using a group of "three?" excel spreadsheets for managing school data, 
-subscription information and loan details. 
+
+### Introduction
+Hampshire County Council's School Library Service (SLS) loans books to over 400 schools in Hampshire and has 4 centres
+located in Basingstoke, Farnborough, Fareham and the New Forest.
+The SLS provides various services as well, including loaning books and e-resources, 
+training and advisory/support services.
+The school's exchange books by visiting a centre or receiving delivery via a small fleet of vans.
+The standard allocation of books is 3 per pupil at primary level and 2 per pupil at secondary with a maximum loan of 
+200 books per exchange.
 
 ### Description of current system
-The current system is managed by a collection of excel spreadsheets. 
-One of these spreadsheets contains contact information, addresses and dates needed for site visits to 
-collect and drop off books that have been selected or ordered and to perform a stock check to assess the 
-amount of books lost and damaged and either replace for free if under a certain level or for a fee if the 
-number of books is significant.
+Currently, the SLS only tracks the quantity of books at a given location using an excel spreadsheet for each 
+centre and one tab for each school. Each tab contains the details about the school (listed below) as well as the details
+of each exchange including the number of books and the date.
+When a school visits a centre to exchange books, the library assistants at the centre physically count all of the books 
+as they come in and go out and record this in the spreadsheet which then calculates the total for the school. 
+
+The problem was researched by speaking with one of the library assistants as well as conducting a survey amongst the rest.
+I also went to a showcase day for library management systems aimed for internal use in a school library. 
+These use a similar principle to my project however they work on a different level with reference to 
+different volumes of users and books. 
+
+The main issue with the current system is that the library assistants have no way of knowing where books are located.
+Currently a school can't request a list of books that they have since there is no tracking data available to look this up with.
+Another issue is that one school is not supposed to have more than two copies of any book in particular but this is difficult
+to manage since there isn't a list of what books they have to check against.
 
 #### General Details for a School
 Each school currently has it's own tab in the spreadsheet. At the top of each tab is a header containing information such as:
@@ -23,6 +36,7 @@ Each school currently has it's own tab in the spreadsheet. At the top of each ta
 * Contact Details
 * The DfE Number (unique number assigned by the Department for Education to each school)
 * Date of the Last Exchange
+* Number of Pupils
 
 Below these details, there is a table of the exchanges and details of them including:
 * Date
@@ -31,47 +45,72 @@ Below these details, there is a table of the exchanges and details of them inclu
 * Number of books returned
 * Number of books issued
 
+![Screenshot of a tab for a school](./spreadsheets/school example.png)
 
  **insert excel spreadsheet analysis** 
 ### Data collection and research:
+#### Identification of End Users:
+The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
 #### Questionnaire:
 Survey made on Enalyzer.
 
 Question 1:
+
 ![Screen cap of question 1](./survey/q1.PNG "Question 1")
 
 Question 2:
+
 ![Screen cap of question 2](./survey/q2.PNG "Question 2")
 
 Question 3:
+
 ![Screen cap of question 3](./survey/q3.PNG "Question 3")
 
 Question 4:
+
 ![Screen cap of question 4](./survey/q4.PNG "Question 4")
 
 Question 5:
+
 ![Screen cap of question 5](./survey/q5.PNG "Question 5")
-#### Results:
+
+Question 6:
+
+![Screen cap of question 6](./survey/q6.PNG "Question 6")
+
+##### Results:
  **\*Insert Results here***
 
-### Identification of prospective users
-The users would be the librarians at the Hampshire School Library Service who could use it to manage the loans easier.
-### Identification of user needs and acceptable limitations
-#### Features requested:
+
+#### Identification of User Needs
 * Reports
 * Calendar
+* no more than 2 of a certain title per school.
 
-#### Features priority based on number of suggestions:
+* format for reports
+
+#### Accecptable Limitations:
+
 
 ### Data sources and destinations
-#### Sources:
-* Google Books for details about the books.
-* Input devices for ISBNs
-#### Destinations:
-* Database for long term storage of data.
-* Printable reports.
-### Data Volumes
-Data is stored in a series of database tables currently using sqlite as the backend.
+The first main data source for the program is the database in which most data will be stored. In the databsse there are 
+five tables for the user logins, book details that have been modified, school details, loan information 
+and what loan a book is on. 
+
+The second main data source for the program is the Google Books API. The API will allow the program to collect 
+information about a book for various reasons. The most important feature for the user is that it can use the data from 
+Google Books to generate a list of books that are currently checked out to a school so that the school can make sure
+they don't miss any books because they didn't know it was part of the SLS loan.
+
+The data coming out of the program will be the lists of books at locations aswell as reports on the loss rate and other 
+statistics that can be calculated about the loans.
+#### Data Volumes
+The main data volume is the SQLite database backend of the program. It contains all of the data on books and loans 
+aswell as schools. The size of the database, once implemented in a production environment, will be much higher than the
+testing version because of the difference in quantities of books and schools which means I can't yet estimate the size
+of an implemented database.
+#### Database ERD
+![Database ERD](./images/database-erd.PNG)
 ### Object analysis diagram
 ### Objectives for Proposed System:
 | Objective                | Details                                                                                                                                                  |
@@ -130,7 +169,8 @@ devices aren't a required feature.
 #### Modules:
 All of the code has been separated into different python modules (*.py).
 These modules can be imported into other parts of the code to allow modularity in the structure of the program. 
-The modules also reduce the amount of code needed to be written as they can imported to allow the calling of the functions inside the modules. 
+The modules also reduce the amount of code needed to be written as they can imported to allow the calling of the functions inside the modules.
+ 
 #### Objects:
 Objects are callable by any other part of the code where the modules are imported. 
 
@@ -138,6 +178,7 @@ Some objects that I've implemented are:
 * Entry form object
 * book details object
 * Homepage object
+* Multientry init form object
 * Multientry form object
 * settings menu object
 * School Details View menu
@@ -148,11 +189,90 @@ Some objects that I've implemented are:
 | Entry Form    |For entering a single value to be processed.|Enering an ISBN to view the details of that book.|Homepage|Book Details|
 | Book Details  |Displays the title, author, etc that is passed into the object.|Displaying the details of a book.|Entry Form|Homepage| 
 | Homepage      |The main menu of the program. Has buttons to call each of the parts of the program.|Calling smaller independent parts of the program such as Settings and the Multientry form.|Starting the program, Book Details, Settings, Multientry, Entry Form.|Entry Form, Multientry, Settings Menu|
-| Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Homepage|##N/A##|
+| Multientry Init|For choosing a school to sign books in from or out to.|Configures the multientry page to the correct school and correct method.|Homepage|Multientry|
+| Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Multientry Init|Homepage|
 | Settings Menu |Changing settings that apply globally to the program.|Changing the colour theme of the program.|Homepage|Homepage|
-|School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
-|School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
+| School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
+| School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
+#### Function Modules
+Some of the modules I've written only contain functions and algorithms that other parts of the program can import and use.
+
+The function modules that I've written are:
+* books_api
+* gui
+* img2gif
+* misc_python
+* sql
+
+The "books_api" module is for interacting with and processing the data from the Google Books API. It contains three 
+functions. The first function takes an ISBN from the program and returns properly formatted python dictionary 
+with all of the details about the book. The second function is used to get a specific detail about a book from 
+the dictionary returned by the first function. The third one runs the second function for all of the details required 
+in the book details window and returns them in a format that can be accepted by the book details object for being
+displayed or compared against the modified data from that window. 
+
+The "gui" module is written to make bringing up a new window easier. Each function in the module contains the few lines
+of code required to call a new GUI object so that other parts of the program can do so in one line. It also makes the
+program code easier to read since the same lines of code are repeated less often.
+
+The "img2gif" module is for the manipulation of the book cover images before they get displayed in the Book Details 
+window. The tkinter canvas object on the window only accepts image files in the GIF type whereas the Google Books API
+stores all of the images as JPEG files. This means in order to display them correctly, the program needs a way to 
+convert between the different file types. As well as the file type discrepancy, there are often differences between the
+resolution of the image file from the Google Books API and the tkinter canvas object in which the images are needed to 
+be displayed. This module also solves that issue by resizing the images to the correct resolution to reduce the blank 
+space around the image and to keep as much of the cover from being cropped.
+
+The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for
+this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one
+module for use in any program I write. One example of a function it contains is a binary search algorithm for searching
+through lists for a specific item. Another function is a sorting algorithm which sorts alphabetically and numerically 
+to make sure that multiple digit numbers are sorted correctly and not by the first digit as happens with algorithms like
+quicksort.
+
+The last function module I've written is a module for interacting with the sqlite database that the program is based 
+around. This module is made up of lots of functions, each with it's own SQL query, that can be executed in a connection
+to the database using variables that are passed into the function from the main program.
+ 
+
+#### Modular Design
+* **Login Screen** 
+  * Login Button
+    * **Main Menu Screen**
+      * Book Details
+        * **Single Entry**
+          * Submit
+            * **Book Details** (Title, Author etc of the book specified by isbn)
+              * Save Changes
+              * Close
+              * Revert to online data
+      * Sign Out Books
+        * **Destination Select Screen**
+          * Sign In
+            * **Multi-Entry**
+              * Sign In
+          * Sign Out
+            * **Multi-Entry**
+              * Sign Out
+      * School Details
+        * **School Selection Screen**
+          * Edit School
+            * **School Details** (Edit Mode)
+          * New School
+            * **School Details** (New Mode)
+          * View School
+            * **School Details** (View Mode)
+      * Settings
+        * **Settings**
+          * Theme Select
+          * Database Location
+          * Root Folder
+          * Add New User (Only when admin)
+            * **Add New User**
+          * Close
+      * Log Off
+      * Quit Program
 ### Definition of data requirements 
 ### Identification of appropriate storage media
 ### Entity relationship diagram(Normalised)
@@ -197,40 +317,131 @@ https://mermaidjs.github.io/mermaid-live-editor/
 
 ### Class and object diagrams 
 ### User interface design (HC)
-#### Single Entry:
-Used for isbn entry.
 
-Text boxes: entry field.
-* Entry field: user enters isbn or other single entry data.
-Button: Submit.
-* Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
+#### Login Screen
+![Login Screen](./gui-images/login.PNG "Login Screen")
 
-Image:
-![Screen cap of entry form](./gui images/entry.png "Entry form")
-#### Books Details:
-Text boxes: title, author, genre, released, binding, age, label, blurb.
-* Title: Book title and subtitle (maybe??) 
-* Author: authors. pretty self explanatory
-* Genre: genre of book
-* Released: release date
-* binding: should be paperback or hard cover. doesnt work. can be repurposed.
-* age: age rating ("mature" or "not mature")
-* label: blank. can be repurposed.
-* blurb: the book blurb.
+This is the Login screen that is presented when the user opens the application or logs out from the homepage.
+The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
+submit button. The button isn't the only way to run the authentication process as the user can also 
+press `Enter` to submit the details as is standard of most login systems. The password field is obscured 
+upon entry with asterisks (`*`) replacing each character as is standard with almost all Windows-based 
+login systems as well as on many websites. When submitted, the password is hashed with an SHA512 cryptographic 
+hash function before being compared with the hashed password associated with the given username that is 
+stored in the databases login's table. 
 
-Canvas: image
-* image: book cover image
+#### Homepage
+![Homepage](./gui-images/homepage.PNG)
 
-Buttons: save changes, close, revert to online data.
-* Save changes: gets the data from the editable text boxes and saves it to a database.
-* close: closes the window.
-* revert to online data: deletes the database version of the book details and lets the program use the google books data instead.
+This is the homepage for the application where the user can navigate to all of the various parts. The homepage 
+is made up of various buttons linked to the different sections of the program. There are also buttons for 
+`Log Off` and `Quit` to allow the user to end their unique session or to completely close the application
+respectively. At the top of the window is the program name and logo and at the bottom is a welcome back 
+message with the current username.
 
-Image: 
+#### Book Details
+![ISBN Entry](./gui-images/isbn-entry.PNG)
 
- ![Screen cap of books details](./gui images/book%20details%20(image%20error).PNG "Books Details")
+This part of the book details process is for taking the inputted isbn for a book and passing it through to the 
+next section. The menu has a entry box for the isbn and a label above it to instruct the user on what to input.
+Below the entry box is a button which will submit the contents of the entry box to the next bit of the 
+Book Details section.
 
+![Book Details](./gui-images/book-details.PNG)
 
+This is the window that is used to display the details of a book. The details are pulled from either the sqlite
+database if there is an entry for that isbn or the Google Books API if there isn't. The details that are available for 
+being displayed are:
+* Title (and subtitle if applicable)
+* Author(s)
+* Genre
+* Release/Publish Date
+* Age Rating
+* Blurb
+* Cover Image
+
+and two placeholder fields for anything else requested by the end users.
+At the bottom of the window are three buttons. One of these will save any changes made to the details by the 
+user to the sqlite database. The next one will close this part of the program and return to the homepage of
+the application. The last button will delete any entry in the database and allow the program to use the original 
+Google Books data for the details.
+
+#### School Details
+![School Selection](./gui-images/school-select.PNG)
+
+This window is for selecting a school to view or edit the details of or to add a new school to the system.
+There are three buttons on the left of the window:
+* `New School` for creating a profile of a new school in the database
+* `View School` for viewing the details of an existing school profile
+* `Edit School` for editing the details of an existing school profile
+
+On the right of the window is drop down menu containing the list of existing school profiles to select from for
+use in the `View School` or `Edit School` windows.
+
+The School Details main window has three variants which are chosen in the previous window.
+All of the variants are have the same fields to fill in or be viewed but they start differently depending 
+on the variant.
+The fields are:
+* School Name
+* Head Teacher
+* Last Exchange
+* Contact:
+* DFE No'
+* No' of Pupils
+* Allocation per pupil
+* Total Allocation
+* Address
+There is also a button next to the address field which will open Google Maps with the location of the school 
+in the default web browser.
+At the bottom of all of the variants is a button to close the details menu and return to the homepage.  
+
+![New School](./gui-images/new-school.PNG)
+
+The first variant of the School Details window is for create a new profile for a school. It has the same fields 
+as the other variants but all are left blank for the user to fill in. At the bottom of the field is an 
+`Add New School` button to save the entered details to the database as a new school.
+
+![View School](./gui-images/view-school.PNG)
+
+The second variant does not have editable field for the school name or a button to save changes as it is only 
+for viewing the details of a chosen school.
+
+![Edit School](./gui-images/edit-school.PNG) 
+
+The third and final variant is for changing the details of a school. As such, it starts with all of the details fields 
+filled with the details in the database ready for being changed by the user and has a `Save Changes` button 
+at the bottom for committing any changes to the database. 
+
+#### Sign Out Books
+
+![Multi-Entry Selection](./gui-images/multientry-selection.PNG)
+
+This window is for selecting a school to sign books out to or in from. It has a list of the schools in the 
+system in a drop down menu to select one and two buttons to choose whether you're signing books in or out with 
+respect to that location.
+
+![Multi-Entry Main](./gui-images/multibook-sign-in.PNG)
+
+This window has a single entry box for entering an isbn of a book. The user enters the ISBN and presses the 
+`Enter` key. This puts the ISBN in the list box on the left and collects the title from the database or the 
+Google Books API and puts it in the list on the right to help make sure the correct book has been entered.
+Once all of the ISBNs are entered, the user clicks on the `Sign In`/`Sign Out` button which will sign the 
+books out to the location selected in the previous window.
+
+#### Settings
+
+![Settings](./gui-images/settings.PNG)
+
+This window is where the user can change any settings pertaining to the application that might need to 
+be modified. 
+The first setting is the application-wide theme option. This is changed via a drop down menu with a list of the 
+available themes that can be chosen from.
+The next setting is the location of the sqlite database. This is chosen via a file path to the database file 
+which can be selected via the Windows Open File dialog. The next setting is the root folder location for the 
+program to use as a file location for the temporary storage of cover images for books and long term storage of 
+icons required for the program.
+The last setting is an `Add New User` button for creating a new user profile which can be used on the login 
+screen to access the application. This setting is only available to accounts with administrator privileges.
 
 ### Hardware specification 
 #### Input Devices 
@@ -250,11 +461,11 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 #### Table:
 
-|               | Processors | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
-|---------------|------------|---------------|--------------------------------|-----------|-------------------|------------------|
-| Minimum:      | i5-4210M   |8GB SODIMM DDR3|80.1MB w/out third-party modules|Win7 32bit |                   |Keyboard and Mouse|
-| Recommended:  |            |               |8GB with all required modules   |Win10 64bit| 1920x1080@60Hz    |                  |
-| Also Working: | i5-4460    |8GB DIMM DDR3  |                                |           | 1920x1080@60Hz    |                  |
+|               | Processors    | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
+|---------------|---------------|---------------|--------------------------------|-----------|-------------------|------------------|
+| Minimum:      | i5-4210M      |8GB SODIMM DDR3|80.1MB w/out third-party modules|Win7 32bit |                   |Keyboard and Mouse|
+| Recommended:  | Ryzen 7 1800x |16GB DDR4      |8GB with all required modules   |Win10 64bit| 1920x1080@60Hz    |                  |
+| Also Working: | i5-4460       |8GB DIMM DDR3  |                                |           | 1920x1080@60Hz    |                  |
 
 
 ## Testing
@@ -278,4 +489,23 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 ## Evaluation
 ## Program Code
+### Python Requirements:
+* Requests
+  * idna
+  * urllib3
+  * certifi
+  * chardet
+* PIL (Python Image Library)
+* Tkinter
+* sqlite3
+* json
+* hashlib
+* re
+* googlebooks
+* os
+* urllib
+* misc_python
+* webbrowser
+* time
+
 

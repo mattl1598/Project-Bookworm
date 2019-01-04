@@ -222,8 +222,13 @@ class App:
 					if self.location == "0":
 						pass # delete these
 					else:
+<<<<<<< HEAD
 						loan_id = sql.create_new_loan(self.location)
 						print(loan_id)
+=======
+						pass
+						# loan_id =
+>>>>>>> 72c3ebc8949de754702e3bd8fac6af8c8d1a5159
 
 
 
