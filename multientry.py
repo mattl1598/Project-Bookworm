@@ -72,9 +72,8 @@ class Selection:
 
 	def sign_out(self):
 		loc = self.get_location()
-		data = sql.get_books_location(loc)
 		self.root.destroy()
-		app = App(1, loc, data)
+		app = App(1, loc)
 
 	def get_location(self):
 		school_name = self.school.get()
@@ -223,7 +222,8 @@ class App:
 					if self.location == "0":
 						pass # delete these
 					else:
-						loan_id = 
+						loan_id = sql.create_new_loan(self.location)
+						print(loan_id)
 
 
 
