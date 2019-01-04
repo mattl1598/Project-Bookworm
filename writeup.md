@@ -93,14 +93,24 @@ Question 6:
 
 
 ### Data sources and destinations
-#### Sources:
-* Google Books for details about the books.
-* Input devices for ISBNs
-#### Destinations:
-* Database for long term storage of data.
-* Printable reports.
+The first main data source for the program is the database in which most data will be stored. In the databsse there are 
+five tables for the user logins, book details that have been modified, school details, loan information 
+and what loan a book is on. 
+
+The second main data source for the program is the Google Books API. The API will allow the program to collect 
+information about a book for various reasons. The most important feature for the user is that it can use the data from 
+Google Books to generate a list of books that are currently checked out to a school so that the school can make sure
+they don't miss any books because they didn't know it was part of the SLS loan.
+
+The data coming out of the program will be the lists of books at locations aswell as reports on the loss rate and other 
+statistics that can be calculated about the loans.
 #### Data Volumes
-Data is stored in a series of database tables currently using sqlite as the backend.
+The main data volume is the SQLite database backend of the program. It contains all of the data on books and loans 
+aswell as schools. The size of the database, once implemented in a production environment, will be much higher than the
+testing version because of the difference in quantities of books and schools which means I can't yet estimate the size
+of an implemented database.
+#### Database ERD
+![Database ERD](./images/database-erd.PNG)
 ### Object analysis diagram
 ### Objectives for Proposed System:
 | Objective                | Details                                                                                                                                                  |
