@@ -384,8 +384,8 @@
         <entry file="file://$PROJECT_DIR$/writeup.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="788">
-                <caret line="301" column="107" selection-start-line="301" selection-start-column="107" selection-end-line="301" selection-end-column="107" />
+              <first_editor relative-caret-position="631">
+                <caret line="351" column="30" lean-forward="true" selection-start-line="351" selection-start-column="30" selection-end-line="351" selection-end-column="30" />
               </first_editor>
               <second_editor />
             </state>
@@ -552,6 +552,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -588,7 +589,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1047,8 +1047,8 @@
     <entry file="file://$PROJECT_DIR$/writeup.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="788">
-            <caret line="301" column="107" selection-start-line="301" selection-start-column="107" selection-end-line="301" selection-end-column="107" />
+          <first_editor relative-caret-position="631">
+            <caret line="351" column="30" lean-forward="true" selection-start-line="351" selection-start-column="30" selection-end-line="351" selection-end-column="30" />
           </first_editor>
           <second_editor />
         </state>

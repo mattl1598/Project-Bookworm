@@ -184,7 +184,7 @@ Some objects that I've implemented are:
 |School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
 ##### Login Screen
-![Login Screen](./gui images/login.png "Login Screen")
+![Login Screen](./gui images/login.PNG "Login Screen")
 
 This is the Login screen that is presented when the user opens the application or logs out from the homepage.
 The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
@@ -196,7 +196,7 @@ hash function before being compared with the hashed password associated with the
 stored in the databases login's table.
 
 ##### Homepage
-![Homepage](./gui images/homepage.png)
+![Homepage](./gui images/homepage.PNG)
 
 This is the homepage for the application where the user can navigate to all of the various parts. The homepage 
 is made up of various buttons linked to the different sections of the program. There are also buttons for 
@@ -205,14 +205,14 @@ respectively. At the top of the window is the program name and logo and at the b
 message with the current username.
 
 ##### Book Details
-![ISBN Entry](./gui images/isbn entry.png)
+![ISBN Entry](./gui images/isbn entry.PNG)
 
 This part of the book details process is for taking the inputted isbn for a book and passing it through to the 
 next section. The menu has a entry box for the isbn and a label above it to instruct the user on what to input.
 Below the entry box is a button which will submit the contents of the entry box to the next bit of the 
 Book Details section.
 
-![Book Details](./gui images/book details.png)
+![Book Details](./gui images/book details.PNG)
 
 This is the window that is used to display the details of a book. The details are pulled from either the sqlite
 database if there is an entry for that isbn or the Google Books API if there isn't. The details that are available for 
@@ -232,7 +232,7 @@ the application. The last button will delete any entry in the database and allow
 Google Books data for the details.
 
 ##### School Details
-![School Selection](./gui images/school select.png)
+![School Selection](./gui images/school select.PNG)
 
 This window is for selecting a school to view or edit the details of or to add a new school to the system.
 There are three buttons on the left of the window:
@@ -260,18 +260,18 @@ There is also a button next to the address field which will open Google Maps wit
 in the default web browser.
 At the bottom of all of the variants is a button to close the details menu and return to the homepage.  
 
-![New School](./gui images/new school.png)
+![New School](./gui images/new school.PNG)
 
 The first variant of the School Details window is for create a new profile for a school. It has the same fields 
 as the other variants but all are left blank for the user to fill in. At the bottom of the field is an 
 `Add New School` button to save the entered details to the database as a new school.
 
-![View School](./gui images/view school.png)
+![View School](./gui images/view school.PNG)
 
 The second variant does not have editable field for the school name or a button to save changes as it is only 
 for viewing the details of a chosen school.
 
-![Edit School](./gui images/edit school.png) 
+![Edit School](./gui images/edit school.PNG) 
 
 The third and final variant is for changing the details of a school. As such, it starts with all of the details fields 
 filled with the details in the database ready for being changed by the user and has a `Save Changes` button 
@@ -279,13 +279,13 @@ at the bottom for committing any changes to the database.
 
 ##### Sign Out Books
 
-![Multi-Entry Selection](./gui images/multientry selection.png)
+![Multi-Entry Selection](./gui images/multientry selection.PNG)
 
 This window is for selecting a school to sign books out to or in from. It has a list of the schools in the 
 system in a drop down menu to select one and two buttons to choose whether you're signing books in or out with 
 respect to that location.
 
-![Multi-Entry Main](./gui images/multibook sign in.png)
+![Multi-Entry Main](./gui images/multibook sign in.PNG)
 
 This window has a single entry box for entering an isbn of a book. The user enters the ISBN and presses the 
 `Enter` key. This puts the ISBN in the list box on the left and collects the title from the database or the 
@@ -295,7 +295,7 @@ books out to the location selected in the previous window.
 
 ##### Settings
 
-![Settings](./gui images/settings.png)
+![Settings](./gui images/settings.PNG)
 
 This window is where the user can change any settings pertaining to the application that might need to 
 be modified. 
@@ -398,7 +398,7 @@ Button: Submit.
 * Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
 
 Image:
-![Screen cap of entry form](./gui images/entry.png "Entry form")
+![Screen cap of entry form](./gui images/isbn entry.PNG "Entry form")
 #### Books Details:
 Text boxes: title, author, genre, released, binding, age, label, blurb.
 * Title: Book title and subtitle (maybe??) 
@@ -420,7 +420,7 @@ Buttons: save changes, close, revert to online data.
 
 Image: 
 
- ![Screen cap of books details](./gui images/book%20details%20(image%20error).PNG "Books Details")
+ ![Screen cap of books details](./gui images/book details.PNG "Books Details")
 
 
 
