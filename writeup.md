@@ -168,6 +168,7 @@ Some objects that I've implemented are:
 * Entry form object
 * book details object
 * Homepage object
+* Multientry init form object
 * Multientry form object
 * settings menu object
 * School Details View menu
@@ -178,135 +179,52 @@ Some objects that I've implemented are:
 | Entry Form    |For entering a single value to be processed.|Enering an ISBN to view the details of that book.|Homepage|Book Details|
 | Book Details  |Displays the title, author, etc that is passed into the object.|Displaying the details of a book.|Entry Form|Homepage| 
 | Homepage      |The main menu of the program. Has buttons to call each of the parts of the program.|Calling smaller independent parts of the program such as Settings and the Multientry form.|Starting the program, Book Details, Settings, Multientry, Entry Form.|Entry Form, Multientry, Settings Menu|
-| Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Homepage|##N/A##|
+| Multientry Init|For choosing a school to sign books in from or out to.|Configures the multientry page to the correct school and correct method.|Homepage|Multientry|
+| Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Multientry Init|Homepage|
 | Settings Menu |Changing settings that apply globally to the program.|Changing the colour theme of the program.|Homepage|Homepage|
-|School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
-|School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
+| School Details View|For the viewing, editing or creating of school profiles in the database.|Can be used to create a new school profile in the database, edit a pre-existing one or viewing the details of one.|School Details Init.|Homepage.|
+| School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
-##### Login Screen
-![Login Screen](./gui-images/login.PNG "Login Screen")
+#### Function Modules
+Some of the modules I've written only contain functions and algorithms that other parts of the program can import and use.
 
-This is the Login screen that is presented when the user opens the application or logs out from the homepage.
-The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
-submit button. The button isn't the only way to run the authentication process as the user can also 
-press `Enter` to submit the details as is standard of most login systems. The password field is obscured 
-upon entry with asterisks (`*`) replacing each character as is standard with almost all Windows-based 
-login systems as well as on many websites. When submitted, the password is hashed with an SHA512 cryptographic 
-hash function before being compared with the hashed password associated with the given username that is 
-stored in the databases login's table. 
+The function modules that I've written are:
+* books_api
+* gui
+* img2gif
+* misc_python
+* sql
 
-##### Homepage
-![Homepage](./gui-images/homepage.PNG)
+The "books_api" module is for interacting with and processing the data from the Google Books API. It contains three 
+functions. The first function takes an ISBN from the program and returns properly formatted python dictionary 
+with all of the details about the book. The second function is used to get a specific detail about a book from 
+the dictionary returned by the first function. The third one runs the second function for all of the details required 
+in the book details window and returns them in a format that can be accepted by the book details object for being
+displayed or compared against the modified data from that window. 
 
-This is the homepage for the application where the user can navigate to all of the various parts. The homepage 
-is made up of various buttons linked to the different sections of the program. There are also buttons for 
-`Log Off` and `Quit` to allow the user to end their unique session or to completely close the application
-respectively. At the top of the window is the program name and logo and at the bottom is a welcome back 
-message with the current username.
+The "gui" module is written to make bringing up a new window easier. Each function in the module contains the few lines
+of code required to call a new GUI object so that other parts of the program can do so in one line. It also makes the
+program code easier to read since the same lines of code are repeated less often.
 
-##### Book Details
-![ISBN Entry](./gui-images/isbn-entry.PNG)
+The "img2gif" module is for the manipulation of the book cover images before they get displayed in the Book Details 
+window. The tkinter canvas object on the window only accepts image files in the GIF type whereas the Google Books API
+stores all of the images as JPEG files. This means in order to display them correctly, the program needs a way to 
+convert between the different file types. As well as the file type discrepancy, there are often differences between the
+resolution of the image file from the Google Books API and the tkinter canvas object in which the images are needed to 
+be displayed. This module also solves that issue by resizing the images to the correct resolution to reduce the blank 
+space around the image and to keep as much of the cover from being cropped.
 
-This part of the book details process is for taking the inputted isbn for a book and passing it through to the 
-next section. The menu has a entry box for the isbn and a label above it to instruct the user on what to input.
-Below the entry box is a button which will submit the contents of the entry box to the next bit of the 
-Book Details section.
+The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for
+this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one
+module for use in any program I write. One example of a function it contains is a binary search algorithm for searching
+through lists for a specific item. Another function is a sorting algorithm which sorts alphabetically and numerically 
+to make sure that multiple digit numbers are sorted correctly and not by the first digit as happens with algorithms like
+quicksort.
 
-![Book Details](./gui-images/book-details.PNG)
-
-This is the window that is used to display the details of a book. The details are pulled from either the sqlite
-database if there is an entry for that isbn or the Google Books API if there isn't. The details that are available for 
-being displayed are:
-* Title (and subtitle if applicable)
-* Author(s)
-* Genre
-* Release/Publish Date
-* Age Rating
-* Blurb
-* Cover Image
-
-and two placeholder fields for anything else requested by the end users.
-At the bottom of the window are three buttons. One of these will save any changes made to the details by the 
-user to the sqlite database. The next one will close this part of the program and return to the homepage of
-the application. The last button will delete any entry in the database and allow the program to use the original 
-Google Books data for the details.
-
-##### School Details
-![School Selection](./gui-images/school-select.PNG)
-
-This window is for selecting a school to view or edit the details of or to add a new school to the system.
-There are three buttons on the left of the window:
-* `New School` for creating a profile of a new school in the database
-* `View School` for viewing the details of an existing school profile
-* `Edit School` for editing the details of an existing school profile
-
-On the right of the window is drop down menu containing the list of existing school profiles to select from for
-use in the `View School` or `Edit School` windows.
-
-The School Details main window has three variants which are chosen in the previous window.
-All of the variants are have the same fields to fill in or be viewed but they start differently depending 
-on the variant.
-The fields are:
-* School Name
-* Head Teacher
-* Last Exchange
-* Contact:
-* DFE No'
-* No' of Pupils
-* Allocation per pupil
-* Total Allocation
-* Address
-There is also a button next to the address field which will open Google Maps with the location of the school 
-in the default web browser.
-At the bottom of all of the variants is a button to close the details menu and return to the homepage.  
-
-![New School](./gui-images/new-school.PNG)
-
-The first variant of the School Details window is for create a new profile for a school. It has the same fields 
-as the other variants but all are left blank for the user to fill in. At the bottom of the field is an 
-`Add New School` button to save the entered details to the database as a new school.
-
-![View School](./gui-images/view-school.PNG)
-
-The second variant does not have editable field for the school name or a button to save changes as it is only 
-for viewing the details of a chosen school.
-
-![Edit School](./gui-images/edit-school.PNG) 
-
-The third and final variant is for changing the details of a school. As such, it starts with all of the details fields 
-filled with the details in the database ready for being changed by the user and has a `Save Changes` button 
-at the bottom for committing any changes to the database. 
-
-##### Sign Out Books
-
-![Multi-Entry Selection](./gui-images/multientry-selection.PNG)
-
-This window is for selecting a school to sign books out to or in from. It has a list of the schools in the 
-system in a drop down menu to select one and two buttons to choose whether you're signing books in or out with 
-respect to that location.
-
-![Multi-Entry Main](./gui-images/multibook-sign-in.PNG)
-
-This window has a single entry box for entering an isbn of a book. The user enters the ISBN and presses the 
-`Enter` key. This puts the ISBN in the list box on the left and collects the title from the database or the 
-Google Books API and puts it in the list on the right to help make sure the correct book has been entered.
-Once all of the ISBNs are entered, the user clicks on the `Sign In`/`Sign Out` button which will sign the 
-books out to the location selected in the previous window.
-
-##### Settings
-
-![Settings](./gui-images/settings.PNG)
-
-This window is where the user can change any settings pertaining to the application that might need to 
-be modified. 
-The first setting is the application-wide theme option. This is changed via a drop down menu with a list of the 
-available themes that can be chosen from.
-The next setting is the location of the sqlite database. This is chosen via a file path to the database file 
-which can be selected via the Windows Open File dialog. The next setting is the root folder location for the 
-program to use as a file location for the temporary storage of cover images for books and long term storage of 
-icons required for the program.
-The last setting is an `Add New User` button for creating a new user profile which can be used on the login 
-screen to access the application. This setting is only available to accounts with administrator privileges.
+The last function module I've written is a module for interacting with the sqlite database that the program is based 
+around. This module is made up of lots of functions, each with it's own SQL query, that can be executed in a connection
+to the database using variables that are passed into the function from the main program.
+ 
 
 #### Modular Design
 * **Login Screen** 
@@ -389,40 +307,131 @@ https://mermaidjs.github.io/mermaid-live-editor/
 
 ### Class and object diagrams 
 ### User interface design (HC)
-#### Single Entry:
-Used for isbn entry.
 
-Text boxes: entry field.
-* Entry field: user enters isbn or other single entry data.
-Button: Submit.
-* Submit: submits data in entry field. saves to input table in database for next program to access. need to find another way to return the value.
+#### Login Screen
+![Login Screen](./gui-images/login.PNG "Login Screen")
 
-Image:
-![Screen cap of entry form](./gui images/isbn entry.PNG "Entry form")
-#### Books Details:
-Text boxes: title, author, genre, released, binding, age, label, blurb.
-* Title: Book title and subtitle (maybe??) 
-* Author: authors. pretty self explanatory
-* Genre: genre of book
-* Released: release date
-* binding: should be paperback or hard cover. doesnt work. can be repurposed.
-* age: age rating ("mature" or "not mature")
-* label: blank. can be repurposed.
-* blurb: the book blurb.
+This is the Login screen that is presented when the user opens the application or logs out from the homepage.
+The menu is characterised by a pair of entry fields, one for the username and one for the password, as well a 
+submit button. The button isn't the only way to run the authentication process as the user can also 
+press `Enter` to submit the details as is standard of most login systems. The password field is obscured 
+upon entry with asterisks (`*`) replacing each character as is standard with almost all Windows-based 
+login systems as well as on many websites. When submitted, the password is hashed with an SHA512 cryptographic 
+hash function before being compared with the hashed password associated with the given username that is 
+stored in the databases login's table. 
 
-Canvas: image
-* image: book cover image
+#### Homepage
+![Homepage](./gui-images/homepage.PNG)
 
-Buttons: save changes, close, revert to online data.
-* Save changes: gets the data from the editable text boxes and saves it to a database.
-* close: closes the window.
-* revert to online data: deletes the database version of the book details and lets the program use the google books data instead.
+This is the homepage for the application where the user can navigate to all of the various parts. The homepage 
+is made up of various buttons linked to the different sections of the program. There are also buttons for 
+`Log Off` and `Quit` to allow the user to end their unique session or to completely close the application
+respectively. At the top of the window is the program name and logo and at the bottom is a welcome back 
+message with the current username.
 
-Image: 
+#### Book Details
+![ISBN Entry](./gui-images/isbn-entry.PNG)
 
- ![Screen cap of books details](./gui images/book details.PNG "Books Details")
+This part of the book details process is for taking the inputted isbn for a book and passing it through to the 
+next section. The menu has a entry box for the isbn and a label above it to instruct the user on what to input.
+Below the entry box is a button which will submit the contents of the entry box to the next bit of the 
+Book Details section.
 
+![Book Details](./gui-images/book-details.PNG)
 
+This is the window that is used to display the details of a book. The details are pulled from either the sqlite
+database if there is an entry for that isbn or the Google Books API if there isn't. The details that are available for 
+being displayed are:
+* Title (and subtitle if applicable)
+* Author(s)
+* Genre
+* Release/Publish Date
+* Age Rating
+* Blurb
+* Cover Image
+
+and two placeholder fields for anything else requested by the end users.
+At the bottom of the window are three buttons. One of these will save any changes made to the details by the 
+user to the sqlite database. The next one will close this part of the program and return to the homepage of
+the application. The last button will delete any entry in the database and allow the program to use the original 
+Google Books data for the details.
+
+#### School Details
+![School Selection](./gui-images/school-select.PNG)
+
+This window is for selecting a school to view or edit the details of or to add a new school to the system.
+There are three buttons on the left of the window:
+* `New School` for creating a profile of a new school in the database
+* `View School` for viewing the details of an existing school profile
+* `Edit School` for editing the details of an existing school profile
+
+On the right of the window is drop down menu containing the list of existing school profiles to select from for
+use in the `View School` or `Edit School` windows.
+
+The School Details main window has three variants which are chosen in the previous window.
+All of the variants are have the same fields to fill in or be viewed but they start differently depending 
+on the variant.
+The fields are:
+* School Name
+* Head Teacher
+* Last Exchange
+* Contact:
+* DFE No'
+* No' of Pupils
+* Allocation per pupil
+* Total Allocation
+* Address
+There is also a button next to the address field which will open Google Maps with the location of the school 
+in the default web browser.
+At the bottom of all of the variants is a button to close the details menu and return to the homepage.  
+
+![New School](./gui-images/new-school.PNG)
+
+The first variant of the School Details window is for create a new profile for a school. It has the same fields 
+as the other variants but all are left blank for the user to fill in. At the bottom of the field is an 
+`Add New School` button to save the entered details to the database as a new school.
+
+![View School](./gui-images/view-school.PNG)
+
+The second variant does not have editable field for the school name or a button to save changes as it is only 
+for viewing the details of a chosen school.
+
+![Edit School](./gui-images/edit-school.PNG) 
+
+The third and final variant is for changing the details of a school. As such, it starts with all of the details fields 
+filled with the details in the database ready for being changed by the user and has a `Save Changes` button 
+at the bottom for committing any changes to the database. 
+
+#### Sign Out Books
+
+![Multi-Entry Selection](./gui-images/multientry-selection.PNG)
+
+This window is for selecting a school to sign books out to or in from. It has a list of the schools in the 
+system in a drop down menu to select one and two buttons to choose whether you're signing books in or out with 
+respect to that location.
+
+![Multi-Entry Main](./gui-images/multibook-sign-in.PNG)
+
+This window has a single entry box for entering an isbn of a book. The user enters the ISBN and presses the 
+`Enter` key. This puts the ISBN in the list box on the left and collects the title from the database or the 
+Google Books API and puts it in the list on the right to help make sure the correct book has been entered.
+Once all of the ISBNs are entered, the user clicks on the `Sign In`/`Sign Out` button which will sign the 
+books out to the location selected in the previous window.
+
+#### Settings
+
+![Settings](./gui-images/settings.PNG)
+
+This window is where the user can change any settings pertaining to the application that might need to 
+be modified. 
+The first setting is the application-wide theme option. This is changed via a drop down menu with a list of the 
+available themes that can be chosen from.
+The next setting is the location of the sqlite database. This is chosen via a file path to the database file 
+which can be selected via the Windows Open File dialog. The next setting is the root folder location for the 
+program to use as a file location for the temporary storage of cover images for books and long term storage of 
+icons required for the program.
+The last setting is an `Add New User` button for creating a new user profile which can be used on the login 
+screen to access the application. This setting is only available to accounts with administrator privileges.
 
 ### Hardware specification 
 #### Input Devices 
@@ -442,11 +451,11 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 #### Table:
 
-|               | Processors | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
-|---------------|------------|---------------|--------------------------------|-----------|-------------------|------------------|
-| Minimum:      | i5-4210M   |8GB SODIMM DDR3|80.1MB w/out third-party modules|Win7 32bit |                   |Keyboard and Mouse|
-| Recommended:  |            |               |8GB with all required modules   |Win10 64bit| 1920x1080@60Hz    |                  |
-| Also Working: | i5-4460    |8GB DIMM DDR3  |                                |           | 1920x1080@60Hz    |                  |
+|               | Processors    | Memory        | Storage                        | OS        | Screen Resolution | Peripherals      |
+|---------------|---------------|---------------|--------------------------------|-----------|-------------------|------------------|
+| Minimum:      | i5-4210M      |8GB SODIMM DDR3|80.1MB w/out third-party modules|Win7 32bit |                   |Keyboard and Mouse|
+| Recommended:  | Ryzen 7 1800x |16GB DDR4      |8GB with all required modules   |Win10 64bit| 1920x1080@60Hz    |                  |
+| Also Working: | i5-4460       |8GB DIMM DDR3  |                                |           | 1920x1080@60Hz    |                  |
 
 
 ## Testing
