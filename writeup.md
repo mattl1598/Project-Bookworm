@@ -80,7 +80,11 @@ Question 6:
 
 ##### Results:
  **\*Insert Results here***
-
+##### Evaluation:
+This questionnaire has a few flaws in the way it was carried out.
+Firstly the sample size that completed the questionnaire was smaller than the already limited target population that
+is the SLS library assistants. This means that my responses are less likely to be varied or represent the views of 
+library assistants from other services offered by other counties who could be interested in using the system.
 
 #### Identification of User Needs
 * Reports
@@ -554,9 +558,32 @@ One of the other parts is a way to look up the details of a book by it's isbn. T
 that appears when the `Book Details` button on the homepage which then passes it through to the details form. 
 The details form displays the books title, authors, genre, release/published date, age rating, blurb and cover image.
 
+Another section is the part for loaning books out to schools and returning them to the base location. The first part 
+of this sub-system is a form to select the school that is having books exchanged with using a drop-down menu and a
+pair of buttons either `Sign Out` books to that school or `Sign In` books from that school. The second part of the 
+sub-system is a form for entering the isbns that are part of the exchange. The isbns are entered into a entry box
+and stored visually in a list box with the corresponding titles in another list box next to it. Once the isbns have 
+been entered and the submit button has been pressed, the system processes all the books and adds them to the a new 
+loan in the database for signing out books or to the existing loan for returning them to the base. 
+
+Another section is the part for retrieving data about a school in the database. The first part of this sub-system is
+a form for selecting the school from a drop-down menu and three buttons to select which mode the second form should 
+open in. Whether the user is viewing or editing a school or   
+ 
 ### Sampled Detailed Algorithms
 
 ## User Guide 
+
+#### signing out instructions draft
+Another section is the part for loaning books out to schools and returning them to the base location. To start the 
+process for re-assigning books, the user clicks on the `Sign Out Books` button on the homepage which opens a form to
+select the school the process should reference with a drop down menu. Once the user has selected as school, there is
+a choice of two buttons, one to `Sign Out` books to a school and another (`Sign In`) for returning books to the base.
+When the correct button is pressed, a new window is opened with two lists, an entry box and a button. The user should
+enter the isbn of a book to be processed and press `Enter` which will add the isbn to the first list box and the title
+associated with that isbn to the second. The user should repeat entering isbns until every book they wish to 
+process has been entered.
+
 ### Contents
 
 ## Evaluation
