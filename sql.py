@@ -6,12 +6,47 @@ import time
 
 def get_db():
 
-	with open("D:/Project-Bookworm/settings.json", "r") as file:
+	with open("C:/Users/mattl/Documents/GitHub/Project-Bookworm/settings.json", "r") as file:
 		settings = json.load(file)
 
 	db = settings["database_location"]
 
 	return db
+
+def create_tables():
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	books = str("""CREATE TABLE "books" ( `isbn` TEXT NOT NULL, `copy_no` INTEGER NOT NULL, `loan_id` INTEGER, 
+	PRIMARY KEY(`isbn`,`copy_no`), 
+	FOREIGN KEY(`loan_id`) 
+	REFERENCES `loans`(`loan_id`) )""")
+	changed_books = str("""CREATE TABLE "changed_books" ( `isbn` TEXT NOT NULL UNIQUE, `title` TEXT, `author` TEXT, 
+	`genre` TEXT, `released` TEXT, `binding` TEXT, `age` TEXT, 
+	`label` TEXT, `blurb` TEXT, `image` BLOB, 
+	PRIMARY KEY(`isbn`) )""")
+	loans = str("""CREATE TABLE "loans" ( `loan_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 
+	`dates` TEXT NOT NULL, `school_id` INTEGER NOT NULL, `active` TEXT NOT NULL, 
+	FOREIGN KEY(`school_id`) 
+	REFERENCES `schools`(`school_id`) )""")
+	login = str("""CREATE TABLE "login" ( `userID` INTEGER NOT NULL UNIQUE, `username` TEXT NOT NULL UNIQUE, 
+	`password` TEXT NOT NULL, `isDepressed` TEXT NOT NULL, 
+	PRIMARY KEY(`userID`) )""")
+	schools = str("""CREATE TABLE "login" ( `userID` INTEGER NOT NULL UNIQUE, `username` TEXT NOT NULL UNIQUE, 
+	`password` TEXT NOT NULL, `isDepressed` TEXT NOT NULL, PRIMARY KEY(`userID`) )""")
+	c.execute(books)
+	conn.commit()
+	c.execute(changed_books)
+	conn.commit()
+	c.execute(loans)
+	conn.commit()
+	c.execute(login)
+	conn.commit()
+	c.execute(schools)
+	conn.commit()
+	conn.close()
+	new_user("admin", "password", "True")
+
 
 def get_books_location(location):
 	db = get_db()
@@ -68,7 +103,13 @@ def create_new_loan(loc):
 
 def get_logins():
 	db = get_db()
-	conn = sqlite3.connect(db)
+	connected = False
+	while connected is False:
+		try:
+			conn = sqlite3.connect(db)
+			connected = True
+		except sqlite3.OperationalError:
+			pass # create database
 	c = conn.cursor()
 	cmd = str("SELECT * FROM login")
 	c.execute(cmd)
@@ -349,4 +390,4 @@ def edit_school(sch_id, data):
 def create_dict(keys, values):
 	return dict(zip(keys, values + [None] * (len(keys) - len(values))))
 
-print(get_book("1509860142"))
+

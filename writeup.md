@@ -89,8 +89,9 @@ Question 6:
 
 * format for reports
 
-#### Accecptable Limitations:
-
+#### Acceptable Limitations:
+* Only able to use it on one computer because the database is kept locally and doesn't support multiple concurrent 
+database connections.
 
 ### Data sources and destinations
 The first main data source for the program is the database in which most data will be stored. In the databsse there are 
@@ -542,6 +543,17 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 ## System Maintenance
 ### System Overview
+When the system is opened by the user, they are greeted with a log on form. This log on form is setup using entry
+boxes to collect the users login credentials to allow the user to log on and access the system. The user will type
+in their log on credentials and press the `Enter` key or click the `Log In` button on the form. If the credentials 
+match any of the stored credentials in the database, the user will be taken to the system homepage.
+
+The system homepage is the way the user accesses the other parts of the system from one central form. It has buttons
+for the user to press to take them to the various other parts.
+One of the other parts is a way to look up the details of a book by it's isbn. The user enters the isbn into a form 
+that appears when the `Book Details` button on the homepage which then passes it through to the details form. 
+The details form displays the books title, authors, genre, release/published date, age rating, blurb and cover image.
+
 ### Sampled Detailed Algorithms
 
 ## User Guide 
