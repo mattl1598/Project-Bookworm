@@ -131,6 +131,66 @@ of an implemented database.
 | Additional Objective VII | The system should be simple to setup and install on the target users computers.                                                                          |
 
 ### Analysis data dictionary and ERD
+#### Data Dictionary
+| Table Name  | Columns | Description |
+|-------------|---------|-------------|
+|books        |isbn, copy_no, loan_id | Links a copy of a certain book isbn to a loan via it's loan id. |
+|changed_books|isbn, title, author, genre, binding, age, label, blurb, image| Stores the details of a modified book. |
+|loans        |loan_id, date, school_id, active| Stores the details of a loan linking it to a school.|
+|login        |userID, username, password, admin| Stores the login details of users for to use when accessing the system. |
+|schools      |school_id, name, address, HT, lastEx, DFE, Contact, pupilTotal, itemsPer| Stores the details about a school. |
+
+
+##### Books
+|Column   |Required|Type   |Field Length|Default Values|Notes|
+|---------|--------|-------|------------|--------------|-----|
+| isbn    | ✔      |Text   | 10 or 13   |              |     |
+| copy_no | ✔      |Integer| N/A        |              |     |
+| loan_id |        |Integer| N/A        |              |     |
+
+##### changed_books
+|Column  |Required|Type   |Field Length|Default Values|Notes|
+|--------|--------|-------|------------|--------------|-----|
+|isbn    | ✔      |Text   | N/A        |              |     |
+|title   |        |Integer| N/A        |              |     |
+|author  |        |Integer| N/A        |              |     |
+|genre   |        |Integer| N/A        |              |     |
+|released|        |Integer| N/A        |              |     |
+|binding |        |Integer| N/A        |              |     |
+|age     |        |Integer| N/A        |              |     |
+|label   |        |Integer| N/A        |              |     |
+|blurb   |        |Integer| N/A        |              |     |
+|image   |        |Blob   | N/A        |              |     |
+
+##### loans
+|Column   |Required|Type   |Field Length|Default Values|Notes|
+|---------|--------|-------|------------|--------------|-----|
+|loan_id  | ✔      |Integer| N/A        |              |Auto-Increment|
+|dates    | ✔      |Text   | N/A        |              |     |
+|school_id| ✔      |Integer| N/A        |              |     |
+|active   | ✔      |Text   | N/A        |              |     |
+
+##### logins
+|Column  |Required|Type   |Field Length|Default Values|Notes|
+|--------|--------|-------|------------|--------------|-----|
+|userID  | ✔      |Integer| N/A        |              |     |
+|username| ✔      |Text   | N/A        |              |     |
+|password| ✔      |Text   | 128        |              |     |
+|admin   | ✔      |Text   | N/A        |              |     |
+
+##### schools
+|Column    |Required|Type   |Field Length|Default Values|Notes|
+|----------|--------|-------|------------|--------------|-----|
+|school_id | ✔      |Integer| N/A        |              |Auto-Increment|
+|name      |        |Text   | N/A        |              |     |
+|address   |        |Text   | N/A        |              |     |
+|HT        |        |Text   | N/A        |              |     |
+|lastEx    |        |Text   | N/A        |              |     |
+|DFE       |        |Text   | N/A        |              |     |
+|Contact   |        |Text   | N/A        |              |     |
+|pupilTotal|        |Integer| N/A        | 0            |     |
+|itemsPer  |        |Integer| N/A        | 3            |     |
+
 ### Realistic appraisal of the feasibility of potential solutions:
 Key:
 
