@@ -54,30 +54,21 @@ The users would be the librarians at the Hampshire School Library Service who co
 #### Questionnaire:
 Survey made on Enalyzer.
 
-Question 1:
+Questions about the current system:
 
-![Screen cap of question 1](./survey/q1.PNG "Question 1")
+![Current System Questions](./survey/excel-rating.PNG)
 
-Question 2:
+Question about respondants interest in a new system:
 
-![Screen cap of question 2](./survey/q2.PNG "Question 2")
+![Interest Question](./survey/pg2.PNG)
 
-Question 3:
+Questions about desired features in the new system:
 
-![Screen cap of question 3](./survey/q3.PNG "Question 3")
+![Desired Features Questions](./survey/p3.png)
 
-Question 4:
+Questions about a report creation feature:
 
-![Screen cap of question 4](./survey/q4.PNG "Question 4")
-
-Question 5:
-
-![Screen cap of question 5](./survey/q5.PNG "Question 5")
-
-Question 6:
-
-![Screen cap of question 6](./survey/q6.PNG "Question 6")
-
+![Report Creation Questions](./survey/pg4.PNG)
 ##### Results:
  **\*Insert Results here***
 ##### Evaluation:
