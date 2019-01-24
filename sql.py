@@ -6,7 +6,7 @@ import time
 
 def get_db():
 
-	with open("C:/Users/mattl/Documents/GitHub/Project-Bookworm/settings.json", "r") as file:
+	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as file:
 		settings = json.load(file)
 
 	db = settings["database_location"]

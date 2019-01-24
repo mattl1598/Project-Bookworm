@@ -1,5 +1,5 @@
 {
-    "database_location": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/database/database2.db",
+    "database_location": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/database/database.db",
     "database_type": "file",
     "root_location": "C:/Users/Matthew/Documents/GitHub/Project-Bookworm/",
     "theme": "dark",
