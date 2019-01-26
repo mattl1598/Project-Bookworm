@@ -14,7 +14,12 @@ import sql
 
 
 def gettheme():
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+		settings = json.load(read2)
+
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -29,7 +34,8 @@ def gettheme():
 	select = theme1[theme]["textbox"]["selectbackground"]
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 
-	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg
+
+	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath
 
 # bg,text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = self.gettheme()
 
@@ -37,9 +43,9 @@ def gettheme():
 class homepage:
 
 	def __init__(self):
-		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath = gettheme()
 
-		with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+		with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as readfile:
 			settings = json.load(readfile)
 
 		logins = sql.get_logins()
@@ -62,7 +68,7 @@ class homepage:
 			welc_string = "Welcome Back!"
 
 		self.home = Tk()
-		self.home.iconbitmap("D:\Project-Bookworm\icons\colour.ico")
+		self.home.iconbitmap(rootpath+"icons\colour.ico")
 
 		size = str(int((self.home.winfo_screenwidth()*(1280/1920))))
 		x = "x"

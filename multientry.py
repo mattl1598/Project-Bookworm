@@ -7,7 +7,12 @@ import misc_python
 
 
 def gettheme():
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+		settings = json.load(read2)
+
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]

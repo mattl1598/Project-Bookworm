@@ -6,7 +6,12 @@ import gui
 
 def gettheme():
 	# get colours from json file
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+		settings = json.load(read2)
+
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -99,10 +104,10 @@ class login():
 		if user in users:
 			if hash_it(psw) == psws[users.index(user)]:
 				print("Authentication Successful")
-				with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+				with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as readfile:
 					settings = json.load(readfile)
 				settings["last_user_id"] = str(ids[users.index(user)])
-				with open("D:/Project-Bookworm/settings.json", "w") as file:
+				with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "w") as file:
 					json.dump(settings, file, indent=4)
 
 				flag = True

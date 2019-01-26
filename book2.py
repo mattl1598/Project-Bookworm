@@ -13,10 +13,12 @@ import homepage
 
 def get_theme():
 
-	with open("D:/Project-Bookworm/settings.json", "r") as file:
-		settings = json.load(file)
+	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+		settings = json.load(read2)
 
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = settings["theme"]
@@ -33,7 +35,7 @@ def get_theme():
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 	darkbg = theme1[theme]["windows"]["darkbackground"]
 
-	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db
+	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db, rootpath
 
 
 class Book:
@@ -42,7 +44,7 @@ class Book:
 					binding=str("None"), age=str("None"), label=str("None"), blurb=str("None"),
 					img_url=None, isbn=None):
 
-		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db = get_theme()
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, darkbg, db, rootpath = get_theme()
 
 		self.isbn = isbn
 		self.img_url = img_url
