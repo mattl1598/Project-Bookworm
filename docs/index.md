@@ -1,4 +1,4 @@
-<sup> [Back](..) </sup>
+<sup> [Back](.) </sup>
 # Project Bookworm
 
 ## Overview
