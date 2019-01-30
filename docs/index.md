@@ -1,4 +1,4 @@
-^ [Back](..)
+^[Back](..)
 # Project Bookworm
 
 ## Overview
