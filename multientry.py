@@ -210,28 +210,11 @@ class App:
 					conn.close()
 			else:
 				pass
+			self.root.destroy()
 		elif mode == "out":
-			books = sql.get_books_location(0)
-			sql.create_new_loan(self.location)
-			for i in range(len(self.root.ISBNS)):
-				isbn = self.root.ISBNs[i]
-				copy = sql.get_copys_location(0, isbn)
-				copy_list = []
-				for j in range(len(copy)):
-					copy_list.append(copy[i][1])
-					copy_list = sorted(copy_list)
-				if copy_list == []:
-					pass # error plz
-				else:
-					copy_no = copy_list[0]
-					if self.location == "0":
-						pass # delete these
-					else:
-						loan_id = sql.create_new_loan(self.location)
-						print(loan_id)
-						pass
-						# loan_id =
-
+			loan_id = sql.create_new_loan(self.location)
+			sql.send_books(self.root.ISBNs, loan_id)
+			self.root.destroy()
 
 
 

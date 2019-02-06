@@ -82,6 +82,26 @@ ORDER BY books.isbn, books.copy_no;""")
 	conn.close()
 	return data
 
+def send_books(books, loan_id):
+	db = get_db()
+	copy = []
+	for count in range(len(books)):
+		isbn = books[count]
+		data = get_copys_location(0, isbn)
+		print(data)
+		copy.append(list(data[0])[1])
+
+	cmd = "UPDATE books SET loan_id = ? WHERE isbn = ? AND copy_no = ?;"
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+
+	for count in range(len(books)):
+		c.execute(cmd, (loan_id, books[count], copy[count],))
+
+	conn.commit()
+	conn.close()
+
+
 def create_new_loan(loc):
 	date = str(time.strftime("%d/%m/%Y"))
 	db = get_db()
