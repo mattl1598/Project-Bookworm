@@ -6,6 +6,8 @@ import gui
 
 def gettheme():
 	# get colours from json file
+	# settings in docs location
+	path = shell.SHGetFolerPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
 		settings = json.load(read2)
 
