@@ -5,12 +5,14 @@ import books_api as books
 import input
 import book2
 import json
-
+from win32com.shell import shell, shellcon
 
 class Form():
 
 	def gettheme(self):
-		with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		with open(setts, "r") as read2:
 			settings = json.load(read2)
 
 		rootpath = settings["root_location"]

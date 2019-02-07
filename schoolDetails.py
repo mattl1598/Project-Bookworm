@@ -5,10 +5,17 @@ import webbrowser
 import urllib
 import sql
 import homepage
-
+from win32com.shell import shell, shellcon
 
 def gettheme():
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	with open(setts, "r") as read2:
+		settings = json.load(read2)
+
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]

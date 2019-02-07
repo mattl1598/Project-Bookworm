@@ -9,10 +9,18 @@ import sql
 import gui
 import re
 import hashlib
+from win32com.shell import shell, shellcon
 
 def gettheme():
 	# get colours from json file
-	with open("D:/Project-Bookworm/theme.json", "r") as readfile:
+	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	with open(setts, "r") as read2:
+		settings = json.load(read2)
+
+	rootpath = settings["root_location"]
+
+	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -37,11 +45,18 @@ class Options:
 		# import colours
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
 
-		with open("D:/Project-Bookworm/settings.json", "r") as readfile:
-			setts = json.load(readfile)
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		with open(setts, "r") as read2:
+			settings = json.load(read2)
 
-		self.current_db = setts["database_location"]
-		self.current_root = setts["root_location"]
+		rootpath = settings["root_location"]
+
+		with open(rootpath + "theme.json", "r") as readfile:
+			theme = json.load(readfile)
+
+		self.current_db = settings["database_location"]
+		self.current_root = settings["root_location"]
 		self.db = self.current_db
 		self.root = self.current_root
 
@@ -55,8 +70,10 @@ class Options:
 		size += x
 		size += str(int(self.setts.winfo_screenheight() * (relh)))
 
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+
 		self.setts.geometry(size)
-		self.setts.iconbitmap("D:\Project-Bookworm\icons\settings.ico")
+		self.setts.iconbitmap(docs+"\\GitHub\\Project-Bookworm\\icons\\settings.ico")
 		self.setts.title("Settings")
 		self.setts.configure(background=bg)
 
@@ -108,7 +125,10 @@ class Options:
 			psws.append(logins[i][2])
 			admin.append(logins[i][3])
 
-		with open("D:/Project-Bookworm/settings.json", "r") as readfile:
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+
+		with open(setts, "r") as readfile:
 			setts = json.load(readfile)
 
 		isAdmin = tkinter.BooleanVar()
@@ -135,7 +155,7 @@ class Options:
 	def apply(self, current_theme, current_db, db, root, current_root):
 		db2 = self.db_location.get("1.0", "end")
 		theme = self.theme.get()
-
+		"""
 		if db2 == current_db:
 			print("yes")
 
@@ -152,11 +172,12 @@ class Options:
 				print(c.fetchall())
 				conn.close()
 				print("succeeded2")
-				flag = True
+				self.flag = True
 			except sqlite3.OperationalError:
 				print("double fail")
 				self.flag = "dbFail"
-
+		"""
+		self.flag = True
 		if self.flag != "dbFail":
 			if theme != current_theme:
 
@@ -166,29 +187,37 @@ class Options:
 
 				theme1["theme"] = theme
 
-				with open("D:/Project-Bookworm/theme.json", "w") as file:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts = docs + "\\GitHub\\Project-Bookworm\\theme.json"
+				with open(setts, "w") as file:
 					json.dump(theme1, file, indent=4)
 
 			if db != current_db or db is not None:
-
-				with open("D:/Project-Bookworm/settings.json", "r") as file:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				with open(setts2, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
 					setts = json.load(file)
 
 				setts["database_location"] = db
 
-				with open("D:/Project-Bookworm/settings.json", "w") as file:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				with open(setts2, "w") as file:
 					json.dump(setts, file, indent=4)
 
 			if root != current_root or root is not None:
-
-				with open("D:/Project-Bookworm/settings.json", "r") as file:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				with open(setts, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
 					setts = json.load(file)
 
 				setts["root_folder"] = root
 
-				with open("D:/Project-Bookworm/settings.json", "w") as file:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				with open(setts2, "w") as file:
 					json.dump(setts, file, indent=4)
 		elif self.flag == "dbFail":
 			print("triple fail")
