@@ -3,12 +3,19 @@ from tkinter import *
 import json
 import sql
 import gui
+from win32com.shell import shell, shellcon
 
 def gettheme():
 	# get colours from json file
+<<<<<<< HEAD
 	# settings in docs location
 	path = shell.SHGetFolerPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
+=======
+	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	with open(setts, "r") as read2:
+>>>>>>> bbd29b04e3e6c45140ba74f39bc28d483e19b6c0
 		settings = json.load(read2)
 
 	rootpath = settings["root_location"]
@@ -133,5 +140,5 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
+	print(shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0))
 
