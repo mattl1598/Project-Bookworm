@@ -129,55 +129,54 @@ of an implemented database.
 ### Analysis data dictionary and ERD
 #### Data Dictionary
 | Table Name  | Columns | Description |
-|-------------|---------|-------------|
-|books        |isbn, copy_no, loan_id | Links a copy of a certain book isbn to a loan via it's loan id. |
-|changed_books|isbn, title, author, genre, binding, age, label, blurb, image| Stores the details of a modified book. |
-|loans        |loan_id, date, school_id, active| Stores the details of a loan linking it to a school.|
-|login        |userID, username, password, admin| Stores the login details of users for to use when accessing the system. |
-|schools      |school_id, name, address, HT, lastEx, DFE, Contact, pupilTotal, itemsPer| Stores the details about a school. |
+|:-------------|:---------|:-------------|
+| books         | isbn, copy_no, loan_id | Links a copy of a certain book isbn to a loan via it's loan id. |
+| changed_books | isbn, title, author, genre, binding, age, label, blurb, image | Stores the details of a modified book. |
+| loans         | loan_id, date, school_id, active | Stores the details of a loan linking it to a school.|
+| login         | userID, username, password, admin | Stores the login details of users for to use when accessing the system. |
+| schools       | school_id, name, address, HT, lastEx, DFE, Contact, pupilTotal, itemsPer | Stores the details about a school. |
 
 
 ##### Books
 |Column   |Required|Type   |Field Length|Default Values|Notes|
 |---------|--------|-------|------------|--------------|-----|
-| isbn    | ✔      |Text   | 10 or 13   |              |     |
-| copy_no | ✔      |Integer| N/A        |              |     |
-| loan_id |        |Integer| N/A        |              |     |
+| isbn    | ✔      |Text   | 10 or 13   |  N/A         |     |
+| copy_no | ✔      |Integer| N/A        |  N/A         |     |
+| loan_id |        |Integer| N/A        |  N/A         |     |
 
 ##### changed_books
 |Column  |Required|Type   |Field Length|Default Values|Notes|
 |--------|--------|-------|------------|--------------|-----|
-|isbn    | ✔      |Text   | N/A        |              |     |
-|title   |        |Integer| N/A        |              |     |
-|author  |        |Integer| N/A        |              |     |
-|genre   |        |Integer| N/A        |              |     |
-|released|        |Integer| N/A        |              |     |
-|binding |        |Integer| N/A        |              |     |
-|age     |        |Integer| N/A        |              |     |
-|label   |        |Integer| N/A        |              |     |
-|blurb   |        |Integer| N/A        |              |     |
-|image   |        |Blob   | N/A        |              |     |
+|isbn    | ✔      |Text   | N/A        |  N/A         |     |
+|title   |        |Integer| N/A        |  N/A         |     |
+|author  |        |Integer| N/A        |  N/A         |     |
+|genre   |        |Integer| N/A        |  N/A         |     |
+|released|        |Integer| N/A        |  N/A         |     |
+|binding |        |Integer| N/A        |  N/A         |     |
+|age     |        |Integer| N/A        |  N/A         |     |
+|label   |        |Integer| N/A        |  N/A         |     |
+|blurb   |        |Integer| N/A        |  N/A         |     |
+|image   |        |Blob   | N/A        |  N/A         |     |
 
 ##### loans
 |Column   |Required|Type   |Field Length|Default Values|Notes|
 |---------|--------|-------|------------|--------------|-----|
-|loan_id  | ✔      |Integer| N/A        |              |Auto-Increment|
-|dates    | ✔      |Text   | N/A        |              |     |
-|school_id| ✔      |Integer| N/A        |              |     |
-|active   | ✔      |Text   | N/A        |              |     |
+|loan_id  | ✔      |Integer| N/A        | N/A          |Auto-Increment|
+|dates    | ✔      |Text   | N/A        | N/A          |     |
+|school_id| ✔      |Integer| N/A        | N/A          |     |
+|active   | ✔      |Text   | N/A        | N/A          |     |
 
 ##### logins
 |Column  |Required|Type   |Field Length|Default Values|Notes|
 |--------|--------|-------|------------|--------------|-----|
-|userID  | ✔      |Integer| N/A        |              |     |
-|username| ✔      |Text   | N/A        |              |     |
-|password| ✔      |Text   | 128        |              |     |
-|admin   | ✔      |Text   | N/A        |              |     |
+|userID  | ✔      |Integer| N/A        | N/A          |     |
+|username| ✔      |Text   | N/A        | N/A          |     |
+|password| ✔      |Text   | 128        | N/A          |     |
+|admin   | ✔      |Text   | N/A        | N/A          |     |
 
 ##### schools
 |Column    |Required|Type   |Field Length|Default Values|Notes|
-
-|:----------|:--------|:-------|:------------|:--------------|:-----|
+|:---------|:-------|:-------|:----------|:-------------|:-----|
 |school_id | ✔      |Integer| N/A        | N/A          |Auto-Increment|
 |name      |        |Text   | N/A        | N/A          |     |
 |address   |        |Text   | N/A        | N/A          |     |
