@@ -187,6 +187,18 @@ of an implemented database.
 | pupilTotal| No     | Integer | N/A        | 0            | .    |
 | itemsPer  | No     | Integer | N/A        | 3            | .    |
 
+| Column     | Required | Type    | Length | Default Values | Notes          |
+|------------|----------|---------|--------|----------------|----------------|
+| school_id  | Yes      | Integer | N/A    | N/A            | Auto-Increment |
+| name       | No       | Text    | N/A    | N/A            |                |
+| address    | No       | Text    | N/A    | N/A            |                |
+| HT         | No       | Text    | N/A    | N/A            |                |
+| lastEx     | No       | Text    | N/A    | N/A            |                |
+| DFE        | No       | Text    | N/A    | N/A            |                |
+| Contact    | No       | Text    | N/A    | N/A            |                |
+| pupilTotal | No       | Integer | N/A    | N/A            |                |
+| itemsPer   | No       | Integer | N/A    | N/A            |                |
+
 ### Realistic appraisal of the feasibility of potential solutions:
 Key:
 
