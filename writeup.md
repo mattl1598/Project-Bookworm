@@ -177,15 +177,15 @@ of an implemented database.
 ##### schools
 |Column    |Required|Type   |Field Length|Default Values|Notes|
 |:---------|:-------|:-------|:----------|:-------------|:-----|
-|school_id | ✔      |Integer| N/A        | N/A          |Auto-Increment|
-|name      |        |Text   | N/A        | N/A          |     |
-|address   |        |Text   | N/A        | N/A          |     |
-|HT        |        |Text   | N/A        | N/A          |     |
-|lastEx    |        |Text   | N/A        | N/A          |     |
-|DFE       |        |Text   | N/A        | N/A          |     |
-|Contact   |        |Text   | N/A        | N/A          |     |
-|pupilTotal|        |Integer| N/A        | 0            |     |
-|itemsPer  |        |Integer| N/A        | 3            |     |
+|school_id | Yes    |Integer| N/A        | N/A          |Auto-Increment|
+|name      | No     |Text   | N/A        | N/A          |     |
+|address   | No     |Text   | N/A        | N/A          |     |
+|HT        | No     |Text   | N/A        | N/A          |     |
+|lastEx    | No     |Text   | N/A        | N/A          |     |
+|DFE       | No     |Text   | N/A        | N/A          |     |
+|Contact   | No     |Text   | N/A        | N/A          |     |
+|pupilTotal| No     |Integer| N/A        | 0            |     |
+|itemsPer  | No     |Integer| N/A        | 3            |     |
 
 ### Realistic appraisal of the feasibility of potential solutions:
 Key:
