@@ -168,7 +168,7 @@ of an implemented database.
 
 ##### logins
 |Column  |Required|Type   |Field Length|Default Values|Notes|
-|--------|--------|-------|------------|--------------|-----|
+|:-------|:-------|:------|:-----------|:-------------|:----|
 |userID  | ✔      |Integer| N/A        | N/A          |     |
 |username| ✔      |Text   | N/A        | N/A          |     |
 |password| ✔      |Text   | 128        | N/A          |     |
