@@ -167,12 +167,12 @@ of an implemented database.
 |active   | ✔      |Text   | N/A        | N/A          |     |
 
 ##### logins
-| Column   | Required | Type    | Length       | Default Values | Notes |
-|----------|----------|---------|--------------|----------------|-------|
 | Column   | Required | Type    | Field Length | Default Values | Notes |
+|----------|----------|---------|--------------|----------------|-------|
 | userID   | ✔        | Integer | N/A          | N/A            |       |
 | username | ✔        | Text    | N/A          | N/A            |       |
 | password | ✔        | Text    | 128          | N/A            |       |
+| admin    | ✔        | Text    | N/A          | N/A            |       |
 
 ##### schools
 
