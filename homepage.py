@@ -101,7 +101,7 @@ class homepage:
 		self.schools.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
-		self.reports = Button(self.home, text="Reports", command=self.school_details)
+		self.reports = Button(self.home, text="Reports", command=self.reports)
 		self.reports.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
@@ -135,6 +135,10 @@ class homepage:
 	def school_details(self):
 		self.home.destroy()
 		gui.school_details()
+
+	def reports(self):#
+		self.home.destroy()
+		gui.report()
 
 	def settings(self):
 		self.home.destroy()

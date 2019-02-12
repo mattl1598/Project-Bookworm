@@ -12,7 +12,9 @@ def gettheme():
 	with open(setts, "r") as read2:
 		settings = json.load(read2)
 
-	rootpath = settings["root_location"]
+	rootpath = docs + "\\GitHub\\Project-Bookworm\\"
+
+	# rootpath = settings["root_location"]
 
 	with open(rootpath+"theme.json", "r") as readfile:
 		theme1 = json.load(readfile)
@@ -39,6 +41,7 @@ class login():
 
 		self.root = Tk()
 		self.root.config(background=bg)
+		debug = False
 
 		relw = 400 / 1920
 		relh = 180 / 1080
@@ -84,27 +87,32 @@ class login():
 		for t in (self.root.user, self.root.psw):
 			t.bind('<Tab>', lambda e, t=t: focus_next(t))
 			t.bind('<Shift-Tab>', lambda e, t=t: focus_prev(t))
-			t.bind('<Return>', lambda e, t=t: self.logmein())
+			t.bind('<Return>', lambda e, t=t: self.logmein(debug))
 
 		self.root.mainloop()
 
-	def logmein(self):
+	def logmein(self, debug):
+		if debug: print("yeet")
 		flag = False
 		user = self.root.user.get("0.0", 'end-1c')
+		if debug: print("yeeet")
 		psw = self.root.psw.get()
+		if debug: print("yeeeet")
 		logins = sql.get_logins()
-
+		if debug: print("yeeeeet")
 		ids = []
 		users = []
 		psws = []
 		admin = []
+		if debug: print("yeeeeeet")
 		for i in range(len(logins)):
 			ids.append(logins[i][0])
 			users.append(logins[i][1])
 			psws.append(logins[i][2])
 			admin.append(logins[i][3])
-
+			if debug: print("yeeeeeeet")
 		if user in users:
+			if debug: print("yeeeeeeeet")
 			if hash_it(psw) == psws[users.index(user)]:
 				print("Authentication Successful")
 				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)

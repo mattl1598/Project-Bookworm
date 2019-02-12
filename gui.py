@@ -6,6 +6,7 @@ import book2
 import entry
 import input as input1
 import login
+import reports
 
 def homescreen():
 	homepage.main()
@@ -33,3 +34,7 @@ def book_deets():
 
 def logins():
 	login.main()
+
+def report():
+	reports.main()
+	homescreen()
