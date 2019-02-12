@@ -47,24 +47,38 @@ class Generator:
 		self.lookup, self.lookup2, schools = sql.get_schools()
 		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *schools)
 
-		self.root.loc.place(relx=1/5, rely=1/10)
-		self.root.loc_drop.place(relx=2/5, rely=1/10)
 		self.root.loc_drop.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 									activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
 									highlightbackground=bg)
 		self.root.loc_drop["menu"].config(bg=button_bg, foreground=butt_txt, bd="0", activebackground="SystemHighlight",
 										activeforeground=butt_txt)
 
+		self.root.report_type = tkinter.Label(self.root, foreground=text, bg=bg, text="Report type")
 		self.report = tkinter.StringVar(self.root)
-		reports = misc.better_sort([])
-		self.lookup, self.lookup2, schools =
-		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *reports)
-		self.root.report_drop =
+		reports = misc.better_sort(["List of Books", "Stock Numbers", "List of Books Marked as Lost", "Allocation Stats",
+									"Unique Titles over Time", "List of Visits"])
+		self.root.report_drop = tkinter.OptionMenu(self.root, self.report, *reports)
+
+		self.root.report_drop.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+										activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
+										highlightbackground=bg)
+		self.root.report_drop["menu"].config(bg=button_bg, foreground=butt_txt, bd="0", activebackground="SystemHighlight",
+												activeforeground=butt_txt)
+
+		self.root.report_type.place(relx=2 / 5, rely=2 / 10, anchor="e")
+		self.root.report_drop.place(relx=2 / 5, rely=2 / 10, anchor="w")
+
+		self.root.loc.place(relx=2 / 5, rely=4 / 10, anchor="e")
+		self.root.loc_drop.place(relx=2 / 5, rely=4 / 10, anchor="w")
+
+
 
 		self.root.mainloop()
 
+
 def main():
 	app = Generator()
+
 
 if __name__ == "__main__":
 	main()

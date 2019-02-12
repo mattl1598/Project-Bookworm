@@ -318,7 +318,7 @@ def get_schools():
 
 	data4 = misc.better_sort(data3)
 
-	print(data4)
+	# print(data4)
 
 	# names = []
 
