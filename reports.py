@@ -1,6 +1,8 @@
 import tkinter
 from win32com.shell import shell, shellcon
 import json
+import sql
+import misc_python as misc
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -36,10 +38,33 @@ class Generator:
 
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath = gettheme()
 		self.root = tkinter.Tk()
-		self.root.geometry("800x600")
+		self.root.geometry("300x400")
 		self.root.configure(background=bg)
+
+		self.root.loc = tkinter.Label(self.root, foreground=text, bg=bg, text="Location")
+
+		self.school = tkinter.StringVar(self.root)
+		self.lookup, self.lookup2, schools = sql.get_schools()
+		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *schools)
+
+		self.root.loc.place(relx=1/5, rely=1/10)
+		self.root.loc_drop.place(relx=2/5, rely=1/10)
+		self.root.loc_drop.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+									activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
+									highlightbackground=bg)
+		self.root.loc_drop["menu"].config(bg=button_bg, foreground=butt_txt, bd="0", activebackground="SystemHighlight",
+										activeforeground=butt_txt)
+
+		self.report = tkinter.StringVar(self.root)
+		reports = misc.better_sort([])
+		self.lookup, self.lookup2, schools =
+		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *reports)
+		self.root.report_drop =
 
 		self.root.mainloop()
 
 def main():
 	app = Generator()
+
+if __name__ == "__main__":
+	main()
