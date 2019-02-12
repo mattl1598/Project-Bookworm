@@ -7,15 +7,9 @@ from win32com.shell import shell, shellcon
 
 def gettheme():
 	# get colours from json file
-<<<<<<< HEAD
-	# settings in docs location
-	path = shell.SHGetFolerPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as read2:
-=======
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
 	with open(setts, "r") as read2:
->>>>>>> bbd29b04e3e6c45140ba74f39bc28d483e19b6c0
 		settings = json.load(read2)
 
 	rootpath = settings["root_location"]
@@ -113,10 +107,12 @@ class login():
 		if user in users:
 			if hash_it(psw) == psws[users.index(user)]:
 				print("Authentication Successful")
-				with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as readfile:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				with open(setts, "r") as readfile:
 					settings = json.load(readfile)
 				settings["last_user_id"] = str(ids[users.index(user)])
-				with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "w") as file:
+				with open(setts, "w") as file:
 					json.dump(settings, file, indent=4)
 
 				flag = True

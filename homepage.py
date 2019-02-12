@@ -47,7 +47,9 @@ class homepage:
 	def __init__(self):
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath = gettheme()
 
-		with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as readfile:
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		with open(setts, "r") as readfile:
 			settings = json.load(readfile)
 
 		logins = sql.get_logins()
@@ -99,13 +101,17 @@ class homepage:
 		self.schools.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
+		self.reports = Button(self.home, text="Reports", command=self.school_details)
+		self.reports.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+								activeforeground=butt_txt)
+
 		self.settings = Button(self.home, text="Settings", command=self.settings)
 		self.settings.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
 		self.logoff = Button(self.home, text="Log Out", command=self.logout)
 		self.logoff.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
-		                    activeforeground=butt_txt)
+								activeforeground=butt_txt)
 
 		self.quit = Button(self.home, text="Quit", command=self.close)
 		self.quit.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
@@ -114,6 +120,7 @@ class homepage:
 		self.deets.place(relx=165/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
 		self.signOut.place(relx=405/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
 		self.schools.place(relx=165/1280, rely=230/720, relwidth=230/1280, relheight=125/720)
+		self.reports.place(relx=885/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
 		self.settings.place(relx=645/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
 		self.logoff.place(relx=885 / 1280, rely=365 / 720, relwidth=230 / 1280, relheight=125 / 720, anchor=NW)
 		self.quit.place(relx=885/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)

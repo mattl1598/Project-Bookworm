@@ -6,13 +6,16 @@ import time
 from win32com.shell import shell, shellcon
 
 def get_db():
-
-	with open("C:/Users/Matthew/Documents/GitHub/Project-Bookworm/settings.json", "r") as file:
+	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	with open(setts, "r") as file:
 		settings = json.load(file)
 
 	db = settings["database_location"]
 
 	return db
+
+# reports sql
 
 def create_tables():
 	db = get_db()
