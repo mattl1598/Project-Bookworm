@@ -5,6 +5,7 @@ import sql
 import misc_python as misc
 import books_api as books
 import tkinter.ttk as ttk
+import progressbar
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -111,19 +112,31 @@ class Generator:
 			school_id = self.lookup[self.school.get()]
 			loan_id = sql.get_loans(school_id)
 			isbns = sql.get_books_from_loan(loan_id[0])
+			popup = tkinter.Toplevel()
+			popup.geometry("300x100")
+			progress = 0
+			progress_var = tkinter.DoubleVar()
+			progress_bar = ttk.Progressbar(popup, variable=progress_var, maximum=len(isbns))
+			progress_bar.place(relx=0.5, rely=0.5, anchor="center")  # .pack(fill=tk.X, expand=1, side=tk.BOTTOM)
 			# print(isbns)
 			titles = []
+			popup.pack_slaves()
+			progress_step = float(1)
 			for i in range(len(isbns)):
+				popup.update()
 				if sql.in_db(isbns[i]) is True:
 					isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbns[i])
 				# print(j, k, l, m, n, o, p, q, r, isbn)
 				# print("sql")
 				else:
-					j, k, l, m, n, o, p, q, r = books.get_all_new(isbns[i])
+					j, k, l, m, n, o, p, q, r = books.get_single_deet(isbns[i], "title")
 					# print("books")
 				# print(j, k, l, m, n, o, p, q, r, isbns[i])
 				print(j.rstrip("\n\r"))
 				titles.append(j.rstrip("\n\r"))
+				progress += progress_step
+				progress_var.set(progress)
+			popup.destroy()
 		report = BookList(titles)
 
 

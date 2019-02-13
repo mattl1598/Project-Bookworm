@@ -10,7 +10,15 @@ def getNewBook(isbn1 = None):
 	else:
 		isbn += isbn1
 		isbn1 = isbn
-	deets = dict(api.list(isbn1))
+	raw = "<Response [403]>"
+	deets = {}
+	raw = api.list(isbn1)
+	while str(raw) == "<Response [403]>":
+		raw = api.list(isbn1)
+		try:
+			deets = dict(raw)
+		except ValueError:
+			print(raw)
 	# print(deets)
 	if deets == null:
 		return deets
