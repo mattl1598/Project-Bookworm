@@ -129,7 +129,7 @@ class Generator:
 				# print(j, k, l, m, n, o, p, q, r, isbn)
 				# print("sql")
 				else:
-					j, k, l, m, n, o, p, q, r = books.get_single_deet(isbns[i], "title")
+					j = books.get_single_deet(isbns[i], "title")
 					# print("books")
 				# print(j, k, l, m, n, o, p, q, r, isbns[i])
 				print(j.rstrip("\n\r"))
