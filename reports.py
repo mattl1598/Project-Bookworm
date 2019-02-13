@@ -4,6 +4,7 @@ import json
 import sql
 import misc_python as misc
 import books_api as books
+import tkinter.ttk as ttk
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -111,6 +112,7 @@ class Generator:
 			loan_id = sql.get_loans(school_id)
 			isbns = sql.get_books_from_loan(loan_id[0])
 			# print(isbns)
+			titles = []
 			for i in range(len(isbns)):
 				if sql.in_db(isbns[i]) is True:
 					isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbns[i])
@@ -120,13 +122,32 @@ class Generator:
 					j, k, l, m, n, o, p, q, r = books.get_all_new(isbns[i])
 					# print("books")
 				# print(j, k, l, m, n, o, p, q, r, isbns[i])
-				print(j)
-
+				print(j.rstrip("\n\r"))
+				titles.append(j.rstrip("\n\r"))
+		report = BookList(titles)
 
 
 	def quit(self):
 		self.root.destroy()
 
+class BookList:
+
+	def __init__(self, titles):
+		self.BookList = tkinter.Tk()
+		self.BookList.geometry("400x600")
+
+		self.BookList.table = ttk.Treeview(self.BookList, columns=("quant"))
+		self.BookList.table.heading("#0", text="Title")
+		self.BookList.table.heading("#1", text="Quantity")
+		self.BookList.table.column("#0", width=200, anchor="e")
+		self.BookList.table.column("#1", width=200)
+
+		for i in range(len(titles)):
+			self.BookList.table.insert("", index="end", text=titles[i], values=("1",))
+
+		self.BookList.table.place(x=0, y=0, anchor="nw")
+
+		self.BookList.mainloop()
 
 def main():
 	app = Generator()
