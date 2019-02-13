@@ -10,3 +10,5 @@ urllib3/
 workspace.xml
 *.pyc
 .idea/workspace.xml
+settings.json
+

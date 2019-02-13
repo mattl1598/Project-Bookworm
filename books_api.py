@@ -11,7 +11,7 @@ def getNewBook(isbn1 = None):
 		isbn += isbn1
 		isbn1 = isbn
 	deets = dict(api.list(isbn1))
-	print(deets)
+	# print(deets)
 	if deets == null:
 		return deets
 		# ask entry for sql database
@@ -69,7 +69,7 @@ def get_single_deet(isbn, type):
 					data = data2
 			else:
 				data = deets["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
-				print(data)
+				# print(data)
 		except KeyError:
 			data = "Unknown"
 	else:

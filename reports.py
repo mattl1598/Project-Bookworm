@@ -3,6 +3,7 @@ from win32com.shell import shell, shellcon
 import json
 import sql
 import misc_python as misc
+import books_api as books
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -45,7 +46,7 @@ class Generator:
 
 		self.school = tkinter.StringVar(self.root)
 		self.lookup, self.lookup2, schools = sql.get_schools()
-		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *schools)
+		self.root.loc_drop = tkinter.OptionMenu(self.root, self.school, *schools, command=self.change_drop3)
 
 		self.root.loc_drop.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 									activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
@@ -57,7 +58,7 @@ class Generator:
 		self.report = tkinter.StringVar(self.root)
 		reports = misc.better_sort(["List of Books", "Stock Numbers", "List of Books Marked as Lost", "Allocation Stats",
 									"Unique Titles over Time", "List of Visits"])
-		self.root.report_drop = tkinter.OptionMenu(self.root, self.report, *reports)
+		self.root.report_drop = tkinter.OptionMenu(self.root, self.report, *reports, command=self.change_drop2)
 
 		self.root.report_drop.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 										activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
@@ -68,12 +69,63 @@ class Generator:
 		self.root.report_type.place(relx=2 / 5, rely=2 / 10, anchor="e")
 		self.root.report_drop.place(relx=2 / 5, rely=2 / 10, anchor="w")
 
-		self.root.loc.place(relx=2 / 5, rely=4 / 10, anchor="e")
-		self.root.loc_drop.place(relx=2 / 5, rely=4 / 10, anchor="w")
 
 
+		self.root.submit = tkinter.Button(self.root, command=self.button, text="Generate Report", background=button_bg,
+									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
+
+		self.root.quit = tkinter.Button(self.root, command=self.quit, text="Close", background=button_bg,
+									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
+
+		self.root.quit.place(relx=3/5, rely=9/10, anchor="w")
 
 		self.root.mainloop()
+
+	def change_drop2(self, report):
+
+		if report == "List of Books" or report == "List of Visits":
+			self.root.loc.place(relx=2 / 5, rely=4 / 10, anchor="e")
+			self.root.loc_drop.place(relx=2 / 5, rely=4 / 10, anchor="w")
+			self.hide_button()
+		else:
+			self.root.loc.place_forget()
+			self.root.loc_drop.place_forget()
+			self.school.set("")
+			self.show_button()
+
+	def change_drop3(self, loc):
+		report = self.report.get()
+
+		self.show_button()
+
+	def show_button(self):
+		self.root.submit.place(relx=2 / 5, rely=9 / 10, anchor="center")
+
+	def hide_button(self):
+		self.root.submit.place_forget()
+
+	def button(self):
+		print("Generated!")
+		if self.report.get() == "List of Books":
+			school_id = self.lookup[self.school.get()]
+			loan_id = sql.get_loans(school_id)
+			isbns = sql.get_books_from_loan(loan_id[0])
+			# print(isbns)
+			for i in range(len(isbns)):
+				if sql.in_db(isbns[i]) is True:
+					isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbns[i])
+				# print(j, k, l, m, n, o, p, q, r, isbn)
+				# print("sql")
+				else:
+					j, k, l, m, n, o, p, q, r = books.get_all_new(isbns[i])
+					# print("books")
+				# print(j, k, l, m, n, o, p, q, r, isbns[i])
+				print(j)
+
+
+
+	def quit(self):
+		self.root.destroy()
 
 
 def main():

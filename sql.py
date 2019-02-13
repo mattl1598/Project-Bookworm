@@ -280,7 +280,7 @@ def get_book(isbn):
 	data = c.fetchall()
 	conn.close()
 
-	print(data)
+	# print(data)
 
 	a = data[0][0]
 	b = data[0][1]
@@ -408,8 +408,31 @@ def edit_school(sch_id, data):
 	conn.commit()
 	conn.close()
 
+def get_loans(school_id):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT loan_id FROM loans WHERE school_id = ?"
+	c.execute(cmd, (school_id,))
+	raw = c.fetchall()
+	conn.close()
+	data = list(raw[0])
+	return data
 
+def get_books_from_loan(loan_id):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT isbn FROM books WHERE loan_id = ?"
+	c.execute(cmd, (loan_id,))
+	raw = c.fetchall()
+	print(raw)
+	conn.close()
+	data = []
+	for i in range(len(raw)):
+		data.append(raw[i][0])
 
+	return data
 
 def create_dict(keys, values):
 	return dict(zip(keys, values + [None] * (len(keys) - len(values))))
