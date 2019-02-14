@@ -1,4 +1,14 @@
 import googlebooks
+import requests
+import json
+
+def new_api(isbn):
+	BASEURL = str("http://www.googleapis.com/books/v1/volumes?q=")
+	url = BASEURL + str(isbn) + str("&key=AIzaSyARvNRpUEftVpD0-5vDGwzZeDK84fgVUpY")
+	resp = requests.get(url)
+	print(resp.url)
+	return resp
+
 
 def getNewBook(isbn1 = None):
 	null = {'kind': 'books#volumes', 'totalItems': 0}
