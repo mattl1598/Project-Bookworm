@@ -416,7 +416,11 @@ def get_loans(school_id):
 	c.execute(cmd, (school_id,))
 	raw = c.fetchall()
 	conn.close()
-	data = list(raw[0])
+	# print(raw)
+	if raw != []:
+		data = list(raw[0])
+	else:
+		data = raw
 	return data
 
 def get_books_from_loan(loan_id):
@@ -426,7 +430,7 @@ def get_books_from_loan(loan_id):
 	cmd = "SELECT isbn FROM books WHERE loan_id = ?"
 	c.execute(cmd, (loan_id,))
 	raw = c.fetchall()
-	print(raw)
+	# print(raw)
 	conn.close()
 	data = []
 	for i in range(len(raw)):

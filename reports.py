@@ -5,8 +5,8 @@ import sql
 import misc_python as misc
 import books_api as books
 import tkinter.ttk as ttk
-import gui
-# import progressbar
+import time
+
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -107,20 +107,85 @@ class Generator:
 
 	def button(self):
 		print("Generated!")
+		self.root.destroy()
 		if self.report.get() == "List of Books":
 			school_id = self.lookup[self.school.get()]
 			loan_id = sql.get_loans(school_id)
-			isbns = sql.get_books_from_loan(loan_id[0])
-			self.root.destroy()
-			report = BookList(isbns)
-		gui.report()
+			isbns = []
+			for i in range(len(loan_id)):
+				isbns2 = sql.get_books_from_loan(loan_id[i])
+				for c in range(len(isbns2)):
+					isbns.append(isbns2[c])
+			report = BookList(isbns, self.school.get())
+		elif self.report.get() == "Allocation Stats":
+			report = AllocStats()
+		main()
 
 	def quit(self):
 		self.root.destroy()
 
+class AllocStats:
+
+	def __init__(self):
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
+
+		self.lookup, self.lookup2, schools = sql.get_schools()
+
+		schools.pop(schools.index("Base"))
+
+		popup = tkinter.Tk()
+		popup.geometry("300x100")
+		popup.config(background=bg)
+		progress = 0
+		progress_var = tkinter.DoubleVar()
+		progress_bar = ttk.Progressbar(popup, variable=progress_var, maximum=len(schools)-1)
+		progress_bar.place(relx=0.5, rely=0.5, anchor="center")  # .pack(fill=tk.X, expand=1, side=tk.BOTTOM)
+		popup.pack_slaves()
+		progress_step = float(1)
+
+		sch = []
+		totals = []
+		alloc = []
+		over = []
+
+		for school in schools:
+			popup.update()
+			school_id = self.lookup[school]
+			loan_id = sql.get_loans(school_id)
+			isbns = []
+			for i in range(len(loan_id)):
+				isbns2 = sql.get_books_from_loan(loan_id[i])
+				for c in range(len(isbns2)):
+					isbns.append(isbns2[c])
+			book_total = len(isbns)
+			progress += progress_step
+			progress_var.set(progress)
+			time.sleep(0.01)
+			sch.append(school)
+			totals.append(book_total)
+			data = sql.get_school_deets(school_id)
+			alloc1 = int(data["itemsPer"]) * int(data["pupilTotal"])
+			alloc.append(alloc1)
+			if book_total > alloc1:
+				over.append("Over")
+			elif book_total < alloc1:
+				over.append("Under")
+			elif book_total == alloc1:
+				over.append("On")
+
+			# print(school, book_total)
+
+		popup.destroy()
+
+		for i in range(len(sch)):
+			print(sch[i], totals[i], alloc[i], over[i])
+
+
+
+
 class BookList:
 
-	def __init__(self, isbns):
+	def __init__(self, isbns, school):
 
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 
@@ -154,7 +219,7 @@ class BookList:
 				isbns2.append(isbns[i])
 				titles.append(temp)
 				quantity.append("1")
-				print(titles)
+				# print(titles)
 			else:
 				new_quant = int(quantity[pos]) + int(1)
 				quantity[pos] = new_quant
@@ -163,10 +228,11 @@ class BookList:
 			progress_var.set(progress)
 		popup.destroy()
 
-		print(len(isbns2), len(titles), len(quantity))
+		# print(len(isbns2), len(titles), len(quantity))
 
 		self.BookList = tkinter.Tk()
 		self.BookList.geometry("400x600")
+		self.BookList.title(school)
 		self.BookList.config(background=bg)
 
 		self.BookList.table = ttk.Treeview(self.BookList, columns=("title", "quant"))
