@@ -5,7 +5,8 @@ import sql
 import misc_python as misc
 import books_api as books
 import tkinter.ttk as ttk
-import progressbar
+import gui
+# import progressbar
 
 def gettheme():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
@@ -30,7 +31,7 @@ def gettheme():
 	select = theme1[theme]["textbox"]["selectbackground"]
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 
-	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath
+	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg
 
 # bg,text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = self.gettheme()
 
@@ -39,7 +40,7 @@ class Generator:
 
 	def __init__(self):
 
-		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath = gettheme()
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 		self.root = tkinter.Tk()
 		self.root.geometry("300x400")
 		self.root.configure(background=bg)
@@ -70,8 +71,6 @@ class Generator:
 
 		self.root.report_type.place(relx=2 / 5, rely=2 / 10, anchor="e")
 		self.root.report_drop.place(relx=2 / 5, rely=2 / 10, anchor="w")
-
-
 
 		self.root.submit = tkinter.Button(self.root, command=self.button, text="Generate Report", background=button_bg,
 									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
@@ -112,51 +111,75 @@ class Generator:
 			school_id = self.lookup[self.school.get()]
 			loan_id = sql.get_loans(school_id)
 			isbns = sql.get_books_from_loan(loan_id[0])
-			popup = tkinter.Toplevel()
-			popup.geometry("300x100")
-			progress = 0
-			progress_var = tkinter.DoubleVar()
-			progress_bar = ttk.Progressbar(popup, variable=progress_var, maximum=len(isbns))
-			progress_bar.place(relx=0.5, rely=0.5, anchor="center")  # .pack(fill=tk.X, expand=1, side=tk.BOTTOM)
-			# print(isbns)
-			titles = []
-			popup.pack_slaves()
-			progress_step = float(1)
-			for i in range(len(isbns)):
-				popup.update()
-				if sql.in_db(isbns[i]) is True:
-					isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbns[i])
-				# print(j, k, l, m, n, o, p, q, r, isbn)
-				# print("sql")
-				else:
-					j = books.get_single_deet(isbns[i], "title")
-					# print("books")
-				# print(j, k, l, m, n, o, p, q, r, isbns[i])
-				print(j.rstrip("\n\r"))
-				titles.append(j.rstrip("\n\r"))
-				progress += progress_step
-				progress_var.set(progress)
-			popup.destroy()
-		report = BookList(titles)
-
+			self.root.destroy()
+			report = BookList(isbns)
+		gui.report()
 
 	def quit(self):
 		self.root.destroy()
 
 class BookList:
 
-	def __init__(self, titles):
+	def __init__(self, isbns):
+
+		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
+
+		popup = tkinter.Tk()
+		popup.geometry("300x100")
+		popup.config(background=bg)
+		progress = 0
+		progress_var = tkinter.DoubleVar()
+		progress_bar = ttk.Progressbar(popup, variable=progress_var, maximum=len(isbns)-1)
+		progress_bar.place(relx=0.5, rely=0.5, anchor="center")  # .pack(fill=tk.X, expand=1, side=tk.BOTTOM)
+		# print(isbns)
+		isbns2 = []
+		titles = []
+		quantity = []
+		popup.pack_slaves()
+		progress_step = float(1)
+		for i in range(len(isbns)):
+			popup.update()
+			if sql.in_db(isbns[i]) is True:
+				isbn, j, k, l, m, n, o, p, q, r = sql.get_book(isbns[i])
+			# print(j, k, l, m, n, o, p, q, r, isbn)
+			# print("sql")
+			else:
+				j = books.get_single_deet(isbns[i], "title")
+			# print("books")
+			# print(j, k, l, m, n, o, p, q, r, isbns[i])
+			temp = j.rstrip("\n\r")
+			try:
+				pos = isbns2.index(isbns[i])
+			except ValueError:
+				isbns2.append(isbns[i])
+				titles.append(temp)
+				quantity.append("1")
+				print(titles)
+			else:
+				new_quant = int(quantity[pos]) + int(1)
+				quantity[pos] = new_quant
+			# titles.append(j.rstrip("\n\r"))
+			progress += progress_step
+			progress_var.set(progress)
+		popup.destroy()
+
+		print(len(isbns2), len(titles), len(quantity))
+
 		self.BookList = tkinter.Tk()
 		self.BookList.geometry("400x600")
+		self.BookList.config(background=bg)
 
-		self.BookList.table = ttk.Treeview(self.BookList, columns=("quant"))
-		self.BookList.table.heading("#0", text="Title")
-		self.BookList.table.heading("#1", text="Quantity")
-		self.BookList.table.column("#0", width=200, anchor="e")
-		self.BookList.table.column("#1", width=200)
+		self.BookList.table = ttk.Treeview(self.BookList, columns=("title", "quant"))
+		self.BookList.table.tag_configure('colour', background=box_bg, foreground=box_txt)
+		self.BookList.table.heading("#0", text="ISBN")
+		self.BookList.table.heading("#1", text="Title")
+		self.BookList.table.heading("#2", text="Quantity")
+		self.BookList.table.column("#0", width=85, anchor="w")
+		self.BookList.table.column("#1", width=265)
+		self.BookList.table.column("#2", width=50)
 
-		for i in range(len(titles)):
-			self.BookList.table.insert("", index="end", text=titles[i], values=("1",))
+		for i in range(0, len(titles)):
+			self.BookList.table.insert("", index="end", text=isbns2[i], values=(titles[i], quantity[i],), tags=('colour',))
 
 		self.BookList.table.place(x=0, y=0, anchor="nw")
 

@@ -3,11 +3,12 @@ import requests
 import json
 
 def new_api(isbn):
-	BASEURL = str("http://www.googleapis.com/books/v1/volumes?q=")
-	url = BASEURL + str(isbn) + str("&key=AIzaSyARvNRpUEftVpD0-5vDGwzZeDK84fgVUpY")
-	resp = requests.get(url)
-	print(resp.url)
-	return resp
+	BASEURL = str("https://www.googleapis.com/books/v1/volumes")
+	# url = BASEURL + str(isbn) + str("&key=AIzaSyARvNRpUEftVpD0-5vDGwzZeDK84fgVUpY")
+	params = dict(q=isbn, key="AIzaSyARvNRpUEftVpD0-5vDGwzZeDK84fgVUpY")
+	resp = requests.get(BASEURL, params=params)
+	# print(resp.url)
+	return resp.json()
 
 
 def getNewBook(isbn1 = None):
@@ -35,6 +36,9 @@ def getNewBook(isbn1 = None):
 		# ask entry for sql database
 	else:
 		return deets
+
+
+
 
 def get_all_new(isbn):
 	deets = getNewBook(isbn)
@@ -72,7 +76,8 @@ def get_single_deet(isbn, type):
 	:param type: title, authors, description, categories, publishedDate, maturityRating, thumbnail
 	:return:
 	"""
-	deets = getNewBook(isbn)
+	# deets = getNewBook(isbn)
+	deets = new_api(isbn)
 	null = {'kind': 'books#volumes', 'totalItems': 0}
 	if deets != null:
 		try:
