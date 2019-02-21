@@ -201,19 +201,21 @@ class Book:
 		self.Text7.insert(tkinter.INSERT, label)
 		self.blurbVar.insert(tkinter.INSERT, blurb)
 
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+
 		try:
-			urllib.request.urlretrieve(img_url, "D:/Project-Bookworm/image.jpg")
+			urllib.request.urlretrieve(img_url, docs+"\\Project-Bookworm\\image.jpg")
 			img2gif.main()
 			img2gif.resize()
-			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/image.gif")
+			self.photo = ImageTk.PhotoImage(file=docs+"\\Project-Bookworm\\image.gif")
 		except TypeError:
 			img2gif.error()
 			img2gif.resizeError()
-			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/error.gif")
+			self.photo = ImageTk.PhotoImage(file=docs+"\\Project-Bookworm\\error.gif")
 		except ValueError:
-			img2gif.error()
-			img2gif.resizeError()
-			self.photo = ImageTk.PhotoImage(file="D:/Project-Bookworm/error.gif")
+			# img2gif.error()
+			# img2gif.resizeError()
+			self.photo = ImageTk.PhotoImage(file=docs+"\\Project-Bookworm\\error.gif")
 
 		self.Canvas1.create_image(0, 123, image=self.photo, anchor='w')
 

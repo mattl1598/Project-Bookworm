@@ -2,6 +2,7 @@ import googlebooks
 import requests
 import json
 
+
 def new_api(isbn):
 	BASEURL = str("https://www.googleapis.com/books/v1/volumes")
 	# url = BASEURL + str(isbn) + str("&key=AIzaSyARvNRpUEftVpD0-5vDGwzZeDK84fgVUpY")
@@ -38,10 +39,9 @@ def getNewBook(isbn1 = None):
 		return deets
 
 
-
-
 def get_all_new(isbn):
-	deets = getNewBook(isbn)
+	# deets = getNewBook(isbn)
+	deets = new_api(isbn)
 	new_data = []
 	for t in "title", "authors", "categories", "publishedDate", "maturityRating", "description":
 		try:

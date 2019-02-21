@@ -180,16 +180,16 @@ class Options:
 		self.flag = True
 		if self.flag != "dbFail":
 			if theme != current_theme:
+				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+				themepath = docs + "\\GitHub\\Project-Bookworm\\theme.json"
 
-				with open("D:/Project-Bookworm/theme.json", "r") as file:
+				with open(themepath, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
 					theme1 = json.load(file)
 
 				theme1["theme"] = theme
 
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts = docs + "\\GitHub\\Project-Bookworm\\theme.json"
-				with open(setts, "w") as file:
+				with open(themepath, "w") as file:
 					json.dump(theme1, file, indent=4)
 
 			if db != current_db or db is not None:

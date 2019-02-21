@@ -158,29 +158,40 @@ class App:
 	def add_isbn(self):
 		isbn = str(self.root.entry.get())
 		self.root.entry.delete(0, "end")
-		if len(isbn) == 13 or len(isbn) == 10:
-			if sql.in_db(isbn) is True:
-				isbn, title, k, l, m, n, o, p, q, r = sql.get_book(isbn)
-				# print(j, k, l, m, n, o, p, q, r, isbn)
-				# print("sql")
-				self.root.ISBNs.append(isbn)
-				self.root.list1.insert('end', isbn)
-				self.root.list2.insert("end", title)
-			elif books.getNewBook(isbn) != {'kind': 'books#volumes', 'totalItems': 0} and sql.in_db(isbn) is False:
-				title = books.get_single_deet(isbn, "title")
-				# print("books")
-				self.root.ISBNs.append(isbn)
-				self.root.list1.insert('end', isbn)
-				self.root.list2.insert("end", title)
+		if self.mode == 1:
+			loan_id = sql.get_loans(0)
+		else:
+			loan_id = sql.get_loans(self.location)
+		isbns = []
+		for i in range(len(loan_id)):
+			isbns2 = sql.get_books_from_loan(loan_id[i])
+			for c in range(len(isbns2)):
+				isbns.append(isbns2[c])
+		if (isbn in isbns):
+			if len(isbn) == 13 or len(isbn) == 10:
+					if sql.in_db(isbn) is True:
+						isbn, title, k, l, m, n, o, p, q, r = sql.get_book(isbn)
+						# print(j, k, l, m, n, o, p, q, r, isbn)
+						# print("sql")
+						self.root.ISBNs.append(isbn)
+						self.root.list1.insert('end', isbn)
+						self.root.list2.insert("end", title)
+					elif books.getNewBook(isbn) != {'kind': 'books#volumes', 'totalItems': 0} and sql.in_db(isbn) is False:
+						title = books.get_single_deet(isbn, "title")
+						# print("books")
+						self.root.ISBNs.append(isbn)
+						self.root.list1.insert('end', isbn)
+						self.root.list2.insert("end", title)
+					else:
+						print("error")
 			else:
 				print("error")
-		else:
-			print("error")
 
 	def submit(self, mode):
 		print(self.location)
 		if mode == "in":
 			if self.location == 0:
+				# adding new books to the system
 				for i in range(len(self.root.ISBNs)):
 					isbn = self.root.ISBNs[i]
 					db = sql.get_db()
@@ -210,8 +221,34 @@ class App:
 						c.execute(cmd2, (isbn, new_copy_no + 1, 0,))
 					conn.commit()
 					conn.close()
+
+
 			else:
-				pass
+				# returning books from a location to the base
+				# list of isbns to be returned
+				return_isbns = self.root.ISBNs
+
+				# list of isbns currently assigned to school
+				loan_id = sql.get_loans(self.location)
+				sch_isbns = []
+				sch_copys = []
+				for i in range(len(loan_id)):
+					isbns2 = sql.get_books_copys_from_loan(loan_id[i])
+					for c in range(len(isbns2)):
+						sch_isbns.append(isbns2[c][0])
+						sch_copys.append(isbns2[c][1])
+
+				print(sch_isbns)
+
+				for book in return_isbns:
+					try:
+						print("test")
+						index = sch_isbns.index(book)
+						copy = sch_copys[index]
+						sql.return_book(book, copy)
+					except ValueError:
+						print("error")
+
 			self.root.destroy()
 		elif mode == "out":
 			loan_id = sql.create_new_loan(self.location)

@@ -105,6 +105,10 @@ class homepage:
 		self.reports.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
 
+		self.calendar = Button(self.home, text="Calendar", command=self.calendar)
+		self.calendar.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+								activeforeground=butt_txt)
+
 		self.settings = Button(self.home, text="Settings", command=self.settings)
 		self.settings.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
 								activeforeground=butt_txt)
@@ -121,6 +125,7 @@ class homepage:
 		self.signOut.place(relx=405/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
 		self.schools.place(relx=165/1280, rely=230/720, relwidth=230/1280, relheight=125/720)
 		self.reports.place(relx=885/1280, rely=95/720, relwidth=230/1280, relheight=125/720)
+		self.calendar.place(relx=165/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
 		self.settings.place(relx=645/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
 		self.logoff.place(relx=885 / 1280, rely=365 / 720, relwidth=230 / 1280, relheight=125 / 720, anchor=NW)
 		self.quit.place(relx=885/1280, rely=500/720, relwidth=230/1280, relheight=125/720, anchor=NW)
@@ -139,6 +144,10 @@ class homepage:
 	def reports(self):#
 		self.home.destroy()
 		gui.report()
+
+	def calendar(self):
+		self.home.destroy()
+		gui.calendar()
 
 	def settings(self):
 		self.home.destroy()

@@ -5,6 +5,7 @@ import json
 import time
 from win32com.shell import shell, shellcon
 
+
 def get_db():
 	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
@@ -16,6 +17,7 @@ def get_db():
 	return db
 
 # reports sql
+
 
 def create_tables():
 	db = get_db()
@@ -69,6 +71,7 @@ ORDER BY books.isbn, books.copy_no;""")
 	conn.close()
 	return data
 
+
 def get_copys_location(location, isbn):
 	db = get_db()
 	conn = sqlite3.connect(db)
@@ -86,6 +89,7 @@ ORDER BY books.isbn, books.copy_no;""")
 	conn.close()
 	return data
 
+
 def send_books(books, loan_id):
 	db = get_db()
 	copy = []
@@ -102,6 +106,16 @@ def send_books(books, loan_id):
 	for count in range(len(books)):
 		c.execute(cmd, (loan_id, books[count], copy[count],))
 
+	conn.commit()
+	conn.close()
+
+
+def return_book(isbn, copy):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "UPDATE books SET loan_id = ? WHERE isbn = ? AND copy_no = ?;"
+	c.execute(cmd, (0, isbn, copy,))
 	conn.commit()
 	conn.close()
 
@@ -133,13 +147,14 @@ def get_logins():
 			conn = sqlite3.connect(db)
 			connected = True
 		except sqlite3.OperationalError:
-			pass # create database
+			pass  # create database
 	c = conn.cursor()
 	cmd = str("SELECT * FROM login")
 	c.execute(cmd)
 	data = c.fetchall()
 	conn.close()
 	return data
+
 
 def get_locations():
 	db = get_db()
@@ -151,6 +166,7 @@ def get_locations():
 	conn.close()
 	return data
 
+
 def new_user(a, b, c):
 	db = get_db()
 	conn = sqlite3.connect(db)
@@ -159,6 +175,7 @@ def new_user(a, b, c):
 	c.execute(cmd, (str(a), str(b), str(c)))
 	conn.commit()
 	conn.close()
+
 
 def db_input_in(input1):
 	db = get_db()
@@ -327,9 +344,16 @@ def get_schools():
 
 	return data2, data, data4
 
-def get_school_id(name):
-	pass
 
+def get_school_name(id):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT name FROM schools WHERE school_id = ?"
+	c.execute(cmd, (id,))
+	data = c.fetchall()
+	data2 = data[0][0].rstrip("\n\r")
+	return data2
 
 
 def get_school_deets(school_id):
@@ -408,6 +432,7 @@ def edit_school(sch_id, data):
 	conn.commit()
 	conn.close()
 
+
 def get_loans(school_id):
 	db = get_db()
 	conn = sqlite3.connect(db)
@@ -418,10 +443,14 @@ def get_loans(school_id):
 	conn.close()
 	# print(raw)
 	if raw != []:
-		data = list(raw[0])
+		# data = list(raw[0])
+		data = []
+		for i in range(len(raw)):
+			data.append(raw[i][0])
 	else:
 		data = raw
 	return data
+
 
 def get_books_from_loan(loan_id):
 	db = get_db()
@@ -438,7 +467,95 @@ def get_books_from_loan(loan_id):
 
 	return data
 
+
+def get_books_copys_from_loan(loan_id):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT isbn, copy_no FROM books WHERE loan_id = ?"
+	c.execute(cmd, (loan_id,))
+	raw = c.fetchall()
+	# print(raw)
+	conn.close()
+	data = []
+	for i in range(len(raw)):
+		data.append([raw[i][0], raw[i][1]])
+
+	return data
+
+
+def get_lost_books():
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT isbn FROM books WHERE active = ?"
+	c.execute(cmd,("False",))
+	raw = c.fetchall()
+	conn.close()
+	data = []
+	for i in range(len(raw)):
+		data.append(raw[i][0])
+
+	return data
+
+
+def get_all_events():
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT * FROM calendar"
+	c.execute(cmd)
+	raw = c.fetchall()
+	conn.close()
+	events = []
+	# print(raw)
+	for i in range(len(raw)):
+		events.append(list(raw[i]))
+	events2 = []
+	for i in range(len(events)):
+		event = []
+		for j in range(len(events[i])):
+			if j == 2:
+				keys = ["day", "month", "year"]
+				split = events[i][j].split("-")
+				# print(split)
+				values = []
+				for k in range(len(split)):
+					values.append(int(split[k]))
+				event.append(dict(zip(keys, values)))
+			else:
+				event.append(events[i][j])
+		events2.append(event)
+	return events2
+
+def get_event(id):
+	db = get_db()
+	conn = sqlite3.connect(db)
+	c = conn.cursor()
+	cmd = "SELECT * FROM calendar WHERE event_id = ?"
+	c.execute(cmd, (id,))
+	raw = c.fetchall()
+	conn.close()
+	events = []
+	# print(raw)
+	for i in range(len(raw)):
+		events.append(list(raw[i]))
+	events2 = []
+	for i in range(len(events)):
+		event = []
+		for j in range(len(events[i])):
+			if j == 2:
+				keys = ["day", "month", "year"]
+				split = events[i][j].split("-")
+				# print(split)
+				values = []
+				for k in range(len(split)):
+					values.append(int(split[k]))
+				event.append(dict(zip(keys, values)))
+			else:
+				event.append(events[i][j])
+		events2.append(event)
+	return events2
+
 def create_dict(keys, values):
 	return dict(zip(keys, values + [None] * (len(keys) - len(values))))
-
-

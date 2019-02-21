@@ -7,6 +7,7 @@ import entry
 import input as input1
 import login
 import reports
+import pb_calendar
 
 def homescreen():
 	homepage.main()
@@ -35,6 +36,12 @@ def book_deets():
 def logins():
 	login.main()
 
+
 def report():
 	reports.main()
+	homescreen()
+
+
+def calendar():
+	pb_calendar.main()
 	homescreen()

@@ -39,13 +39,12 @@ class Form():
 		font9 = "-family {Segoe UI} -size 14 -weight normal -slant " \
 				"roman -underline 0 -overstrike 0"
 
-		bg,text, buttonBG, buttTXT, boxBG, boxTXT, cursor, select, clickedbg = self.gettheme()
+		bg, text, buttonBG, buttTXT, boxBG, boxTXT, cursor, select, clickedbg = self.gettheme()
 
 		self.root = Tkinter.Tk()
 		self.root.geometry("200x159+700+347")
 		self.root.title("Entry Form")
 		self.root.configure(background=bg)
-
 
 		self.entry = Tkinter.Entry(self.root)
 		self.entry.place(relx=0.08, rely=0.31, height=30, relwidth=0.82)
