@@ -4,15 +4,11 @@ import misc_python as misc
 import json
 import time
 from win32com.shell import shell, shellcon
+import locations
 
 
 def get_db():
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
-	with open(setts, "r") as file:
-		settings = json.load(file)
-
-	db = settings["database_location"]
+	db = locations.database()
 
 	return db
 

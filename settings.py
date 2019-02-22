@@ -251,6 +251,7 @@ class userCreate():
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
 		self.create = tkinter.Tk()
 
+		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 
 		# Window Creation
 
@@ -264,7 +265,7 @@ class userCreate():
 
 		self.create.geometry(size)
 		self.create.config(bg=bg)
-		self.create.iconbitmap("D:\Project-Bookworm\icons\settings.ico")
+		self.create.iconbitmap(docs+"\\GitHub\\Project-Bookworm\\icons\\settings.ico")
 
 		# Title:
 		self.create.title("Add New User")
@@ -277,7 +278,7 @@ class userCreate():
 
 		# New Password
 		self.create.password = tkinter.Entry(self.create, background=box_bg, foreground=box_txt,
-		                                     insertbackground=cursor, selectbackground=select, show="*")
+											insertbackground=cursor, selectbackground=select, show="*")
 		self.create.passwordL = tkinter.Label(self.create, text="New Password:", foreground=text, bg=bg)
 
 		# Confirm Password
@@ -305,7 +306,7 @@ class userCreate():
 		self.create.reqs = tkinter.Label(self.create, text=passreqs, foreground=text, bg=bg)
 
 		# Button
-		self.create.new_user_button = tkinter.Button(self.create, command=self.new_user, background=button_bg,
+		self.create.new_user_button = tkinter.Button(self.create, text="Create New User", command=self.new_user, background=button_bg,
 												foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 
 		# Place items
@@ -351,11 +352,13 @@ class userCreate():
 			psws.append(logins[i][2])
 			admin.append(logins[i][3])
 
+		print(admin)
+
 		admin_psws = []
 
 		for i in range(len(psws)):
-			if admin[i] is True:
-				admin_psws.append(psws)
+			if admin[i] == "True":
+				admin_psws.append(psws[i])
 
 		flag_admin = False
 		flag_unique = False
@@ -366,7 +369,10 @@ class userCreate():
 		flag_digits = False
 
 		user_unique = username in users
-		admin_verify = psw_admin in admin_psws
+		print(self.hash_it(psw_admin))
+		print(admin_psws)
+		admin_verify = self.hash_it(psw_admin) in admin_psws
+		print(admin_verify)
 
 
 		if admin_verify:
@@ -414,8 +420,12 @@ class userCreate():
 			print("Password does not contain numbers.")
 		else:
 			check += 1
+		if flag_admin is False:
+			print("Admin Password is incorrect.")
+		else:
+			check += 1
 
-		if check == 6:
+		if check == 7:
 			sql.new_user(username, self.hash_it(psw), admin)
 			message = "New User was successfully created with username: "
 			message += username

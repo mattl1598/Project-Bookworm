@@ -3,20 +3,13 @@ from tkinter import *
 import json
 import sql
 import gui
-from win32com.shell import shell, shellcon
+import locations
+
 
 def gettheme():
 	# get colours from json file
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
-	with open(setts, "r") as read2:
-		settings = json.load(read2)
 
-	rootpath = docs + "\\GitHub\\Project-Bookworm\\"
-
-	# rootpath = settings["root_location"]
-
-	with open(rootpath+"theme.json", "r") as readfile:
+	with open(locations.theme(), "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -34,7 +27,7 @@ def gettheme():
 	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, theme
 
 
-class login():
+class Login:
 
 	def __init__(self):
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
@@ -46,10 +39,10 @@ class login():
 		relw = 400 / 1920
 		relh = 180 / 1080
 
-		size = str(int((self.root.winfo_screenwidth() * (relw))))
+		size = str(int((self.root.winfo_screenwidth() * relw)))
 		x = "x"
 		size += x
-		size += str(int(self.root.winfo_screenheight() * (relh)))
+		size += str(int(self.root.winfo_screenheight() * relh))
 
 		self.root.geometry(size)
 
@@ -67,7 +60,7 @@ class login():
 		self.root.psw.place(relx=19 / 40, rely=80 / 180, relheight=23 / 180, relwidth=180 / 400, anchor="w")
 		self.root.pswL.place(relx=19 / 40, rely=80 / 180, anchor="e")
 
-		self.root.button = Button(self.root, command=self.logmein, text="Log In",background=button_bg,
+		self.root.button = Button(self.root, command=self.log_me_in, text="Log In", background=button_bg,
 									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 		self.root.button.place(relx=1/2, rely=12/20)
 
@@ -84,39 +77,45 @@ class login():
 			widget.tk_focusPrev().focus_set()
 			return "break"
 
-		for t in (self.root.user, self.root.psw):
-			t.bind('<Tab>', lambda e, t=t: focus_next(t))
-			t.bind('<Shift-Tab>', lambda e, t=t: focus_prev(t))
-			t.bind('<Return>', lambda e, t=t: self.logmein(debug))
+		for i in (self.root.user, self.root.psw):
+			i.bind('<Tab>', lambda e, t=i: focus_next(t))
+			i.bind('<Shift-Tab>', lambda e, t=i: focus_prev(t))
+			i.bind('<Return>', lambda e, t=i: self.log_me_in(debug))
 
 		self.root.mainloop()
 
-	def logmein(self, debug):
-		if debug: print("yeet")
+	def log_me_in(self, debug):
+		if debug:
+			print("yeet")
 		flag = False
 		user = self.root.user.get("0.0", 'end-1c')
-		if debug: print("yeeet")
+		if debug:
+			print("yeeet")
 		psw = self.root.psw.get()
-		if debug: print("yeeeet")
+		if debug:
+			print("yeeeet")
 		logins = sql.get_logins()
-		if debug: print("yeeeeet")
+		if debug:
+			print("yeeeeet")
 		ids = []
 		users = []
 		psws = []
 		admin = []
-		if debug: print("yeeeeeet")
+		if debug:
+			print("yeeeeeet")
 		for i in range(len(logins)):
 			ids.append(logins[i][0])
 			users.append(logins[i][1])
 			psws.append(logins[i][2])
 			admin.append(logins[i][3])
-			if debug: print("yeeeeeeet")
+			if debug:
+				print("yeeeeeeet")
 		if user in users:
-			if debug: print("yeeeeeeeet")
+			if debug:
+				print("yeeeeeeeet")
 			if hash_it(psw) == psws[users.index(user)]:
 				print("Authentication Successful")
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				setts = locations.settings()
 				with open(setts, "r") as readfile:
 					settings = json.load(readfile)
 				settings["last_user_id"] = str(ids[users.index(user)])
@@ -133,16 +132,16 @@ class login():
 			self.root.destroy()
 			gui.homescreen()
 
+
 def hash_it(pwd):
-	hash = hashlib.sha512(pwd.encode())
-	hex = hash.hexdigest()
-	return hex
+	hash1 = hashlib.sha512(pwd.encode())
+	hex1 = hash1.hexdigest()
+	return hex1
+
 
 def main():
-	login1 = login()
+	Login()
 
 
 if __name__ == "__main__":
 	main()
-	print(shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0))
-
