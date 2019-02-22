@@ -79,8 +79,7 @@ class CalendarMain:
 		self.root.calendar.config(bg=box_bg)
 		self.root.calendar.place(relx=80/1280, rely=65/720, relwidth=1120/1280, relheight=630/720)
 
-
-		self.button = tkinter.Button(self.root, text="test", command=self.event_test).place(x=0, y=0)
+		# self.button = tkinter.Button(self.root, text="test", command=self.event_test).place(x=0, y=0)
 
 		days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -156,9 +155,7 @@ class CalendarMain:
 				events.append(all_events[i])
 
 		for i in range(len(events)):
-			note = events[i][5] + " - " + sql.get_school_name(events[i][1])
-			# self.lookup[0][i] = events[i][0]
-			# self.lookup[1][i] = note
+			note = events[i][5] + " - " + sql.get_school_name(events[i][1]) + " - " + str(events[i][0])
 			self.list_boxes[int(events[i][2]["day"])+start-1].insert('end', note)
 
 	def update_days(self):
@@ -231,9 +228,12 @@ class CalendarMain:
 		app = EventViewer()
 
 	def event(self, test):
+		raw = str(self.root.calendar.focus_get())
+		listbox = raw[raw.index(".!listbox")+9:]
+		note = self.list_boxes[int(listbox)-1].get(self.list_boxes[int(listbox)-1].curselection())
 		self.root.destroy()
-		print(test)
-		# app = EventViewer()
+		data = note.split(" - ")
+		app = EventViewer(int(data[2]))
 
 
 class EventViewer:
@@ -242,33 +242,99 @@ class EventViewer:
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = gettheme()
 
 		self.root = tkinter.Tk()
-		self.root.geometry("300x400")
+		self.root.geometry("400x400")
 		self.root.config(bg=bg)
 
-		self.root.schoolL = tkinter.Label(self.root, text="School:", bg=bg, fg=box_txt).place(x=70, y=50, anchor="e")
-		self.root.schoolE = tkinter.Entry(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
-										selectbackground=select).place(x=75, y=50, height=30, anchor="w")
+		self.event_id = event_id
 
-		self.root.dateL = tkinter.Label(self.root, text="Date:", bg=bg, fg=box_txt).place(x=70, y=150, anchor="e")
+		self.event = sql.get_event(self.event_id)[0]
+
+		values = []
+		for j in range(len(self.event[2].values())):
+			values.append(str(list(self.event[2].values())[j]).zfill(2))
+
+		self.event[2] = "-".join(values)
+
+		self.school = tkinter.StringVar(self.root)
+
+		self.lookup, self.lookup2, schools = sql.get_schools()
+
+		"""
+		self.vars = []
+		for i in range(0, 6):
+			if i != 2:
+				self.vars.append(tkinter.StringVar().set(self.event[i]))
+			else:
+				values = []
+				for j in range(len(self.event[i].values())):
+					values.append(str(list(self.event[i].values())[j]))
+				self.vars.append(tkinter.StringVar(self.root).set("-".join(values)))
+		"""
+		self.root.schoolL = tkinter.Label(self.root, text="School:", bg=bg, fg=box_txt)
+		self.root.schoolE = tkinter.OptionMenu(self.root, self.school, *schools)
+		self.root.schoolE.configure(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+									activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg,
+									highlightbackground=bg)
+		self.root.schoolE["menu"].config(bg=button_bg, foreground=butt_txt, bd="0", activebackground="SystemHighlight",
+											activeforeground=butt_txt)
+
+		self.root.dateL = tkinter.Label(self.root, text="Date:", bg=bg, fg=box_txt)
 		self.root.dateE = tkinter.Entry(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
-										selectbackground=select).place(x=75, y=150, height=30, anchor="w")
+										selectbackground=select)
 
-		self.root.timeL = tkinter.Label(self.root, text="Time:", bg=bg, fg=box_txt).place(x=70, y=100, anchor="e")
+		self.root.timeL = tkinter.Label(self.root, text="Time:", bg=bg, fg=box_txt)
 		self.root.timeE = tkinter.Entry(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
-										selectbackground=select).place(x=75, y=100, height=30, anchor="w")
+										selectbackground=select)
 
-		self.root.typeL = tkinter.Label(self.root, text="Type:", bg=bg, fg=box_txt).place(x=70, y=200, anchor="e")
+		self.root.typeL = tkinter.Label(self.root, text="Type:", bg=bg, fg=box_txt)
 		self.root.typeE = tkinter.Entry(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
-										selectbackground=select).place(x=75, y=200, height=30, anchor="w")
+										selectbackground=select)
 
-		self.root.notesL = tkinter.Label(self.root, text="Notes:", bg=bg, fg=box_txt).place(x=70, y=250, anchor="e")
-		self.root.notesE = tkinter.Entry(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
-										selectbackground=select).place(x=75, y=235, height=125, width=175, anchor="nw")
+		self.root.notesL = tkinter.Label(self.root, text="Notes:", bg=bg, fg=box_txt)
+		self.root.notesE = tkinter.Text(self.root, bg=box_bg, fg=box_txt, insertbackground=cursor,
+										selectbackground=select)
+
+		self.labels = [self.root.schoolL, self.root.dateL, self.root.timeL, self.root.typeL, self.root.notesL]
+		self.entry = [self.root.schoolE, self.root.dateE, self.root.timeE, self.root.typeE, self.root.notesE]
+
+		for label in self.labels:
+			label.place(x=70, y=(self.labels.index(label)*50)+30, anchor="e")
+
+		for entry in self.entry:
+			entry.place(x=75, y=(self.entry.index(entry)*50)+30, height=30, width=275, anchor="w")
+
+		self.root.notesE.place(x=75, y=215, height=125, width=275, anchor="nw")
+
+		self.populate()
+
+		self.button = tkinter.Button(self.root, text="test", command=self.update_event).place(x=0, y=0)
 
 		self.root.mainloop()
 
 	def populate(self):
-		pass
+		index = [2, 5, 3, 4]
+		widgets = self.entry
+		widgets.pop(0)
+		self.school.set(sql.get_school_name(self.event[1]))
+		for entry in widgets:
+			value = index[widgets.index(entry)]
+			temp = str(self.event[value])
+			if entry != widgets[3]:
+				entry.insert(0, temp)
+			else:
+				if str(self.event[4]) != "None":
+					entry.insert(tkinter.END, str(self.event[4]))
+				else:
+					entry.insert(tkinter.END, "")
+
+	def update_event(self):
+		event = []
+		for entry in self.entry:
+			try:
+				event.append(entry.get())
+			except TypeError:
+				event.append(entry.get('1.0', tkinter.END).rstrip("\n\r"))
+		print(event)
 
 
 def main():
