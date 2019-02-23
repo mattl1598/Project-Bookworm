@@ -1,5 +1,5 @@
 import tkinter
-from win32com.shell import shell, shellcon
+import locations
 import json
 import sql
 import misc_python as misc
@@ -11,14 +11,13 @@ import datetime
 
 
 def gettheme():
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	setts = locations.settings()
 	with open(setts, "r") as read2:
-		settings = json.load(read2)
+		setting = json.load(read2)
 
-	rootpath = settings["root_location"]
+	rootpath = setting["root_location"]
 
-	with open(rootpath+"theme.json", "r") as readfile:
+	with open(locations.theme(), "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -282,7 +281,7 @@ class AllocStats:
 
 	def create_printout(self):
 		values = self.print2()
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		docs = locations.docs()
 		workbook = xlsxwriter.Workbook(docs + "\\Project-Bookworm\\Reports\\Allocation " + str(
 			datetime.datetime.now().strftime("%d-%m-%Y %H-%M")) + ".xlsx")
 		worksheet = workbook.add_worksheet("Allocation")
@@ -438,7 +437,7 @@ class BookList:
 
 	def create_printout(self):
 		values = self.print2()
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		docs = locations.docs()
 		workbook = xlsxwriter.Workbook(docs + "\\Project-Bookworm\\Reports\\Books at " + self.school.rstrip("\n\r") + " " + str(
 			datetime.datetime.now().strftime("%d-%m-%Y %H-%M")) + ".xlsx")
 		worksheet = workbook.add_worksheet(self.school)
@@ -576,7 +575,7 @@ class LostBooks:
 
 	def create_printout(self):
 		values = self.print2()
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
+		docs = locations.docs()
 		workbook = xlsxwriter.Workbook(docs + "\\Project-Bookworm\\Reports\\Lost Books "+ str(
 			datetime.datetime.now().strftime("%d-%m-%Y %H-%M")) + ".xlsx")
 		worksheet = workbook.add_worksheet("Lost Books")

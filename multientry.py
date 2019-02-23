@@ -4,17 +4,16 @@ import books_api as books
 import sql
 import sqlite3
 import misc_python
-from win32com.shell import shell, shellcon
+import locations
 
 def gettheme():
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	setts = locations.settings()
 	with open(setts, "r") as read2:
-		settings = json.load(read2)
+		setting = json.load(read2)
 
-	rootpath = settings["root_location"]
+	rootpath = setting["root_location"]
 
-	with open(rootpath+"theme.json", "r") as readfile:
+	with open(locations.theme(), "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -30,7 +29,6 @@ def gettheme():
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 
 	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg
-
 
 
 class Selection:
@@ -53,8 +51,8 @@ class Selection:
 
 		self.root.location = tkinter.OptionMenu(self.root, self.school, *schools)
 
-		self.root.location.config(background=button_bg, foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt,
-									highlightthickness=0, highlightcolor=bg, highlightbackground=bg)
+		self.root.location.config(background=button_bg, foreground=butt_txt, activebackground=clickedbg,
+									activeforeground=butt_txt, highlightthickness=0, highlightcolor=bg, highlightbackground=bg)
 
 		self.root.location["menu"].config(bg=button_bg, foreground=butt_txt, bd="0", activebackground="SystemHighlight",
 											activeforeground=butt_txt)

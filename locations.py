@@ -13,10 +13,21 @@ def root():
 
 
 def icons():
-	path = root() + "\\assets\\icons\\"
+	path = root() + "\\assets\\icons"
 
 	return path
 
+
+def assets():
+	path = root() +"\\assets\\"
+
+	return path
+
+
+def docs():
+	doc = winshell.my_documents()
+
+	return doc
 
 def theme():
 	path = root() + "\\theme.json"

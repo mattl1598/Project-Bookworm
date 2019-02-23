@@ -12,11 +12,11 @@ def new_api(isbn):
 	return resp.json()
 
 
-def getNewBook(isbn1 = None):
+def getNewBook(isbn1=None):
 	null = {'kind': 'books#volumes', 'totalItems': 0}
 	api = googlebooks.Api()
 	isbn = "isbn:"
-	if isbn1 == None:
+	if isbn1 is None:
 		isbn += input("input isbn")
 		isbn1 = isbn
 	else:

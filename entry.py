@@ -5,19 +5,19 @@ import books_api as books
 import input
 import book2
 import json
-from win32com.shell import shell, shellcon
+import locations
+
 
 class Form():
 
 	def gettheme(self):
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		setts = locations.settings()
 		with open(setts, "r") as read2:
 			settings = json.load(read2)
 
 		rootpath = settings["root_location"]
 
-		with open(rootpath + "theme.json", "r") as readfile:
+		with open(locations.theme(), "r") as readfile:
 			theme1 = json.load(readfile)
 
 		theme = theme1["theme"]
@@ -33,7 +33,7 @@ class Form():
 		clickedbg = theme1[theme]["button"]["clickedbg"]
 
 		return bg, text, buttonBG, buttTXT, boxBG, boxTXT, cursor, select, clickedbg
-		#bg,text, buttonBG, buttTXT, boxBG, boxTXT, cursor, select, clickedbg = self.gettheme()
+		# bg, text, buttonBG, buttTXT, boxBG, boxTXT, cursor, select, clickedbg = self.gettheme()
 
 	def __init__(self, text1):
 		font9 = "-family {Segoe UI} -size 14 -weight normal -slant " \
@@ -83,7 +83,4 @@ class Form():
 			input.bookDeets(j, k, l, m, n, o, p, q, r, isbn)
 		else:
 			print("error")
-		#sql.dbInputIn(input1)
-
-
-
+		# sql.dbInputIn(input1)

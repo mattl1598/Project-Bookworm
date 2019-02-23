@@ -1,18 +1,17 @@
 import tkinter
 import tkinter.ttk as ttk
-from win32com.shell import shell, shellcon
+import locations
 import time
 import json
 
 def gettheme():
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	setts = locations.settings()
 	with open(setts, "r") as read2:
-		settings = json.load(read2)
+		setting = json.load(read2)
 
-	rootpath = settings["root_location"]
+	rootpath = setting["root_location"]
 
-	with open(rootpath+"theme.json", "r") as readfile:
+	with open(locations.theme(), "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]

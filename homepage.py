@@ -11,17 +11,17 @@ import os
 import schoolDetails
 import gui
 import sql
-from win32com.shell import shell, shellcon
+import locations
+
 
 def gettheme():
-	docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-	setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+	setts = locations.settings()
 	with open(setts, "r") as read2:
-		settings = json.load(read2)
+		setting = json.load(read2)
 
-	rootpath = settings["root_location"]
+	rootpath = setting["root_location"]
 
-	with open(rootpath+"theme.json", "r") as readfile:
+	with open(locations.theme(), "r") as readfile:
 		theme1 = json.load(readfile)
 
 	theme = theme1["theme"]
@@ -36,10 +36,9 @@ def gettheme():
 	select = theme1[theme]["textbox"]["selectbackground"]
 	clickedbg = theme1[theme]["button"]["clickedbg"]
 
-
 	return bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath
 
-# bg,text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = self.gettheme()
+# bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg = self.gettheme()
 
 
 class homepage:
@@ -47,10 +46,9 @@ class homepage:
 	def __init__(self):
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, rootpath = gettheme()
 
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		setts = locations.settings()
 		with open(setts, "r") as readfile:
-			settings = json.load(readfile)
+			setting = json.load(readfile)
 
 		logins = sql.get_logins()
 
@@ -62,7 +60,7 @@ class homepage:
 			users.append(logins[i][1])
 			psws.append(logins[i][2])
 
-		user_id = settings["last_user_id"]
+		user_id = setting["last_user_id"]
 		if str(user_id) in ids:
 			user = users[ids.index(str(user_id))]
 			welc_string = "Welcome back, "
@@ -72,7 +70,7 @@ class homepage:
 			welc_string = "Welcome Back!"
 
 		self.home = Tk()
-		self.home.iconbitmap(rootpath+"icons\colour.ico")
+		self.home.iconbitmap(locations.icons() + "\\colour.ico")
 
 		size = str(int((self.home.winfo_screenwidth()*(1280/1920))))
 		x = "x"
@@ -83,7 +81,7 @@ class homepage:
 		self.home.title("Project Bookworm")
 		self.home.resizable(False, False)
 		self.home.configure(background=bg)
-		self.randon_variable = StringVar()
+		self.random_variable = StringVar()
 
 		self.welc = Label(self.home)
 		self.welc.config(activebackground=bg, activeforeground=text, background=bg, foreground=text,
