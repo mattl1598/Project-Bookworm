@@ -306,7 +306,7 @@ class EventViewer:
 
 		self.populate()
 
-		self.button = tkinter.Button(self.root, text="test", command=self.update_event).place(x=0, y=0)
+		# self.button = tkinter.Button(self.root, text="test", command=self.update_event).place(x=0, y=0)
 
 		self.root.mainloop()
 

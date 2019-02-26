@@ -44,18 +44,17 @@ class Options:
 		# import colours
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
 
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		setts = locations.settings()
 		with open(setts, "r") as read2:
-			settings = json.load(read2)
+			setting = json.load(read2)
 
-		rootpath = settings["root_location"]
+		rootpath = setting["root_location"]
 
 		with open(rootpath + "theme.json", "r") as readfile:
 			theme = json.load(readfile)
 
-		self.current_db = settings["database_location"]
-		self.current_root = settings["root_location"]
+		self.current_db = setting["database_location"]
+		self.current_root = setting["root_location"]
 		self.db = self.current_db
 		self.root = self.current_root
 
@@ -69,10 +68,8 @@ class Options:
 		size += x
 		size += str(int(self.setts.winfo_screenheight() * (relh)))
 
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-
 		self.setts.geometry(size)
-		self.setts.iconbitmap(docs+"\\GitHub\\Project-Bookworm\\icons\\settings.ico")
+		self.setts.iconbitmap(locations.icons() + "\\settings.ico")
 		self.setts.title("Settings")
 		self.setts.configure(background=bg)
 
@@ -124,8 +121,7 @@ class Options:
 			psws.append(logins[i][2])
 			admin.append(logins[i][3])
 
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-		setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+		setts = locations.settings()
 
 		with open(setts, "r") as readfile:
 			setts = json.load(readfile)
@@ -179,8 +175,7 @@ class Options:
 		self.flag = True
 		if self.flag != "dbFail":
 			if theme != current_theme:
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				themepath = docs + "\\GitHub\\Project-Bookworm\\theme.json"
+				themepath = locations.theme()
 
 				with open(themepath, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
@@ -192,36 +187,31 @@ class Options:
 					json.dump(theme1, file, indent=4)
 
 			if db != current_db or db is not None:
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				setts2 = locations.settings()
 				with open(setts2, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
 					setts = json.load(file)
 
 				setts["database_location"] = db
 
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				setts2 = locations.settings()
 				with open(setts2, "w") as file:
 					json.dump(setts, file, indent=4)
 
 			if root != current_root or root is not None:
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts = docs + "\\GitHub\\Project-Bookworm\\settings.json"
-				with open(setts, "r") as file:
+				setts2 = locations.settings()
+				with open(setts2, "r") as file:
 					# doesnt work as one line. has to be two seperate "with opens" to modify a json.
 					setts = json.load(file)
 
 				setts["root_folder"] = root
 
-				docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
-				setts2 = docs + "\\GitHub\\Project-Bookworm\\settings.json"
+				setts2 = locations.settings()
 				with open(setts2, "w") as file:
 					json.dump(setts, file, indent=4)
 		elif self.flag == "dbFail":
 			print("triple fail")
 			messagebox.showerror("Open File", "Database is invalid.")
-
 
 	def close(self):
 		self.apply(self.current_theme, self.current_db, self.db, self.root, self.current_root)
@@ -244,13 +234,12 @@ class Options:
 		self.setts.destroy()
 		user = userCreate()
 
+
 class userCreate():
 
 	def __init__(self):
 		bg, text, button_bg, butt_txt, box_bg, box_txt, cursor, select, clickedbg, self.current_theme = gettheme()
 		self.create = tkinter.Tk()
-
-		docs = shell.SHGetFolderPath(0, shellcon.CSIDL_PERSONAL, None, 0)
 
 		# Window Creation
 
@@ -264,7 +253,7 @@ class userCreate():
 
 		self.create.geometry(size)
 		self.create.config(bg=bg)
-		self.create.iconbitmap(docs+"\\GitHub\\Project-Bookworm\\icons\\settings.ico")
+		self.create.iconbitmap(locations.icons() + "\\settings.ico")
 
 		# Title:
 		self.create.title("Add New User")

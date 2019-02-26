@@ -4,6 +4,7 @@ import json
 import sql
 import gui
 import locations
+import elevate
 
 
 def gettheme():
@@ -45,6 +46,8 @@ class Login:
 		size += str(int(self.root.winfo_screenheight() * relh))
 
 		self.root.geometry(size)
+		self.root.title("Login - Project Bookworm")
+		self.root.iconbitmap(locations.icons() + "\\colour.ico")
 
 		self.root.user = Text(self.root, background=box_bg, foreground=box_txt, insertbackground=cursor,
 										selectbackground=select)
@@ -60,7 +63,7 @@ class Login:
 		self.root.psw.place(relx=19 / 40, rely=80 / 180, relheight=23 / 180, relwidth=180 / 400, anchor="w")
 		self.root.pswL.place(relx=19 / 40, rely=80 / 180, anchor="e")
 
-		self.root.button = Button(self.root, command=self.log_me_in, text="Log In", background=button_bg,
+		self.root.button = Button(self.root, command=lambda: self.log_me_in(debug), text="Log In", background=button_bg,
 									foreground=butt_txt, activebackground=clickedbg, activeforeground=butt_txt)
 		self.root.button.place(relx=1/2, rely=12/20)
 
@@ -140,6 +143,7 @@ def hash_it(pwd):
 
 
 def main():
+	# elevate.elevate(show_console=True)
 	Login()
 
 

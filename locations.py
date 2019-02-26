@@ -5,21 +5,38 @@ import json
 def root():
 	docs = winshell.my_documents()
 	appdata = winshell.application_data()
+	program = programs()
 
-	doc_path = docs + "\\GitHub\\Project-Bookworm"
-	app_path = appdata + "\\Project-Bookworm"
+	doc_path = docs + "\\GitHub\\Project-Bookworm\\"
+	app_path = appdata + "\\Project-Bookworm\\"
 
-	return doc_path
+	return program
+
+
+def programs():
+	return "C:\\ProgramData\\Project-Bookworm\\"
+
+
+def app_data():
+	appdata = winshell.application_data()
+	app_path = appdata + "\\Project-Bookworm\\"
+
+	return app_path
 
 
 def icons():
-	path = root() + "\\assets\\icons"
+	path = assets() + "icons"
 
 	return path
 
 
 def assets():
-	path = root() +"\\assets\\"
+	setts = settings()
+
+	with open(setts, "r") as file:
+		setting = json.load(file)
+
+	path = setting["assets"]
 
 	return path
 
@@ -30,7 +47,7 @@ def docs():
 	return doc
 
 def theme():
-	path = root() + "\\theme.json"
+	path = programs() + "theme.json"
 
 	return path
 
@@ -47,6 +64,6 @@ def database():
 
 
 def settings():
-	path = root() + "\\settings.json"
+	path = root() + "settings.json"
 
 	return path
