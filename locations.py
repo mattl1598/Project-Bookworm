@@ -9,8 +9,9 @@ def root():
 
 	doc_path = docs + "\\GitHub\\Project-Bookworm\\"
 	app_path = appdata + "\\Project-Bookworm\\"
+	public = "C:\\Users\\Public\\Programs\\Project-Bookworm\\"
 
-	return program
+	return public
 
 
 def programs():
