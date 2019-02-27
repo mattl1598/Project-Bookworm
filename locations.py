@@ -11,7 +11,7 @@ def root():
 	app_path = appdata + "\\Project-Bookworm\\"
 	public = "C:\\Users\\Public\\Programs\\Project-Bookworm\\"
 
-	return public
+	return doc_path
 
 
 def programs():

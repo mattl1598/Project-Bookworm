@@ -437,6 +437,7 @@ class BookList:
 
 	def create_printout(self):
 		values = self.print2()
+		print(values)
 		docs = locations.docs()
 		workbook = xlsxwriter.Workbook(docs + "\\Project-Bookworm\\Reports\\Books at " + self.school.rstrip("\n\r") + " " + str(
 			datetime.datetime.now().strftime("%d-%m-%Y %H-%M")) + ".xlsx")
@@ -448,7 +449,7 @@ class BookList:
 		worksheet.set_column('A:A', 20)
 		worksheet.set_column('B:B', 40)
 		worksheet.set_column('C:C', 10)
-		for i in range(len(values)):
+		for i in range(len(values)-1):
 			worksheet.write(i, 0, values[i][0], cell_format)
 			worksheet.write(i, 1, values[i][1])
 			worksheet.write(i, 2, values[i][2])
