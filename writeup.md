@@ -70,6 +70,10 @@ Questions about a report creation feature:
 ![Report Creation Questions](./survey/pg4.PNG)
 ##### Results:
  **\*Insert Results here***
+ 
+###### Question 1:
+
+ 
 ##### Evaluation:
 This questionnaire has a few flaws in the way it was carried out.
 Firstly, the sample size (of seven) that completed the questionnaire was smaller than the already limited target population that
@@ -88,7 +92,7 @@ library assistants from other services offered by other counties who could be in
 database connections.
 
 ### Data sources and destinations
-The first main data source for the program is the database in which most data will be stored. In the databsse there are
+The first main data source for the program is the database in which most data will be stored. In the database there are
 five tables for the user logins, book details that have been modified, school details, loan information
 and what loan a book is on.
 
@@ -97,11 +101,11 @@ information about a book for various reasons. The most important feature for the
 Google Books to generate a list of books that are currently checked out to a school so that the school can make sure
 they don't miss any books because they didn't know it was part of the SLS loan.
 
-The data coming out of the program will be the lists of books at locations aswell as reports on the loss rate and other
+The data coming out of the program will be the lists of books at locations as well as reports on the loss rate and other
 statistics that can be calculated about the loans.
 #### Data Volumes
 The main data volume is the SQLite database backend of the program. It contains all of the data on books and loans
-aswell as schools. The size of the database, once implemented in a production environment, will be much higher than the
+as well as schools. The size of the database, once implemented in a production environment, will be much higher than the
 testing version because of the difference in quantities of books and schools which means I can't yet estimate the size
 of an implemented database.
 #### Database ERD
@@ -197,26 +201,26 @@ Key:
 | ❌ | No or not practical               |
 
 
-| Project Method        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use | Supports USB Scanners |
+| Project Platform        | Windows | MacOS | Linux | Android | iOS | Experienced with | Has libraries to use | Supports USB Scanners |
 |-----------------------|---------|-------|-------|---------|-----|------------------|----------------------|----------------------|
 | Python Text Interface |    ✔    |  ✔   |  ✔    |   ❌    |  ❌  |       ✔         | ✔                   | ✔                     |
-| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓    |  🗸  |       ✔          | ✔                   | ✓ (bluetooth version required for android and iOS) |
-| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       🗸          | ✔                   | ✓ (bluetooth version required for android and iOS) |
+| Python Tkinter GUI    |    ✔    |  ✔   |  ✔    |   ✓    |  🗸  |       ✔          | ✔                   | ✓ (Bluetooth version required for Android and iOS) |
+| Python Kivy GUI       |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       🗸          | ✔                   | ✓ (Bluetooth version required for Android and iOS) |
 | Visual Basic          |    ✔    |  ❌   |  ❌   |   ❌    |  ❌  |       ✔          | ❌                   | ✔                     |
 | Java                  |    ✔    |  ✔   |  ✔    |   ✔    |  ✔  |       ❌          | ❌                   | ✔                     |
-| WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end +bluetooth version for mobile) |
+| WebApp                |    ✔    |  ✔   |  ✔    |    ✔   |  ✔  |       ❌          | ✔                   | ✓ (more setup required on user end + Bluetooth version for mobile) |
 
 ### Justification of chosen solution:
 
 * Python with Tkinter GUI
 
 I have chosen to use Python with Tkinter for the GUI as my method of choice for my project. I am using it because
-I know python quite well (compared to VB which is the only other language I have used before) and I have
-already learnt Tkinter as a GUI implementation for python as opposed to learning Kivy just for being able to
+I know Python quite well (compared to Visual Basic which is the only other language I have used before) and I have
+already learnt Tkinter as a GUI implementation technique for Python as opposed to learning Kivy just for being able to
 easily put the program on mobile devices.
 
 I also know that the users have Windows machines as their desk computers at the site meaning mobile
-devices aren't a required feature.
+devices are not a required feature.
 
 ## Design
 ### Overall System Design
@@ -229,7 +233,7 @@ The modules also reduce the amount of code needed to be written as they can impo
 #### Objects:
 Objects are callable by any other part of the code where the modules are imported.
 
-Some objects that I've implemented are:
+Some objects that I have implemented include:
 * Entry form object
 * book details object
 * Homepage object
@@ -241,8 +245,8 @@ Some objects that I've implemented are:
 
 | Object:       | Description: |Uses:| Called by: | Calls: |
 |---------------|--------------|------------|------------|--------|
-| Entry Form    |For entering a single value to be processed.|Enering an ISBN to view the details of that book.|Homepage|Book Details|
-| Book Details  |Displays the title, author, etc that is passed into the object.|Displaying the details of a book.|Entry Form|Homepage|
+| Entry Form    |For entering a single value to be processed.|Entering an ISBN to view the details of that book.|Homepage|Book Details|
+| Book Details  |Displays the title, author, etc. that is passed into the object.|Displaying the details of a book.|Entry Form|Homepage|
 | Homepage      |The main menu of the program. Has buttons to call each of the parts of the program.|Calling smaller independent parts of the program such as Settings and the Multientry form.|Starting the program, Book Details, Settings, Multientry, Entry Form.|Entry Form, Multientry, Settings Menu|
 | Multientry Init|For choosing a school to sign books in from or out to.|Configures the multientry page to the correct school and correct method.|Homepage|Multientry|
 | Multientry    |For entering multiple values to be processed.|Entering many ISBNs to be assigned to a loan.|Multientry Init|Homepage|
@@ -251,9 +255,9 @@ Some objects that I've implemented are:
 | School Details Init|Initialising the school details view object.|Opens the School Details View in new school mode for creating a new school or selecting an existing school|Homepage.|School Details View.|
 
 #### Function Modules
-Some of the modules I've written only contain functions and algorithms that other parts of the program can import and use.
+Some of the modules written only contain functions and algorithms that other parts of the program can import and use.
 
-The function modules that I've written are:
+The function modules that I have written are:
 * books_api
 * gui
 * img2gif
@@ -261,34 +265,37 @@ The function modules that I've written are:
 * sql
 
 The "books_api" module is for interacting with and processing the data from the Google Books API. It contains three
-functions. The first function takes an ISBN from the program and returns properly formatted python dictionary
-with all of the details about the book. The second function is used to get a specific detail about a book from
-the dictionary returned by the first function. The third one runs the second function for all of the details required
-in the book details window and returns them in a format that can be accepted by the book details object for being
-displayed or compared against the modified data from that window.
+functions. 
 
-The "gui" module is written to make bringing up a new window easier. Each function in the module contains the few lines
-of code required to call a new GUI object so that other parts of the program can do so in one line. It also makes the
-program code easier to read since the same lines of code are repeated less often.
+The first function takes an ISBN from the program and returns properly formatted python dictionary with all of the details about the book. 
+
+The second function is used to get a specific detail about a book from
+the dictionary returned by the first function.
+
+The third one runs the second function for all of the details required
+in the book details window and returns them in a format that can be accepted by the book details object for being displayed or compared against the modified data from that window.
+
+The "gui" module is written to make bringing up a new window easier. 
+
+Each function in the module contains the few lines of code required to call a new GUI object so that other parts of the program can do so in one line. 
+It also makes the program code easier to read since the same lines of code are repeated less often.
 
 The "img2gif" module is for the manipulation of the book cover images before they get displayed in the Book Details
-window. The tkinter canvas object on the window only accepts image files in the GIF type whereas the Google Books API
-stores all of the images as JPEG files. This means in order to display them correctly, the program needs a way to
-convert between the different file types. As well as the file type discrepancy, there are often differences between the
-resolution of the image file from the Google Books API and the tkinter canvas object in which the images are needed to
-be displayed. This module also solves that issue by resizing the images to the correct resolution to reduce the blank
-space around the image and to keep as much of the cover from being cropped.
+window. 
 
-The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for
-this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one
-module for use in any program I write. One example of a function it contains is a binary search algorithm for searching
-through lists for a specific item. Another function is a sorting algorithm which sorts alphabetically and numerically
-to make sure that multiple digit numbers are sorted correctly and not by the first digit as happens with algorithms like
-quicksort.
+The tkinter canvas object on the window only accepts image files in the GIF type whereas the Google Books API stores all of the images as JPEG files. This means in order to display them correctly, the program needs a way to
+convert between the different file types. 
 
-The last function module I've written is a module for interacting with the sqlite database that the program is based
-around. This module is made up of lots of functions, each with it's own SQL query, that can be executed in a connection
-to the database using variables that are passed into the function from the main program.
+As well as the file type discrepancy, there are often differences between the resolution of the image file from the Google Books API and the tkinter canvas object in which the images are needed to be displayed. This module also solves that issue by resizing the images to the correct resolution to reduce the blank space around the image and to keep as much of the cover from being cropped.
+
+The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one module for use in any program I write. 
+
+One example of a function it contains is a binary search algorithm for searching through lists for a specific item. 
+
+Another function is a sorting algorithm which sorts alphabetically and numerically to make sure that multiple digit numbers are sorted correctly and not by the first digit as happens with algorithms like quicksort.
+
+The last function module I've written is a module for interacting with the sqlite database that the program is based around. 
+This module is made up of lots of functions, each with it's own SQL query, that can be executed in a connection to the database using variables that are passed into the function from the main program.
 
 
 #### Modular Design
