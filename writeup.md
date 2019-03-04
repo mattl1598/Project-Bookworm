@@ -44,7 +44,9 @@ Below these details, there is a table of the exchanges and details of them inclu
 * Number of books returned
 * Number of books issued
 
-![Screenshot of a tab for a school](./spreadsheets/school example.png)
+![Screenshot of a tab for a school](./spreadsheets/school-example.png)
+
+![enter image description here](https://github.com/mattl1598/Project-Bookworm/blob/reports/spreadsheets/school%20example.png)
 
  **insert excel spreadsheet analysis**
 ### Data collection and research:
@@ -604,5 +606,5 @@ process has been entered.
 * webbrowser
 * time
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUzOTE5Njc2MF19
+eyJoaXN0b3J5IjpbMTUxNTg1OTkxMV19
 -->
