@@ -35,7 +35,7 @@ class Login:
 
 		self.root = Tk()
 		self.root.config(background=bg)
-		debug = False
+		debug = True
 
 		relw = 400 / 1920
 		relh = 180 / 1080

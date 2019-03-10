@@ -184,6 +184,23 @@ class App:
 						print("error")
 			else:
 				print("error")
+		elif self.location == 0:
+			if len(isbn) == 13 or len(isbn) == 10:
+					if sql.in_db(isbn) is True:
+						isbn, title, k, l, m, n, o, p, q, r = sql.get_book(isbn)
+						# print(j, k, l, m, n, o, p, q, r, isbn)
+						# print("sql")
+						self.root.ISBNs.append(isbn)
+						self.root.list1.insert('end', isbn)
+						self.root.list2.insert("end", title)
+					elif books.getNewBook(isbn) != {'kind': 'books#volumes', 'totalItems': 0} and sql.in_db(isbn) is False:
+						title = books.get_single_deet(isbn, "title")
+						# print("books")
+						self.root.ISBNs.append(isbn)
+						self.root.list1.insert('end', isbn)
+						self.root.list2.insert("end", title)
+					else:
+						print("error")
 
 	def submit(self, mode):
 		print(self.location)
