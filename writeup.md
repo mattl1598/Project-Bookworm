@@ -70,10 +70,10 @@ Questions about a report creation feature:
 ![Report Creation Questions](./survey/pg4.PNG)
 ##### Results:
  **\*Insert Results here***
- 
+
 ###### Question 1:
 
- 
+
 ##### Evaluation:
 This questionnaire has a few flaws in the way it was carried out.
 Firstly, the sample size (of seven) that completed the questionnaire was smaller than the already limited target population that
@@ -121,6 +121,7 @@ of an implemented database.
 | Key Objective V          | The system should have a login policy to protect sensitive data about the subscribed schools.                                                            |
 | Key Objective VI         | The graphical user interface must be user friendly and intuitive.                                                                                        |
 | Key Objective VII        | The system should protect the database from SQL Injection attacks that could otherwise cause irreversible damage to the structure and contents of it.    |
+| Key Objective VIII        | The system should be able to look up the details of book and use those details in various places.    |
 | Additional Objective I   | The system should use Object Oriented Programming where possible                                                                                         |
 | Additional Objective II  | The system could have a settings menu where the user can customise their experience (e.g. colour themes) and change the locations of any required files. |
 | Additional Objective III | The system could have a calendar system to manage school visits.                                                                                         |
@@ -265,9 +266,9 @@ The function modules that I have written are:
 * sql
 
 The "books_api" module is for interacting with and processing the data from the Google Books API. It contains three
-functions. 
+functions.
 
-The first function takes an ISBN from the program and returns properly formatted python dictionary with all of the details about the book. 
+The first function takes an ISBN from the program and returns properly formatted python dictionary with all of the details about the book.
 
 The second function is used to get a specific detail about a book from
 the dictionary returned by the first function.
@@ -275,26 +276,26 @@ the dictionary returned by the first function.
 The third one runs the second function for all of the details required
 in the book details window and returns them in a format that can be accepted by the book details object for being displayed or compared against the modified data from that window.
 
-The "gui" module is written to make bringing up a new window easier. 
+The "gui" module is written to make bringing up a new window easier.
 
-Each function in the module contains the few lines of code required to call a new GUI object so that other parts of the program can do so in one line. 
+Each function in the module contains the few lines of code required to call a new GUI object so that other parts of the program can do so in one line.
 It also makes the program code easier to read since the same lines of code are repeated less often.
 
 The "img2gif" module is for the manipulation of the book cover images before they get displayed in the Book Details
-window. 
+window.
 
 The tkinter canvas object on the window only accepts image files in the GIF type whereas the Google Books API stores all of the images as JPEG files. This means in order to display them correctly, the program needs a way to
-convert between the different file types. 
+convert between the different file types.
 
 As well as the file type discrepancy, there are often differences between the resolution of the image file from the Google Books API and the tkinter canvas object in which the images are needed to be displayed. This module also solves that issue by resizing the images to the correct resolution to reduce the blank space around the image and to keep as much of the cover from being cropped.
 
-The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one module for use in any program I write. 
+The "misc_python" module is different to the other function modules in the fact that it wasn't written specifically for this program. Instead, it is a collection of useful functions and algorithms that I have written and collated into one module for use in any program I write.
 
-One example of a function it contains is a binary search algorithm for searching through lists for a specific item. 
+One example of a function it contains is a binary search algorithm for searching through lists for a specific item.
 
 Another function is a sorting algorithm which sorts alphabetically and numerically to make sure that multiple digit numbers are sorted correctly and not by the first digit as happens with algorithms like quicksort.
 
-The last function module I've written is a module for interacting with the sqlite database that the program is based around. 
+The last function module I've written is a module for interacting with the sqlite database that the program is based around.
 This module is made up of lots of functions, each with it's own SQL query, that can be executed in a connection to the database using variables that are passed into the function from the main program.
 
 
