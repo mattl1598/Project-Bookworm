@@ -1,5 +1,6 @@
 import hashlib
 from tkinter import *
+from tkinter import messagebox
 import json
 import sql
 import gui
@@ -35,7 +36,7 @@ class Login:
 
 		self.root = Tk()
 		self.root.config(background=bg)
-		debug = True
+		debug = False
 
 		relw = 400 / 1920
 		relh = 180 / 1080
@@ -128,8 +129,11 @@ class Login:
 				flag = True
 			else:
 				print("Authentication Failed")
+				messagebox.showerror("Authentication Failed.", "Authentication Failed. Please try again.")
+
 		else:
 			print("Authentication Failed")
+			messagebox.showerror("Authentication Failed.", "Authentication Failed. Please try again.")
 
 		if flag is True:
 			self.root.destroy()

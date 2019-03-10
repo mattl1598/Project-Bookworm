@@ -121,7 +121,7 @@ of an implemented database.
 | Key Objective V          | The system should have a login policy to protect sensitive data about the subscribed schools.                                                            |
 | Key Objective VI         | The graphical user interface must be user friendly and intuitive.                                                                                        |
 | Key Objective VII        | The system should protect the database from SQL Injection attacks that could otherwise cause irreversible damage to the structure and contents of it.    |
-| Key Objective VIII        | The system should be able to look up the details of book and use those details in various places.    |
+| Key Objective VIII        | The system should be able to look up the details of book from the internet or a database with modified details and use those details in various places.    |
 | Additional Objective I   | The system should use Object Oriented Programming where possible                                                                                         |
 | Additional Objective II  | The system could have a settings menu where the user can customise their experience (e.g. colour themes) and change the locations of any required files. |
 | Additional Objective III | The system could have a calendar system to manage school visits.                                                                                         |
