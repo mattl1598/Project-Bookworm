@@ -225,6 +225,7 @@ devices are not a required feature.
 
 ## Design
 ### Overall System Design
+![System Process Flowchart](./images/bulk=flowchart.svg)
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).
@@ -543,7 +544,7 @@ Required: Program files and sqlite database. unknown sizes as unfinished. databa
 
 Once I have finished creating the program, I will test it in a few main areas. Firstly, I will test against the key objectives to check that required functionality is working. This is done by attempting to complete a task that fits with the key objective being tested, for example signing books out to or in from a school to test Key Objective I.
 
-Secondly, I will stress test the parts of the system where the length of the process varies based on amount data entered or stored in the database by using larger amounts of data than is realistic in the 
+Secondly, I will stress test the parts of the system where the length of the process varies based on amount data entered or stored in the database by using larger amounts of data than is realistic in the
 
 ### Testing Details
 
