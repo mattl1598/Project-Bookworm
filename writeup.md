@@ -44,7 +44,7 @@ Below these details, there is a table of the exchanges and details of them inclu
 * Number of books returned
 * Number of books issued
 
-![Screenshot of a tab for a school](./spreadsheets/school example.png)
+![Screenshot of a tab for a school](./spreadsheets/school-example.png)
 
  **insert excel spreadsheet analysis**
 ### Data collection and research:
