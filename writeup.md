@@ -225,7 +225,7 @@ devices are not a required feature.
 
 ## Design
 ### Overall System Design
-![System Process Flowchart](./images/bulk=flowchart.svg)
+![System Process Flowchart](./images/bulk-flowchart.svg)
 ### Description of modular structure of system
 #### Modules:
 All of the code has been separated into different python modules (*.py).
