@@ -11,4 +11,5 @@ workspace.xml
 *.pyc
 .idea/workspace.xml
 settings.json
-
+venv/
+debug.log
