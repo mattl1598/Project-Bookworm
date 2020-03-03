@@ -1,10 +1,10 @@
-.idea/
+/.idea/
 certifi/
 chardet/
 idna/
 PIL/
 requests/
-__pycache__/
+/__pycache__/
 urllib3/
 *.env
 workspace.xml
